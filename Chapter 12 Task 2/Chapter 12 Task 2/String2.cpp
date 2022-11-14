@@ -7,30 +7,41 @@ String::String()
 {
 	len = 0;
 	str = new char[1];
-	str[0] = '\0'; // строка
+	str[0] = '\0'; // line
+
+	//spent a lot of time to find the missing increment here 
+	//and getting negative output of destructors without  increment
+	num_strings++; //increment the counter of objects 
 }
 
 
 String::String(const char* s)
 {
 	len = std::strlen(s);
-	str = new char[len + 1];        //+1 нужен  дл€ нуль-символа, признака конца строки
-	strcpy_s(str, strlen(s) + 1, s);  //создаЄм строку на основании значени€ параметра
-	str[len] = '\0';                //на вс€кий случай, если строка будет слишком большой, насильно перепишем последний символ, если вдруг конца в строке не окажетс€
+	str = new char[len + 1];     //+1 is needed for a null character, a sign of the end of a string
+	strcpy_s(str, strlen(s) + 1, s);  // create a string based on the parameter value
+	str[len] = '\0';    //just in case, if the string is too big, forcibly rewrite the last character, if suddenly there is no end in the string
 
-	num_strings++;       //наращиваем счЄтчик объектов
+	num_strings++;       //increment the counter of objects
 
-	std::cout << num_strings << " : " << str << " object created\n";
+	//std::cout << num_strings << " : " << str << " object created\n"; //for debugging
 }
 
 
+String::String(const String& st)
+{
+	num_strings++; // handle static member update
+	len = st.len; // same length
+	str = new char[len + 1]; // memory allocation
+	strcpy_s(str, strlen(st.str) + 1, st.str); // copy the string to a new location
+}
 
 
 String:: ~String()
 {
-	std::cout << str << " object deleted ";
+	//std::cout << str << " object deleted "; //for debugging
 	--num_strings;
-	std::cout << num_strings << " left\n";
+	//std::cout << num_strings << " left\n"; //for debugging
 	delete[] str;
 }
 
@@ -65,47 +76,35 @@ String& String::operator= (const String& st)
 }
 
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-String operator+(const String& st1, const String& st2) //перегрузка + по ссылке 
+String operator+(const String& st1, const String& st2) // overload + by reference
 {
 	String sum;
 	delete sum.str;
 	sum.len = strlen(st1.str) + strlen(st2.str);
-	sum.str = new char[strlen(st1.str) + strlen(st2.str) + 1]; // new char[st1.len] + 1;
+	sum.str = new char[sum.len + 1];
 
 	strcat(strcpy(sum.str, st1.str), st2.str); 
-	//strcat добавл€ет добавл€ет копию символьной строки, на которую указывает st2.str в конец строки,
-	//на которую указывает strcpy(sum.str, st1.str)
+	//strcat adds adds a copy of the character string pointed to by st2.str to the end of the string,
+	//pointed to by strcpy(sum.str, st1.str)
 
-	//strcpy копирует содeржимое st1.str в sum.str (sum.str заранее имеет размер (st1.str + st2.str) +1)
-
+	//strcpy copies the contents of st1.str to sum.str (sum.str beforehand has the size(st1.str + st2.str) +1)
 	return sum;
 }
 
 
-String& String::operator=(const char* s) // ѕрисваивание —-строки объекту String 
+
+String& String::operator=(const char* s) // Assigning a C-string to a String object
 {
 	delete[] str;
 	len = std::strlen(s);
-	str = new char[len + 1];  //+1 нужен  дл€ нуль-символа, признака конца строки
-	strcpy_s(str, strlen(s) + 1, s); //создаЄм строку на основании значени€ параметра
-	str[len] = '\0';  //+ на вс€кий случай, если строка будет слишком большой, насильно перепишем последний символ, если вдруг конца в строке не окажетс€
+	str = new char[len + 1];  
+	strcpy_s(str, strlen(s) + 1, s);
+	str[len] = '\0'; 
 	return *this;
-
 }
 
 
-String::String(const String& st) //конструктор копировани€
-{
-	num_strings++; // обработка обновлени€ статического члена 
-	len = st.len; // длина та же 
-	str = new char[len + 1]; // выделение пам€ти 
-	strcpy_s(str, strlen(st.str) + 1, st.str); // копирование строки в новое место 
-}
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void String::stringup()
 {
 	for (int i = 0; str[i] != '\0'; i++)
@@ -132,4 +131,40 @@ int String::has(char ch)
 
 	return count;
 }
+
+
+void String::stringlow()
+
+{
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		if (isupper(str[i]))
+		{
+			str[i] = tolower(str[i]);
+		}
+	}
+
+}
+
+
+
+// Read and write access to individual characters in a non-const String object
+char& String::operator [] (int i)
+{
+	return str[i];
+}
+
+// Read-only access to individual characters in a const String object
+const char& String:: operator [] (int i) const
+{
+	return str[i];
+}
+
+// overloaded operation ==
+bool operator==(const String& stl, const String& st2)
+{
+	return (std::strcmp(stl.str, st2.str) == 0);
+}
+
+
 
