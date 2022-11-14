@@ -1,4 +1,6 @@
 #include "String2.h"
+#include <string.h> // for strcat_s
+
 #pragma warning(disable:4996)
 
 String::String()
@@ -72,7 +74,11 @@ String operator+(const String& st1, const String& st2) //перегрузка + по ссылке
 	sum.len = strlen(st1.str) + strlen(st2.str);
 	sum.str = new char[strlen(st1.str) + strlen(st2.str) + 1]; // new char[st1.len] + 1;
 
-	strcat(strcpy(sum.str, st1.str), st2.str);
+	strcat(strcpy(sum.str, st1.str), st2.str); 
+	//strcat добавляет добавляет копию символьной строки, на которую указывает st2.str в конец строки,
+	//на которую указывает strcpy(sum.str, st1.str)
+
+	//strcpy копирует содeржимое st1.str в sum.str (sum.str заранее имеет размер (st1.str + st2.str) +1)
 
 	return sum;
 }
@@ -82,9 +88,11 @@ String& String::operator=(const char* s) // Присваивание С-строки объекту String
 {
 	delete[] str;
 	len = std::strlen(s);
-	str = new char[len + 1];
-	strcpy_s(str, strlen(s) + 1, s);
+	str = new char[len + 1];  //+1 нужен  для нуль-символа, признака конца строки
+	strcpy_s(str, strlen(s) + 1, s); //создаём строку на основании значения параметра
+	str[len] = '\0';  //+ на всякий случай, если строка будет слишком большой, насильно перепишем последний символ, если вдруг конца в строке не окажется
 	return *this;
+
 }
 
 
@@ -95,3 +103,33 @@ String::String(const String& st) //конструктор копирования
 	str = new char[len + 1]; // выделение памяти 
 	strcpy_s(str, strlen(st.str) + 1, st.str); // копирование строки в новое место 
 }
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void String::stringup()
+{
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		if (islower(str[i]))
+		{
+			str[i] = toupper(str[i]);
+		}
+	}
+
+}
+
+
+int String::has(char ch)
+{
+	int count = 0;
+
+	int size = strlen(str);
+	for (int i = 0; i < size; i++)
+	{
+		if (str[i] == ch)
+			count++;
+	}
+
+	return count;
+}
+

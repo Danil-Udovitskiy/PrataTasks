@@ -3,7 +3,6 @@
 #include <cstring>
 
 
-
 class String
 {
 private:
@@ -22,14 +21,20 @@ public:
 
 	// Дружественная функция 
 	friend std::ostream& operator<<(std::ostream& os, const String& st);
-	friend std::istream& operator>>(std::istream& is, String& st);
+	friend std::istream& operator>>(std::istream& is, String& st); 
 
 	String& operator= (const String& st); //прототип перегрузки операции присваивания 
 	String& operator= (const char* s); // прототип перегрузки операции присваивания С-строки объекту String 
 	 
-
+	//а) Перегрузите операцию + для объединения двух строк в одну.
 	friend String operator+(const String& a, const String& b); // перегрузка оператора + по ссылке 
+	
+	//+++++++++++++++++++++++++++
 
+	// в) Напишите функцию - член stringup(), которая преобразует все буквенные символы в строке в верхний регистр.
+	void stringup();
 
+	//г) Напишите функцию - член, которая принимает аргумент типа char и возвращает количество раз, которое символ появляется в строке.
+	int has(char a);  //int has(int a);
 
 };

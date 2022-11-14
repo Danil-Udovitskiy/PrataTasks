@@ -8,28 +8,28 @@ int String::num_strings = 0;
 
 int main()
 {
-	String sl(" and I am a C++ student.");
+	String s1(" and I am a C++ student.");
 	String s2 = " Please enter your name: "; // ввод имени 
 	String s3;
 
 	std::cout << s2; // перегруженная операция << 
 
-
-
-	//++++++++++++++++++++++++++++++++++++++++++++++++++++
 	std::cin >> s3; // перегруженная операция >> 
 
 	s2 = "My name is " + s3; // перегруженные операции =, + 
 	std::cout << s2 << " .\n";
 	
-	
-	/*s2'= s2 + si;
+
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	s2 = s2 + s1;
 
 	s2.stringup(); // преобразование строки в верхний регистр 
-	std::cout << "The string\n" << s2 << "\ncontains " << s2.has('A')
-		<< " 'A' characters in it.\n";
 	
-	si = "red"; // String(const char *) , 
+	std::cout << "The string\n" << s2 << "\ncontains " << s2.has('A') // s2.has('A'/65)
+		<< " 'A' characters in it.\n";
+
+	
+	/*si = "red"; // String(const char *) , 
 	// тогда String & operator= (const Strings) 
 	String rgb[3] = { String(si), String("green"), String("blue") };
 	cout << "Enter the name of a primary color for mixing light: "; // ввод цвета 
