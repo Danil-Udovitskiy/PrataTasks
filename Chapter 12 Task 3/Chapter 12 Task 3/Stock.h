@@ -14,6 +14,8 @@ private:
 	double total_val;
 	void set_tot() { total_val = shares * share_val; }
 
+	static int num; // number of objects
+
 public:
 
 	Stock(); 

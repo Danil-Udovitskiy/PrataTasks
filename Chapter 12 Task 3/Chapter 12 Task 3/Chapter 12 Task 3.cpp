@@ -4,6 +4,9 @@
 #include <iostream>
 #include "Stock.h"
 
+// Initialize a static class member
+int Stock::num = 0;
+
 const int STKS = 4;
 int main()
 {
@@ -32,12 +35,8 @@ int main()
 	for (st = 1; st < STKS; st++)
 	top = &top->topval(stocks[st]);
 
-	cout << "\n The biggest package : \n";
+	cout << "\n The biggest package : \n" << *top; //using operator <<
 	
-	std::cout << *top; //using operator <<
-	
-	delete[] stocks; //operation  delete for pointer 
-
 	return 0;
 	
 }
