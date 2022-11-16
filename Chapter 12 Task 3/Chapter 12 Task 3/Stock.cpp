@@ -5,17 +5,22 @@
 
 Stock::Stock() // default constructor
 {
-	strcpy_s(company, strlen(company) + 1, company);
+	//if object doesn't have name 
+	company = new char[1]; // dynamic memory allocation
+	company = nullptr; //null pointer
+
 	shares = 0;
 	share_val = 0.0;
 	total_val = 0.0;
 }
 
 
-Stock::Stock(const char* со, int n, double pr) // constructor with arguments
+Stock::Stock(const char* co, int n, double pr) // constructor with arguments
 {
-	strcpy_s(company, strlen(со) + 1, со);
-	company[29] = '\0';
+	//if object has name
+	company = new char[strlen(co)]; //allocate the amount of dynamic memory equal to the size of the array co
+	strcpy_s(company, strlen(co) + 1, co); //copy the contents of co to company(which in turn is a pointer to the char)
+
 
 	if (n < 0)
 	{
@@ -24,9 +29,16 @@ Stock::Stock(const char* со, int n, double pr) // constructor with arguments
 		shares = 0;
 	}
 	else
+	{
 		shares = n;
+	}
 	share_val = pr;
 	set_tot();
+}
+
+Stock::~Stock()
+{
+	delete[]company; // delete all objects 
 }
 
 

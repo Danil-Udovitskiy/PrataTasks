@@ -26,12 +26,18 @@ int main()
 	for (st = 0; st < STKS; st++)
 	std::cout<<stocks[st]; //using operator <<
 
-	Stock top = stocks[0];
+	//creating a pointer to 1 element of an array of objects Stock
+	const Stock* top = &stocks[0]; // or const Stock *top = (address) stocks first element pointer 
+
 	for (st = 1; st < STKS; st++)
-	top = top.topval(stocks[st]);
+	top = &top->topval(stocks[st]);
+
 	cout << "\n The biggest package : \n";
 	
-	std::cout << top; //using operator <<
+	std::cout << *top; //using operator <<
+	
+	delete[] stocks; //operation  delete for pointer 
+
 	return 0;
 	
 }
