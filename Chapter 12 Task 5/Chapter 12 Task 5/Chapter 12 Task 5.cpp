@@ -4,14 +4,14 @@
 // bank.срр -- использование интерфейса Queue 
 
 #include <iostream> 
-#include <cstdlib> // для rand() и srand() 
-#include <ctime> // для time() 
+#include <cstdlib> // for rand() and srand() 
+#include <ctime> // for time() 
 #include "Queue.h" 
 
 
 const int MIN_PER_HR = 60;
 
-bool newcustomer(double x); // появился ли новый клиент? 
+bool newcustomer(double x); // is there a new client?
 
 
 int main()
@@ -20,96 +20,104 @@ int main()
 	using std::cout;
 	using std::endl;
 	using std::ios_base;
+
 	
-	// Подготовка 
-	std::srand(std::time(0)); // случайная инициализация rand() 
+	// Preparation
+	std::srand(std::time(0)); // random initialization rand()
 	cout << "Case Study: Bank of Heather Automatic Teller\n";
-	cout << "Enter maximum size of queue: "; // ввод максимального размера очереди 
-
-
+	cout << "Enter maximum size of queue: "; // enter the maximum queue size
+	
 	int qs;
 	cin >> qs;
-	Queue line(qs); // очередь может содержать до qs людей 
-	cout << "Enter the number of simulation hours: "; // ввод количества эмулируемых часов 
-	int hours; // часы эмуляции 
-	cin >> hours;
+	Queue line(qs); // queue can contain up to qs people
 
-	// Эмуляция будет запускать один цикл в минуту 
-	long cyclelimit = MIN_PER_HR * hours; // количество циклов 
-	cout << "Enter the average number of customers per hour: ";
+	int hours = 100; // enter the number of simulated hours given by the task condition - (Use at least a 100-hour simulation period.)
+
+	// The emulation will run one cycle per minute
+	long cyclelimit = MIN_PER_HR * hours; // the number of cycles
+	double perhour = 0.0;       // number of customers per hour
+
+	double min_per_cust; // average time between spawns
+	Item temp;  // new client data
+	long turnaways = 0; // not allowed in the full queue
+	long customers = 0; // attached to the queue
+	long served = 0; // serviced during emulation
+	double sum_line = 0; // total queue length
+	int wait_time = 0; // time until the ATM is free
+	long line_wait = 0; // total time in the queue
 	
-	// Ввод количества клиентов в час 
-	double perhour; // среднее количество появлений за час 
-	cin >> perhour;
 
-	double min_per_cust; // среднее время между появлениями 
-	min_per_cust = MIN_PER_HR / perhour;
-	Item temp; // данные нового клиента 
-	long turnaways = 0; // не допущены в полную очередь 
-	long customers = 0; // присоединены к очереди 
-	long served = 0; // обслужены во время эмуляции 
-	long sum_line = 0; // общая длина очереди 
-	int wait_time = 0; // время до освобождения банкомата 
-	long line_wait = 0; // общее время в очереди 
+	//I add a variable to calculate the average waiting time
+	int avarage_wait_time = 0; // average client wait time
+	
 
-
-	// Запуск моделирования 
-	for (int cycle = 0; cycle < cyclelimit; cycle++)
+	//Add a loop with a 1 minute wait condition
+	while (avarage_wait_time < 1) // condition for a total wait time of 1 minute
 	{
-		if (newcustomer(min_per_cust)) // есть подошедший клиент 
+		min_per_cust = MIN_PER_HR / perhour; //initialize variable to generate client spawn
+		//first return from the function newcustomer = false (default) , that is the client does not appear
+
+		// Start Simulation
+		for (int cycle = 0; cycle < cyclelimit; cycle++)
 		{
-			if (line.isfull())
-				turnaways++;
-			else
+			if (newcustomer(min_per_cust)) // client approached
 			{
-				customers++;
-				temp.set(cycle); // cycle = время прибытия 
-				line.enqueue(temp);// добавление новичка в очередь
+				if (line.isfull())
+					turnaways++;
+				else
+				{
+					customers++;
+					temp.set(cycle); // cycle = arrival time
+					line.enqueue(temp); // adding a newcomer to the queue
+				}
 			}
+
+
+			if (wait_time <= 0 && !line.isempty())
+			{
+				line.dequeue(temp); // serving the next client
+				wait_time = temp.ptime(); // during wait_time minutes
+				line_wait += cycle - temp.when();
+				served++;
+			}
+
+			if (wait_time > 0)
+				wait_time--;
+			sum_line += line.queuecount();
 		}
 
 
-		if (wait_time <= 0 && !line.isempty())
-		{
-			line.dequeue(temp); // обслуживание следующего клиента 
-			wait_time = temp.ptime(); // в течение wait_time минут 
-			line_wait += cycle - temp.when();
-			served++;
-		}
-
-		if (wait_time > 0)
-			wait_time--;
-		sum_line += line.queuecount();
+		avarage_wait_time = sum_line / cyclelimit; // divide the total length of the queue by the number of cycles and get the average waiting time
+		perhour++; // increase the number of clients per hour (increments until the wait time is 1 minute)
+		
 	}
 
 
-	// Вывод результатов 
-	if (customers > 0)
-	{
-		cout << "customers accepted: " << customers << endl; // принято клиентов 
-		cout << " customers served: " << served << endl; // обслужено клиентов 
-		cout << " turnaways: " << turnaways << endl; 	// не принято клиентов 
-		cout << "average queue size: "; // средний размер очереди 
-		cout.precision(2);
-		cout.setf(ios_base::fixed, ios_base::floatfield);
-		cout << (double)sum_line / cyclelimit << endl;
-		cout << " average wait time: " // среднее время ожидания (минут) 
-			 << (double)line_wait / served << " minutes\n";
-	}
-	else
-		cout << "No customers! \n"; // клиентов нет 
-	cout << "Done!\n";
+	//removed the condition for checking the presence of clients, since in this case it does not make sense
+	// Output results
+
+	cout << "\nUsing 100 hours simulation period\n";
+	cout << " customers accepted : " << customers << endl;
+	cout << " customers served : " << served << endl;
+	cout << " sum_line : " << sum_line << endl;
+	cout << " turnaways : " << turnaways << endl;
+
+	cout << " customers per hour: " << perhour << endl;
+	cout << " average wait time: " << avarage_wait_time << " minute\n";
+
+	cout << "\nDone!\n";
 	return 0;
+
 }
 
 
 
-// x = среднее время в минутах между клиентами 
-// возвращается значение true, если в эту минуту появляется клиент 
+// x = average time in minutes between clients
+// return true if a client is showing up at this minute
 bool newcustomer(double x)
 {
 	return (std::rand() * x / RAND_MAX < 1);
 }
 
-			
+
 

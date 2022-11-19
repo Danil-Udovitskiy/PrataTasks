@@ -1,25 +1,25 @@
 #include "Queue.h" 
-#include <cstdlib> // (или stdlib.h) для rand() 
+#include <cstdlib> // for rand() 
 
 
 //Listing 12.11.queue.cpp
-// queue.cpp — методы классов Queue и Customer 
+//methods of the Queue and Customer classes
 
-// Методы класса Queue 
+// Queue class methods
 Queue::Queue(int qs) : qsize(qs)
 {
-	front = rear = NULL; // или nullptr 
+	front = rear = NULL; // or nullptr 
 	items = 0;
 }
 
 Queue::~Queue()
 {
 	Node* temp;
-	while (front != NULL) // пока очередь не пуста	
+	while (front != NULL) // while the queue is not empty
 	{
-		temp = front;			// сохранение адреса начального элемента 
-		front = front->next;	// переустановка указателя на следующий элемент 
-		delete temp;			// удаление предыдущего начального элемента 
+		temp = front;			// store the address of the initial element
+		front = front->next;	// reset the pointer to the next element
+		delete temp;			// remove the previous initial element
 	}
 }
 
@@ -39,44 +39,44 @@ int Queue::queuecount() const
 }
 
 
-// Добавление элемента в очередь 
+// Adding an element to the queue
 bool Queue::enqueue(const Item& item)
 {
 	if (isfull())
 		return false;
-	Node* add = new Node; // создание узла 
+	Node* add = new Node; // create node
 
-	// При неудачном выполнении операция new генерирует исключение std::bad_alloc 
-	add->item = item; // занесение указателей на узлы 
-	add->next = NULL; // или nullptr; 
+	// On failure, the new operation throws a std::bad_alloc exception
+	add->item = item; // inserting pointers to nodes
+	add->next = NULL; // or nullptr; 
 	items++;
-	if (front == NULL) // если очередь пуста,
-		front = add;   // элемент помещается в начало 
+	if (front == NULL) // if the queue is empty
+		front = add;   // element is placed at the beginning
 	else
-		rear->next = add; // иначе он помещается в конец 
-	rear = add; 	// указатель конца указывает на новый узел 
+		rear->next = add; // otherwise it is placed at the end
+	rear = add; 	// end pointer points to new node
 	return true;
 }
 
-// Помещение элемента front в переменную item и его удаление из очереди 
+// Putting the front element into the item variable and removing it from the queue
 bool Queue::dequeue(Item& item)
 {
 	if (front == NULL)
 		return false;
-	item = front->item; // в item заносится первый элемент из очереди 
+	item = front->item; // item is loaded with the first element from the queue
 	items--;
-	Node* temp = front; // сохранение местоположения первого элемента 
-	front = front->next; // сдвиг указателя начала на следующий элемент 
-	delete temp; // удаление предыдущего первого элемента 
+	Node* temp = front; // store the location of the first element
+	front = front->next; // shift the start pointer to the next element
+	delete temp; // remove the previous first element
 	if (items == 0)
 		rear = NULL;
 	return true;
 }
 
 
-// Метод класса Customer 
-// При появлении клиента фиксируется момент его прибытия, а время 
-// обслуживания выбирается случайным образом из диапазона 1-3 
+// Customer class method
+// When a client appears, the moment of his arrival is fixed, 
+// and the time maintenance is randomly selected from the range 1-3
 void Customer::set(long when)
 {
 	processtime = std::rand() % 3 + 1;

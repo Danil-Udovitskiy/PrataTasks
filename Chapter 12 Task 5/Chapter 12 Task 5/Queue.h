@@ -1,14 +1,14 @@
 #pragma once
 
 //Listing 12.10.queue.h
-// queue.h Ч интерфейс дл€ очереди 
+// queue.h Ч queue interface
 
-// ќчередь, содержаща€ элементы Customer 
+
 class Customer
 {
 private:
-	long arrive; // момент по€влени€ клиента 
-	int processtime; // врем€ обслуживани€ клиента 
+	long arrive; // the moment the client appears
+	int processtime; // customer service time 
 public:
 	Customer() { arrive = processtime = 0; }
 	void set(long when);
@@ -20,26 +20,26 @@ typedef Customer Item;
 class Queue
 {
 private:
-	// ќпределени€ области действи€ класса 
-	// Node - вложенна€ структура, локальна€ дл€ данного класса 
+	// Class scope definitions
+	// Node - nested structure, local to this class
 	struct Node { Item item; struct Node* next; };
 	enum { Q_SIZE = 10 };
 
-	// «акрытые члены класса 
-	Node* front; // указатель на начало Queue 
-	Node* rear; // указатель на конец Queue 
-	int items; // текущее количество элементов в Queue 
-	const int qsize; // максимальное количество элементов в Queue 
-	// ”преждающие объ€влени€ дл€ предотвращени€ открытого копировани€ 
+	// Private class members
+	Node* front; // pointer to the beginning of the Queue
+	Node* rear; // pointer to end of Queue
+	int items; // current number of elements in the Queue
+	const int qsize; // maximum number of elements in the Queue
+	// Forward declarations to prevent open copy
 	Queue(const Queue& q) : qsize(0) {}
 	Queue& operator=(const Queue& q) { return *this; }
 
 public:
-	Queue(int qs = Q_SIZE); // создание очереди с предельным размером qs 
+	Queue(int qs = Q_SIZE); // create queue with size limit qs
 	~Queue();
 	bool isempty() const;
 	bool isfull() const;
 	int queuecount() const;
-	bool enqueue(const Item& item); // добавление элемента в конец 
-	bool dequeue(Item& item); // удаление элемента из начала 
+	bool enqueue(const Item& item); // adding an element to the end
+	bool dequeue(Item& item); // remove element from start
 };
