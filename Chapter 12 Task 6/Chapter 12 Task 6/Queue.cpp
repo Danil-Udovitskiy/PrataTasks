@@ -1,6 +1,6 @@
 #include "Queue.h" 
 #include <cstdlib> // for rand() 
-
+#include <iostream> 
 
 //Listing 12.11.queue.cpp
 //methods of the Queue and Customer classes

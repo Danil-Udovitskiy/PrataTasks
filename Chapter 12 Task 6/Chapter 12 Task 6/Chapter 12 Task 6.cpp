@@ -31,8 +31,12 @@ int main()
 	cin >> qs;
 	Queue line(qs); // queue can contain up to qs people
 
-	//adding second queue
-	Queue second_line(qs); // second queue can contain up to qs people
+	//adding second queue 
+	cout << "Enter maximum size of second queue: "; // enter the maximum second queue size
+	int qs2; //++
+	cin >> qs2;
+	Queue second_line(qs2); // second queue can contain up to qs people
+
 
 	int hours = 100; // enter the number of simulated hours given by the task condition - (Use at least a 100-hour simulation period.)
 
@@ -65,13 +69,19 @@ int main()
 		{
 			if (newcustomer(min_per_cust)) // client approached
 			{
-				if (line.isfull())
+				if (line.isfull() && second_line.isfull()) // ++ && second_line.isfull() проверяем не заполнены ли обе очереди 
 					turnaways++;
 				else
 				{
 					customers++;
 					temp.set(cycle); // cycle = arrival time
+					
+					//++
+					if (qs <= qs2) //если первая очередь <= второй, то добавляем нового клиента в очередь 1
 					line.enqueue(temp); // adding a newcomer to the queue
+
+					else if (qs2 < qs) //если вторая очередь < первой, то добавляем нового клиента в очередь 2
+					second_line.enqueue(temp);
 				}
 			}
 
@@ -84,9 +94,20 @@ int main()
 				served++;
 			}
 
+			//++
+			if (wait_time <= 0 && !second_line.isempty()) //если очередь 2 не пустая и время ожидания <= 0, то переходим к следующему клиенту
+			{
+				second_line.dequeue(temp); // serving the next client
+				wait_time = temp.ptime(); // during wait_time minutes
+				line_wait += cycle - temp.when();
+				served++;
+			}
+
 			if (wait_time > 0)
 				wait_time--;
+
 			sum_line += line.queuecount();
+
 		}
 
 		avarage_wait_time = (double)line_wait / served; //divide the total waiting time by serviced during emulation
@@ -113,6 +134,7 @@ int main()
 	{
 		cout << "No customers! \n"; // клиентов нет  
 	}
+
 
 	cout << "\nDone!\n";
 	return 0;
