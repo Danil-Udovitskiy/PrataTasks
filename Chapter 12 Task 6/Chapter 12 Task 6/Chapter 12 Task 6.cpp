@@ -1,4 +1,4 @@
-﻿// Chapter 12 Task 5.cpp 
+﻿// Chapter 12 Task 6.cpp 
 
 //Listing 12.12.bank.срр
 // bank.срр -- использование интерфейса Queue 
@@ -21,15 +21,18 @@ int main()
 	using std::endl;
 	using std::ios_base;
 
-	
+
 	// Preparation
 	std::srand(std::time(0)); // random initialization rand()
 	cout << "Case Study: Bank of Heather Automatic Teller\n";
 	cout << "Enter maximum size of queue: "; // enter the maximum queue size
-	
+
 	int qs;
 	cin >> qs;
 	Queue line(qs); // queue can contain up to qs people
+
+	//adding second queue
+	Queue second_line(qs); // second queue can contain up to qs people
 
 	int hours = 100; // enter the number of simulated hours given by the task condition - (Use at least a 100-hour simulation period.)
 
@@ -45,11 +48,11 @@ int main()
 	double sum_line = 0; // total queue length
 	int wait_time = 0; // time until the ATM is free
 	long line_wait = 0; // total time in the queue
-	
+
 
 	//I add a variable to calculate the average waiting time
 	int avarage_wait_time = 0; // average client wait time
-	
+
 
 	//Add a loop with a 1 minute wait condition
 	while (avarage_wait_time < 1) // condition for a total wait time of 1 minute
@@ -88,7 +91,7 @@ int main()
 
 		avarage_wait_time = (double)line_wait / served; //divide the total waiting time by serviced during emulation
 		perhour++; // increase the number of clients per hour (increments until the wait time is 1 minute)
-		
+
 	}
 
 
@@ -122,6 +125,3 @@ bool newcustomer(double x)
 {
 	return (std::rand() * x / RAND_MAX < 1);
 }
-
-
-
