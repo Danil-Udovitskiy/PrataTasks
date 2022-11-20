@@ -86,8 +86,7 @@ int main()
 			sum_line += line.queuecount();
 		}
 
-
-		avarage_wait_time = sum_line / cyclelimit; // divide the total length of the queue by the number of cycles and get the average waiting time
+		avarage_wait_time = (double)line_wait / served; //divide the total waiting time by serviced during emulation
 		perhour++; // increase the number of clients per hour (increments until the wait time is 1 minute)
 		
 	}
@@ -107,9 +106,7 @@ int main()
 
 	cout << "\nDone!\n";
 	return 0;
-
 }
-
 
 
 // x = average time in minutes between clients
