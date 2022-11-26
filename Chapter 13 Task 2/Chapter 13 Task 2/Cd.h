@@ -38,10 +38,10 @@ public:
 
 	Classic(const char* main_tr, const char* s1, const char* s2, int n, double x);
 	Classic();
-
-	//+
 	~Classic(); //we need an explicit destructor because we are deleting a private field of the derived class
 
 	void Report() const;
 
+	//+
+	Classic& operator= (const Classic& d); 
 };

@@ -4,7 +4,7 @@
 
 Cd::Cd(const char* s1, const char* s2, int n, double x)
 {
-	//динамическое выделение памяти 
+	//dynamic memory allocation
 	int len1 = strlen(s1);
 	performers = new char[len1 + 1];
 	strcpy_s(performers, len1 + 1, s1);
@@ -51,19 +51,30 @@ Cd::~Cd()
 }
 
 
-Cd& Cd::operator= (const Cd& d)
+//+
+Cd& Cd::operator= (const Cd& d) // operator overload = with dynamic memory allocation for pointers
 {
-	int len1 = 50;
-	strcpy_s(performers, len1, d.performers);
+	if (this == &d)
+		return *this;
 
-	int len2 = 20;
-	strcpy_s(label, len2, d.label);
+	delete[]performers;
+	delete[]label;
+
+
+	int len1 = strlen(d.performers);
+	performers = new char[len1 + 1];
+	strcpy_s(performers, len1 + 1, d.performers);
+
+	int len2 = strlen(d.label);
+	label = new char[len2 + 1];
+	strcpy_s(label, len2 + 1, d.label);
 
 	selections = d.selections;
 	playtime = d.playtime;
 
 	return *this;
 }
+
 
 
 

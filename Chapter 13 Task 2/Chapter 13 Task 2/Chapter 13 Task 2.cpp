@@ -37,21 +37,19 @@ int main()
 	Bravo(c2);
 
 
-	/*
 	// Testing assignment
 	//We cant assign different types because the methods are not virtual (task didn't mention it)
 	std::cout << "\n-Testing assignment for Classic type:- ";
-	Classic copy;
+	Classic copy; //first use - Classic operator overload =  then - Cd operator overload 
 	copy = c2;
 	copy.Report();
 
 	
 	std::cout << "\n-Testing assignment for Cd type:- ";
-	no_name_obj = c1;
+	no_name_obj = c1; //use of Cd operator overload =
 	no_name_obj.Report();
 
-
-	return 0;*/
+	return 0;
 }
 
 

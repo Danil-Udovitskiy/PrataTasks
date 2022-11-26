@@ -24,11 +24,28 @@ void Classic::Report() const
 }
 
 
-//++
 Classic::~Classic()
 {
 	std::cout << "classic dect\n";
 	delete[] main_track;
+}
+
+
+//+
+Classic& Classic::operator= (const Classic& d) // operator overload = with dynamic memory allocation for pointers
+{
+
+	if (this == &d)
+		return *this;
+
+	delete[] main_track;
+	Cd::operator=(d);
+
+	int lenAdd = strlen(d.main_track);
+	main_track = new char[lenAdd + 1];
+	strcpy_s(main_track, lenAdd + 1, d.main_track);
+
+	return *this;
 }
 
 
