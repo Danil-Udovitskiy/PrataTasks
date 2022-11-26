@@ -2,8 +2,9 @@
 #include <string.h>
 
 
-Cd::Cd(const char* s1, const char* s2, int n, double x)
+Cd::Cd(const char* s1, const char* s2, int n, double x) 
 {
+	//different copy options
 	//int len1 = 50;
 	//std::strlen(s1);
 	//strcpy_s(performers, strlen(s1) + 1, s1);
@@ -32,11 +33,6 @@ Cd::Cd()
 }
 
 
-
-
-
-
-
 void Cd::Report() const
 {
 	std::cout << "\nPerformer : " << performers << "\n";
@@ -45,6 +41,23 @@ void Cd::Report() const
 	std::cout << "Total playtime : " << playtime << "\n";
 }
 
+
 Cd::~Cd()
 {
+	std::cout << "cd dect\n";
+}
+
+
+Cd& Cd::operator= (const Cd& d)
+{
+	int len1 = 50;
+	strcpy_s(performers, len1, d.performers);
+
+	int len2 = 20;
+	strcpy_s(label, len2, d.label);
+	
+	selections = d.selections;
+	playtime = d.playtime;
+
+	return *this;
 }
