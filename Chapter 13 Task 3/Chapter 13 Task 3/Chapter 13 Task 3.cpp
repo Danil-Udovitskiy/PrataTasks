@@ -13,7 +13,7 @@ int main()
 	using std::endl;
 
 
-	Base* p_clients[CLIENTS];
+	BaseABC* p_clients[CLIENTS];
 	std::string tempName; // brand name
 	int tempWCode; // wincode
 
@@ -27,28 +27,29 @@ int main()
 		cout << "Enter win code "; // enter VIN code
 		cin >> tempWCode;
 
-		// 1 - Base Car, 2 - DMA-lacks Car (with car price)
-		// 3 - DMA-has Car (with car weight)
-		// 4 - DMA Car (with maximum car speed and model name)
+		// 1 - DMA-lacks Car (со стоимостью авто)
+		// 3 - DMA-has Car (с весом авто)
+		// 3 - DMA Car (с максимальной скоростью авто и названием модели)
 
-		cout << "Enter 1 for Base Car:\n"
-			<< "or 2 for DMA-lacks Car:\n"
-			<< "or 3 for DMA-has Car:\n"
-			<< "or 4 for DMA Car:\n";
+		cout << "Enter 1 for DMA-lacks Car:\n"
+			<< "or 2 for DMA-has Car:\n"
+			<< "or 3 for DMA Car:\n";
 
-		while (cin >> kind && (kind != '1' && kind != '2' && kind != '3' && kind != '4'))
-			cout << "Enter either 1 or 2 or 3 or 4 : ";
+		while (cin >> kind && (kind != '1' && kind != '2' && kind != '3'))
+			cout << "Enter either 1 or 2 or 3 :";
 		if (kind == '1')
-			p_clients[i] = new Base(tempName, tempWCode);
-		else if (kind == '2')
-		{
+		{	
+			//we cant create ABC class object, beacouse of clear function
+			//p_clients[i] = new Base(tempName, tempWCode);
+
 			double tempPrice; // price
 			cout << "Enter price: $ "; // entering the cost of the car
 			cin >> tempPrice;
 
 			p_clients[i] = new DMA_lacks(tempName, tempWCode, tempPrice);
+
 		}
-		else if (kind == '3')
+		else if (kind == '2')
 		{
 			double tempWeight; // weight
 			cout << "Enter weight: kg "; // entering the weight of the car
@@ -56,7 +57,7 @@ int main()
 
 			p_clients[i] = new DMA_has(tempName, tempWCode, tempWeight);
 		}
-		else if (kind == '4')
+		else if (kind == '3')
 		{
 			int tempMaxSpeed;// max speed
 			cout << "Enter max speed : "; // entering the max speed of the car
@@ -68,6 +69,7 @@ int main()
 
 			p_clients[i] = new DMA(tempName, tempWCode, tempMaxSpeed, tempName2);
 		}
+
 		while (cin.get() != '\n')
 			continue;
 	}

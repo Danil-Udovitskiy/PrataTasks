@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-class Base
+class BaseABC
 {
 private:
 
@@ -11,16 +11,16 @@ private:
 
 public:
 
-	Base(const std::string& s = "Car No Name", int winCode = 0000);
-	virtual void View() const;
+	BaseABC(const std::string& s = "Car No Name", int winCode = 0000);
+	virtual void View() const = 0; // clear function
 
-	virtual ~Base() {};
+	virtual ~BaseABC() {};
 };
 
 
 
 //DMA_lacks
-class DMA_lacks :public::Base
+class DMA_lacks :public::BaseABC
 {
 private:
 	double price;
@@ -36,7 +36,7 @@ public:
 
 
 //DMA_has
-class DMA_has :public::Base
+class DMA_has :public::BaseABC
 {
 private:
 	double weight;
@@ -52,7 +52,7 @@ public:
 
 
 //DMA
-class DMA :public::Base
+class DMA :public::BaseABC
 {
 private:
 	std::string modelName2;
