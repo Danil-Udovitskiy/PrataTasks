@@ -16,3 +16,20 @@ public:
 
 	virtual ~Base() {};
 };
+
+
+
+
+class DMA_lacks :public::Base
+{
+private:
+	double price;
+
+public:
+
+	DMA_lacks(const std::string& s = "Car No Name", int winCode = 0000, double price = 0.0);
+	virtual void View() const;
+
+	virtual ~DMA_lacks() {};
+};
+

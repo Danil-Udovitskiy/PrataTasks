@@ -11,3 +11,6 @@ void Base::View() const
 	std::cout << "Car: " << modelName << "\n";
 	std::cout << "Win code: " << winCode << "\n";
 }
+
+
+

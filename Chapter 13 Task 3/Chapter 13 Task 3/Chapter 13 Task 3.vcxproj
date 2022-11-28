@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Chapter 13 Task 3.cpp" />
+    <ClCompile Include="DMA_lacks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base.h" />
