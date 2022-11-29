@@ -1,6 +1,6 @@
 #include "Port.h"
 
-Port::Port(const char* br, const char* st, int b)
+Port::Port(const char* br, const char* st, int b) // constructor with arguments
 {
 	int len = strlen(br);
 	brand = new char[len + 1];
@@ -12,7 +12,7 @@ Port::Port(const char* br, const char* st, int b)
 }
 
 
-Port::Port(const Port& p) // конструктор копирования 
+Port::Port(const Port& p) // copy constructor
 {
 	int len = strlen(p.brand);
 	brand = new char[len + 1];
@@ -25,7 +25,7 @@ Port::Port(const Port& p) // конструктор копирования
 
 
 
-Port& Port::operator= (const Port& p) //операция присваивания
+Port& Port::operator= (const Port& p) //operation =
 {
 	if (this == &p)
 		return *this;
@@ -45,14 +45,14 @@ Port& Port::operator= (const Port& p) //операция присваивания
 
 
 
-Port& Port::operator+=(int b)  // добавляет b к bottles 
+Port& Port::operator+=(int b)  // adds b to bottles
 {
 	bottles += b;
 	return *this;
 }
 
 
-Port& Port::operator-= (int b) // вычитает b из bottles, если это возможно 
+Port& Port::operator-= (int b) // subtracts b from bottles if possible
 {
 	if (bottles - b >= 0)
 	{
@@ -68,7 +68,7 @@ Port& Port::operator-= (int b) // вычитает b из bottles, если это возможно
 }
 
 
-void Port::Show() const
+void Port::Show() const // function Show
 {
 	std::cout << "Brand : " << brand << "\n";
 	std::cout << "Kind : " << style << "\n";
@@ -76,7 +76,7 @@ void Port::Show() const
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Port& p)
+std::ostream& operator<<(std::ostream& os, const Port& p) //operation = 
 {
 	os << p.brand << ", ";
 	os << p.style << ", ";
