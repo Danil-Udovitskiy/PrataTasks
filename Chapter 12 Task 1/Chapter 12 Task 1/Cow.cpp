@@ -5,7 +5,7 @@
 
 Cow::Cow() // default constructor
 {
-	name[0] = 0; //initialize 0 array element - 0 or '\0' or name[0] = {};
+	name[0] = '\0'; //initialize 0 array element - '\0' or name[0] = {};
 	hobby = new char[1];  // allocate 1 byte of dynamic memory for 0 ('\0') element to the end of the array
 	hobby[0] = '\0'; // initialize 0 array element - 0 or '\0' or name[0] = {};
 	weight = 0.0;  // initialize weight to 0.0 
@@ -33,6 +33,8 @@ Cow::Cow(const char* nm, const char* ho, double wt) // constructor with paramete
 
 Cow::Cow(const Cow& c) // copy constructor
 {
+	delete[] hobby; // freeing the old string
+
 	strcpy_s(name, strlen(c.name) + 1, c.name); // copying a string
 
 	int len = std::strlen(c.hobby) + 1;  // variable that takes the length of the string

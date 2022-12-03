@@ -37,6 +37,11 @@ int main()
 
 	cout << "\n The biggest package : \n" << *top; //using operator <<
 	
+
+	//for testing default constructor
+	std::cout << "\nTesting default constructor\n";
+	Stock obj;
+	std::cout << obj;
 	return 0;
 	
 }

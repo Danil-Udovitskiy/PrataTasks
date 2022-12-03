@@ -5,14 +5,14 @@
 
 int main()
 {
-	std::cout << "Constructors:__________________________\n";
+	std::cout << "Constructors:________________________\n";
 
 	std::cout << "\nObject 1\n";
 	Cow obj1;
 
 	std::cout << "\nObject 2\n";
 	Cow obj2("Hello", "Car", 22.6);
-	
+
 	std::cout << "\nObject 3 by copy constructor\n";
 	Cow obj3 = Cow(obj2);
 
@@ -39,10 +39,3 @@ int main()
 
 	return 0;
 }
-
-
-
-
-
-
-
