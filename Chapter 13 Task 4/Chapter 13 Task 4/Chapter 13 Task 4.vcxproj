@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Chapter 13 Task 4.cpp" />
     <ClCompile Include="Port.cpp" />
-    <ClCompile Include="VintagePort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Port.h" />

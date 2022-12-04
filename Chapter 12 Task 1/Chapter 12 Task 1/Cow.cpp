@@ -6,8 +6,8 @@
 Cow::Cow() // default constructor
 {
 	name[0] = '\0'; //initialize 0 array element - '\0' or name[0] = {};
-	hobby = new char[1];  // allocate 1 byte of dynamic memory for 0 ('\0') element to the end of the array
-	hobby[0] = '\0'; // initialize 0 array element - 0 or '\0' or name[0] = {};
+	hobby = nullptr;
+
 	weight = 0.0;  // initialize weight to 0.0 
 
 	std::cout << "Default constructor\n"; // for debug purposes
@@ -78,7 +78,15 @@ Cow& Cow::operator= (const Cow& c) // class assignment operation
 
 void Cow::ShowCow() const // output
 {
+	if (hobby !=nullptr)
+	{
+		std::cout << hobby << " - hobby\n";
+	}
+	else
+	{
+		std::cout << "no - hobby\n";
+	}
+
 	std::cout << name << " - name\n";
-	std::cout << hobby << " - hobby\n";
 	std::cout << weight << " - weight\n";
 }

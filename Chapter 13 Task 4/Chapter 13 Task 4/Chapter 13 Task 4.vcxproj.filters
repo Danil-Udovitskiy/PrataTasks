@@ -21,9 +21,6 @@
     <ClCompile Include="Port.cpp">
       <Filter>Файлы заголовков</Filter>
     </ClCompile>
-    <ClCompile Include="VintagePort.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Port.h">

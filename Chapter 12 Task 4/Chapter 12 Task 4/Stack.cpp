@@ -1,37 +1,33 @@
 #include "Stack.h"
 
-Stack::Stack(int n) //create a stack with n elements (10 elements by default)
+Stack::Stack(int n) //create a stack with n elements (or 10 elements by default)
 {
-	pitems = new Item[MAX];
-	size = n;
-	top = 0;
 
+	if (n >= MAX || n < 0)
+	{
+		pitems = new Item[MAX];
+		size = MAX;
+	}
 
-	//or I can use size to allocate memory for 10 elements on the stack, 
-	//but then size would need to be initialized first with the value of the formal argument n
-	/*size = n;
+	else 
+	{
+		pitems = new Item[n];
+		size = n;
+	}
 	top = 0;
-	pitems = new Item[n]; // or new Item[size]*/
 }
 
 
 
 Stack::Stack(const Stack& st) // copy constructor
 {
-	/*size = st.size;
-	top = st.top;
-	pitems = new Item[size];
-	for (int i = 0; i < size; i++)
-		pitems[i] = st.pitems[i];*/
 
-
-	//or I can use MAX to allocate memory for 10 elements on the stack, 
-	//but then size would need to be initialized first with the value of the formal argument n
-	pitems = new Item[MAX];
-	for (int i = 0; i < MAX; i++)
+	pitems = new Item[st.size];
+	for (int i = 0; i < st.size; i++)
 		pitems[i] = st.pitems[i];
-	size = MAX; //size can also have a value of MAX, bacause in any case, the stack is created for 10 elements
+	size = st.size; 
 	top = st.top;
+
 }
 
 
@@ -52,10 +48,10 @@ Stack& Stack::operator= (const Stack& st)  // operator overload =
 
 	delete[] pitems;
 
-	size = st.size; // or size = st.MAX or size = MAX
+	size = st.size;
 	top = st.top;
-	pitems = new Item[size]; // or new Item[MAX]
-	for (int i = 0; i < size; i++) //  or i < MAX;
+	pitems = new Item[st.size];
+	for (int i = 0; i < st.size; i++)
 		pitems[i] = st.pitems[i];
 	return *this;
 }
@@ -72,13 +68,13 @@ bool Stack::isempty() const
 
 bool Stack::isfull() const
 {
-	return top == MAX; //or top == size
+	return top == size;
 }
 
 
 bool Stack::push(const Item& item)
 {
-	if (top < MAX) //or top < size
+	if (top < size)
 	{
 		pitems[top++] = item;
 		return true;

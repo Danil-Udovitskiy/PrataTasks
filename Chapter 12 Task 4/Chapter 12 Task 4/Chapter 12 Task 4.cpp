@@ -8,11 +8,19 @@
 int main()
 {
 	using namespace std;
-	Stack st; // create a stack of 10 elements
+	Stack st1; // create a stack of 10 elements
 
-	Stack st2 = Stack(st); //use the copy constructor
+	Stack st2 = Stack(st1); //use the copy constructor
 
-	st2 = st; // use operation of overloaded operation =
+	st2 = st1; // use operation of overloaded operation =
+	
+	// create a stacks of 10 elements (default)
+	Stack st3(-1); 
+	Stack st4(15);
+	
+	// create a stacks of 5 elements
+	Stack st(5);
+	Stack second (st);
 
 
 	//code testing by Listing 10.12 (pg 517-518)
@@ -36,19 +44,19 @@ int main()
 		case 'a': cout << " Enter order number to add : ";
 			cin >> ро;
 
-			if (st.isfull())
+			if (second.isfull())
 				cout << " Stack is already full\n";
 			else
-				st.push(ро);
+				second.push(ро);
 			break;
 
 		case 'P':
 		case 'p':
-			if (st.isempty())
+			if (second.isempty())
 				cout << " Stack is already empty\n";
 			else
 			{
-				st.pop(ро);
+				second.pop(ро);
 				cout << " Order N# " << ро << " pushed out\n";
 			}
 			break;

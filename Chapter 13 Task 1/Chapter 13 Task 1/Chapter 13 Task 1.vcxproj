@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Cd.cpp" />
     <ClCompile Include="Chapter 13 Task 1.cpp" />
-    <ClCompile Include="Classic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cd.h" />

@@ -6,8 +6,7 @@
 Stock::Stock() // default constructor
 {
 	//if object doesn't have name 
-	company = new char[1]; // dynamic memory allocation
-	company[0] = '\0'; 
+	company = nullptr;
 
 	shares = 0;
 	share_val = 0.0;
@@ -96,7 +95,15 @@ void Stock::update(double price)
 
 std::ostream& operator<<(std::ostream& os, const Stock& st) // operator overload <<
 {
-	os << " Company : " << st.company << "\n";
+	if (st.company != nullptr)
+	{
+		os << " Company : " << st.company << "\n";
+	}
+	else
+	{
+		os << " Company : no name " << "\n";
+	}
+
 	os << " Packages : " << st.shares << "\n";
 	os << " Package price : $" << st.share_val << "\n";
 	os << " Total cost : $" << st.total_val << "\n";
