@@ -4,6 +4,8 @@
 #include <valarray>
 #include"Pair.h"
 
+typedef std::valarray<int> ArrayInt;
+typedef Pair<ArrayInt, ArrayInt> PairArray;
 
 class Wine
 {
@@ -12,28 +14,19 @@ private:
 	std::string name;
 	int year;
 
-	Pair< std::valarray<int>, std::valarray<int> > objects;
-
-
+	Pair< ArrayInt, ArrayInt > objects;
 
 public:
 	
 	Wine();
 	Wine(const char* l, int y);
+	Wine(const char* l, int ó, const int yr[], const int bot[]);
 	
-	
-	//Wine(const char* l, int ó, const int yr[], const int bot[]);
-
-	//void GetBottles();
-
-	//std::string& Label();
-	//int sum();
-
-
-
-	void Show();
 	virtual ~Wine();
 
-
+	void GetBottles();
+	std::string& Label();
+	int sum();
+	void Show();
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 
-//Ћистинг 14.19 
-// pairs.срр Ч определение и использование шаблона Pair 
+//Listing 14.19 
+//defining and using the Pair pattern
 
 template <class T1, class T2>
 class Pair

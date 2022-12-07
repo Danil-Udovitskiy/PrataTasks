@@ -1,7 +1,7 @@
 ﻿// Chapter 14 Task 1.cpp 
 #include <iostream>
 #include "Wine.h"
-// ре14-1.срр — класс Wine с использованием включения 
+// wine class using include
 
 int main()
 {
@@ -10,35 +10,39 @@ int main()
 	using std::cin;
 	using std::cout;
 	using std::endl;
-	cout << "Enter name of wine: "; // ввод названия вина 
+	cout << "Enter name of wine: "; // Enter name of wine
 	char lab[50];
 	cin.getline(lab, 50);
-	cout << "Enter number of years: "; // ввод количества годов сбора винограда 
+	cout << "Enter number of years: "; // enter number of vintage years (grape)
 	int yrs;
 	cin >> yrs;
 	
 
-	Wine holding(lab, yrs); // сохранение названия, лет, 
-							// создание массивов из yrs элементов 
+	Wine holding(lab, yrs); // save name, years,
+							// create arrays from yrs elements
 	
-	//holding.GetBottles();	// предложение ввести год и количество бутылок 
-	holding.Show();			// вывод содержимого объекта 
+	holding.GetBottles();	// suggestion to enter year and number of bottles
+	holding.Show();			// show data of object
 	
+	//Empty object with default constructor
+	std::cout << "\nEmpty object\n";
 	Wine holding1;
 	holding1.Show();
+	std::cout << "\n";
 
 
-	/*const int YRS = 3;
+	const int YRS = 3;
 	int y[YRS] = { 1993, 1995, 1998 };
 	int b[YRS] = { 48, 60, 72 };
 
-	// Создание нового объекта, инициализация 
-	// с использованием данных из массивов у и b 
-	Wine more("Gushing Grape Red", YRS, y, b);
-	more.Show();
-	cout << "Total bottles for " << more.Label() // используется метод Label() 
-		<< ": " << more.sum() << endl;			 // используется метод sum() 
-	cout << "Bye\n";*/
+
+	// Create a new object, initialization
+	// using data from arrays y and b
+	Wine more("Gushing Grape Red", YRS, y, b); // using Wine(const char* l, int у, const int yr[], const int bot[]);
+	more.Show(); 
+	cout << "Total bottles for " << more.Label() // using Label() 
+		<< ": " << more.sum() << endl;			 // using sum() 
+	cout << "Bye\n";
 	
 	
 	return 0;
