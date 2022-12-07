@@ -25,7 +25,7 @@ public:
 	virtual ~Wine();
 
 	void GetBottles();
-	std::string& Label();
+	const std::string& Label(); //const link to string
 	int sum();
 	void Show();
 };

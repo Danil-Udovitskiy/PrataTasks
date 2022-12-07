@@ -4,9 +4,6 @@ Wine::Wine()
 {
 	//name does not need to be initialized with a default value, because string type initialized initially (in advance)
 	year = 0;
-	Pair< ArrayInt, ArrayInt >obj;
-	
-	objects = obj;
 }
 
 
@@ -51,11 +48,14 @@ void Wine::Show() // output
 	std::cout << name << " - name\n";
 	std::cout << year << " - year\n";
 
-	std::cout << "Year\t" << "Bottles\n";
-	for (int i = 0; i < year; i++) 
+	if (objects.first().size() > 0 && objects.second().size() > 0) 
 	{
-		std::cout << objects.first()[i]<<"\t"; //operator [] for first 
-		std::cout << objects.second()[i] << "\n"; //operator [] for second
+		std::cout << "Year\t" << "Bottles\n";
+		for (int i = 0; i < year; i++)
+		{
+			std::cout << objects.first()[i] << "\t"; //operator [] for first 
+			std::cout << objects.second()[i] << "\n"; //operator [] for second
+		}
 	}
 }
 
@@ -80,9 +80,9 @@ void Wine::GetBottles()
 
 
 
-std::string& Wine::Label()
+const std::string& Wine::Label()
 {
-	//returns a link to the name of the drink (Wine)
+	//returns const link to the name of the drink (Wine)
 	return name;
 }
 
