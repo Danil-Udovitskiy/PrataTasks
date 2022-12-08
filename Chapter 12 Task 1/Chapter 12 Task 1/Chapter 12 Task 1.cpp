@@ -3,18 +3,25 @@
 #include <iostream>
 #include "Cow.h"
 
+
 int main()
 {
 	std::cout << "Constructors:________________________\n";
 
 	std::cout << "\nObject 1\n";
 	Cow obj1;
+	//obj1.ShowCow();
+
 
 	std::cout << "\nObject 2\n";
 	Cow obj2("Hello", "Car", 22.6);
 
+	//std::cout << "\nObject 2\n";
+	//obj2.ShowCow();
+
 	std::cout << "\nObject 3 by copy constructor\n";
 	Cow obj3 = Cow(obj2);
+	//obj3.ShowCow();
 
 	std::cout << "\nObject 4 by assignment operation\n";
 	Cow obj4;
