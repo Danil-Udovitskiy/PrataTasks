@@ -1,13 +1,14 @@
 #pragma once
 #include <iostream>
 #include <cstring>
-
+#include <memory>
 
 class String
 {
 private:
 
-	char* str; // pointer to string
+	std::unique_ptr<char[]> str; //smart pointer
+	
 	int len; // string length
 	static int num_strings; // number of objects
 	static const int CINLIM = 80; // input limit for sin
