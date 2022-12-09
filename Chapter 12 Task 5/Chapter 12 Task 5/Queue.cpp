@@ -8,17 +8,20 @@
 // Queue class methods
 Queue::Queue(int qs) : qsize(qs)
 {
-	front = rear = NULL; // or nullptr 
+	//front = rear = NULL; // or nullptr 
 	items = 0;
 }
 
 Queue::~Queue()
 {
 	Node* temp;
-	while (front != NULL) // while the queue is not empty
+	//std::unique_ptr<Node> temp;
+
+	while (front.get() != NULL) // while the queue is not empty
 	{
-		temp = front;			// store the address of the initial element
-		front = front->next;	// reset the pointer to the next element
+		temp = front.get();			// store the address of the initial element
+		front.get()->next;	// reset the pointer to the next element
+		//front = front->next;
 		delete temp;			// remove the previous initial element
 	}
 }
@@ -51,10 +54,20 @@ bool Queue::enqueue(const Item& item)
 	add->next = NULL; // or nullptr; 
 	items++;
 	if (front == NULL) // if the queue is empty
-		front = add;   // element is placed at the beginning
+	{
+		//front = add;   // element is placed at the beginning
+		front.reset(add);
+	}
+
 	else
-		rear->next = add; // otherwise it is placed at the end
-	rear = add; 	// end pointer points to new node
+	{
+		//rear->next = add; // otherwise it is placed at the end
+		rear.get()->next.reset(add);
+		//rear.reset();
+
+	}
+	//rear = add; 	// end pointer points to new node
+	rear.reset(add);
 	return true;
 }
 
@@ -65,11 +78,16 @@ bool Queue::dequeue(Item& item)
 		return false;
 	item = front->item; // item is loaded with the first element from the queue
 	items--;
-	Node* temp = front; // store the location of the first element
-	front = front->next; // shift the start pointer to the next element
+	
+	//Node* temp = front; // store the location of the first element
+	Node* temp = front.get();
+	
+	//front = front->next; // shift the start pointer to the next element
+	front.reset();
+
 	delete temp; // remove the previous first element
 	if (items == 0)
-		rear = NULL;
+		rear= NULL;
 	return true;
 }
 
