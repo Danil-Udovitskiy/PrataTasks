@@ -6,7 +6,6 @@
 Stock::Stock() // default constructor
 {
 	//if object doesn't have name 
-	company = nullptr;
 
 	shares = 0;
 	share_val = 0.0;
@@ -20,9 +19,9 @@ Stock::Stock(const char* co, int n, double pr) // constructor with arguments
 {
 	//if object has name
 	
-	// the size of the selected string company was not large enough to fit all characters + '\0' at the end
-	company = new char[strlen(co) + 1]; //allocate the amount of dynamic memory equal to the size of the array co
-	strcpy_s(company, strlen(co) + 1, co); //copy the contents of co to company(which in turn is a pointer to the char)
+	int len = strlen(co) + 1;
+	company.reset(new char[len]); 
+	strcpy_s(company.get(), len, co);
 	num++;
 
 
@@ -44,7 +43,6 @@ Stock::~Stock()
 {
 	--num;
 	std::cout << "dectr " << num << "\n";
-	delete[] company; // delete all objects 
 }
 
 
