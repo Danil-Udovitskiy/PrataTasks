@@ -6,19 +6,15 @@
 String::String()
 {
 	len = 0;
-
-	std::unique_ptr<char[]> str; // std::unique_ptr<char[]> str = nullptr;
-	str.reset(nullptr);
-
 	num_strings++; //increment the counter of objects 
 }
 
 
 String::String(const char* s)
 {
-	len = std::strlen(s) + 1;
+	len = std::strlen(s) + 1; // set the length + 1 
 
-	str.reset(new char[len + 1]); // allocate memory for a new string
+	str.reset(new char[len]); // allocate memory for a new string 
 	strcpy_s(str.get(), len, s); // copying a string
 
 	num_strings++;       //increment the counter of objects
@@ -28,10 +24,11 @@ String::String(const char* s)
 String::String(const String& st)
 {
 	num_strings++; // handle static member update
-	len = st.len + 1; // same length
+	len = st.len + 1; // set the length by 1 more to enter another line ending character
 
-	str.reset(new char[len + 1]); // allocate memory for a new string
-	strcpy_s(str.get(), len+1 , st.str.get()); // copy the string to a new location
+	//now there is no need to allocate one more character for the end of the string, since len already has an extra byte
+	str.reset(new char[len]); // allocate memory for a new string 
+	strcpy_s(str.get(), len, st.str.get()); // copy the string to a new location 
 }
 
 
@@ -65,8 +62,10 @@ String& String::operator= (const String& st)
 		return *this;
 
 	len = st.len + 1;
-	str.reset (new char[len+1]);
-	strcpy_s(str.get(), strlen(st.str.get())+1, st.str.get()); // strlen(st.str.get())+1
+	str.reset(new char[len]);
+	
+	//this option is better
+	strcpy_s(str.get(), len, st.str.get());
 
 	return *this;
 }
@@ -77,11 +76,12 @@ String operator+(const String& st1, const String& st2) // overload + by referenc
 {
 	String sum;
 
-	sum.len = (strlen(st1.str.get())+1) + (strlen(st2.str.get()) + 1);
+	sum.len = (strlen(st1.str.get()) + strlen(st2.str.get())) + 1;
 
-	sum.str.reset(new char[sum.len + 1]); // allocate memory for a new string
+	sum.str.reset(new char[sum.len]); // allocate memory for a new string
 
 	strcat(strcpy(sum.str.get(), st1.str.get()), st2.str.get());
+
 	//strcat adds adds a copy of the character string pointed to by st2.str to the end of the string,
 	//pointed to by strcpy(sum.str, st1.str)
 
@@ -94,7 +94,7 @@ String& String::operator=(const char* s) // Assigning a C-string to a String obj
 {
 	len = std::strlen(s) + 1;
 
-	str.reset(new char[len + 1]); // allocate memory for a new string
+	str.reset(new char[len]); // allocate memory for a new string
 	strcpy_s(str.get(), len, s); // copying a string
 
 	return *this;
