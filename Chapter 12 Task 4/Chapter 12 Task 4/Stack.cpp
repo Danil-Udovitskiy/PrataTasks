@@ -5,13 +5,13 @@ Stack::Stack(int n) //create a stack with n elements (or 10 elements by default)
 
 	if (n >= MAX || n < 0)
 	{
-		pitems = new Item[MAX];
+		pitems.reset(new Item[MAX]);
 		size = MAX;
 	}
 
 	else 
 	{
-		pitems = new Item[n];
+		pitems.reset(new Item[n]);
 		size = n;
 	}
 	top = 0;
@@ -21,8 +21,8 @@ Stack::Stack(int n) //create a stack with n elements (or 10 elements by default)
 
 Stack::Stack(const Stack& st) // copy constructor
 {
+	pitems.reset(new Item[st.size]);
 
-	pitems = new Item[st.size];
 	for (int i = 0; i < st.size; i++)
 		pitems[i] = st.pitems[i];
 	size = st.size; 
@@ -34,7 +34,6 @@ Stack::Stack(const Stack& st) // copy constructor
 
 Stack::~Stack() // destructor
 {
-	delete[]pitems;
 }
 
 
@@ -46,11 +45,10 @@ Stack& Stack::operator= (const Stack& st)  // operator overload =
 	if (this == &st)
 		return *this;
 
-	delete[] pitems;
-
 	size = st.size;
 	top = st.top;
-	pitems = new Item[st.size];
+
+	pitems.reset(new Item[st.size]);
 	for (int i = 0; i < st.size; i++)
 		pitems[i] = st.pitems[i];
 	return *this;
