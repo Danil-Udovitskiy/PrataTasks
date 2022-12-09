@@ -1,17 +1,20 @@
 #pragma once
+#include <memory>
+#include <string>
 
 class Cow
 {
 private:
 
 	char name[20];
-	char* hobby;
+	std::unique_ptr<char[]> hobby; // add smart pointer unique_ptr
 	double weight;
 
 public:
 
 	Cow(); // default constructor
 	Cow(const char* nm, const char* ho, double wt); // constructor with parameters
+	
 	Cow(const Cow& c);  // copy constructor
 	~Cow(); // destructor 
 
