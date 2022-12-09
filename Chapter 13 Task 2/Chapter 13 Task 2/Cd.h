@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 // Base class
 class Cd
@@ -7,8 +8,9 @@ class Cd
 
 private:
 
-	char *performers; // pointer name singer
-	char *label; // pointer name label
+	std::shared_ptr<char[]> performers; //smart pointer
+	std::shared_ptr<char[]>label; //smart pointer
+
 	int selections; // number of collections
 	double playtime; // playback time in minutes
 
@@ -32,7 +34,7 @@ class Classic :public Cd // inheritance from a class Cd
 {
 private:
 
-	char *main_track; //pointer to char
+	std::shared_ptr<char[]> main_track; //smart pointer
 
 public:
 
