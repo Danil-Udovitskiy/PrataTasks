@@ -31,7 +31,7 @@ void Wine::Show() // output
 	std::cout << "Wine: " << (const std::string&)(*this) << "\n"; //приводим к типу ссылки на стринг и отображаем содержимое 
 	std::cout << year << " - year\n";
 
-	//обращаемся к объектам унаследованного класса при помощи оператора разрешения контекста ::
+	//refer to objects of the inherited class using the context resolution operator ::
 	if (PairArray::first().size() > 0 && PairArray::second().size() > 0)
 	{
 		std::cout << "Year\t" << "Bottles\n";
@@ -41,4 +41,39 @@ void Wine::Show() // output
 			std::cout << PairArray::second()[i] << "\n"; //operator [] for second
 		}
 	}
+}
+
+
+
+void Wine::GetBottles()
+{
+	//for a Wine object of a given age, prompts the user to enter the appropriate values
+	//for crop year and number of bottles
+
+	std::cout << "Enter " << (const std::string&)(*this); //cast to string reference type and display content
+	std::cout << " data for " << year << " - year(s)\n";
+
+	for (int i = 0; i < year; i++)
+	{
+		std::cout << "Enter year: ";
+		std::cin >> PairArray::first()[i]; //cin in first valarray (object)
+		std::cout << "Enter bottles for that year: ";
+		std::cin >> PairArray::second()[i]; //cin in second valarray (object)
+	}
+}
+
+
+
+const std::string& Wine::Label()
+{
+	//to access the internal string object "name", we perform type casting 
+	//The Wine type is derived from string, so the Wine object can be cast to string
+	return (const std::string &)(*this); //return a reference to the inherited string object that is in the calling Wine object
+}
+
+
+int Wine::sum()
+{
+	//returns the total number of bottles in the second valarray<int> object from the Pair object
+	return PairArray::second().sum();
 }

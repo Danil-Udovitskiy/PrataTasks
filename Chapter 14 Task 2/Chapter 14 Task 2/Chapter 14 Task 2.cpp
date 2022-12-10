@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Wine.h"
-// 
+// using closed inheritance
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
 	Wine holding(lab, yrs); // save name, years,
 							// create arrays from yrs elements
 
-	//holding.GetBottles();	// suggestion to enter year and number of bottles
+	holding.GetBottles();	// suggestion to enter year and number of bottles
 	holding.Show();			// show data of object
 
 	//Empty object with default constructor
@@ -28,7 +28,7 @@ int main()
 	std::cout << "\n";
 
 
-	/*const int YRS = 3;
+	const int YRS = 3;
 	int y[YRS] = { 1993, 1995, 1998 };
 	int b[YRS] = { 48, 60, 72 };
 
@@ -39,7 +39,7 @@ int main()
 	more.Show();
 	std::cout << "Total bottles for " << more.Label() // using Label() 
 		<< ": " << more.sum() << "\n";			 // using sum() 
-	std::cout << "Bye\n";*/
+	std::cout << "Bye\n";
 
 
 	return 0;
