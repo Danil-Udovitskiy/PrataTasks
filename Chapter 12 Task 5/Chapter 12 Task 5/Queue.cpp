@@ -63,10 +63,7 @@ bool Queue::dequeue(Item& item)
 	item = front->item; // item is loaded with the first element from the queue
 	items--;
 	
-	std::shared_ptr<Node> temp; // store the location of the first element
-	temp.reset(front.get()); //??
-
-	front.reset(front.get()->next.get()); // shift the start pointer to the next element
+	front = front->next; // shift the start pointer to the next element
 
 	if (items == 0)
 		rear= NULL;

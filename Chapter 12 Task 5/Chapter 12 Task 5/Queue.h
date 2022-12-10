@@ -22,7 +22,7 @@ class Queue
 private:
 	// Class scope definitions
 	// Node - nested structure, local to this class
-	struct Node { Item item; std::shared_ptr<struct Node> next; };//smart pointer
+	struct Node { Item item; std::shared_ptr<Node> next; }; //smart pointer
 	
 	enum { Q_SIZE = 10 };
 
