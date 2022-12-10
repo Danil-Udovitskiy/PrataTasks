@@ -2,7 +2,7 @@
 
 //Listing 12.10.queue.h
 // queue.h — queue interface
-
+#include <memory>
 
 class Customer
 {
@@ -26,8 +26,12 @@ private:
 	enum { Q_SIZE = 10 };
 
 	// Private class members
-	Node* front; // pointer to the beginning of the Queue
-	Node* rear; // pointer to end of Queue
+	//Node* front; // pointer to the beginning of the Queue
+	//Node* rear; // pointer to end of Queue
+	
+	std::unique_ptr<Node> front;
+	std::unique_ptr<Node> rear;
+	
 	int items; // current number of elements in the Queue
 	const int qsize; // maximum number of elements in the Queue
 	// Forward declarations to prevent open copy
