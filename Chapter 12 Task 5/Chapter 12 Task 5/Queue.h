@@ -29,8 +29,6 @@ private:
 	enum { Q_SIZE = 10 };
 
 	// Private class members
-	//Node* front; // pointer to the beginning of the Queue
-	//Node* rear; // pointer to end of Queue
 
 	std::unique_ptr<Node> front; //smart pointer
 	std::unique_ptr<Node> rear; //smart pointer

@@ -17,7 +17,7 @@ Queue::~Queue()
 	Node* temp;
 	//std::unique_ptr<Node> temp;
 
-	while (front.get() != NULL) // while the queue is not empty
+	while (front != NULL) // while the queue is not empty
 	{
 		temp = front.get();			// store the address of the initial element
 		front.get()->next;	// reset the pointer to the next element
@@ -63,7 +63,6 @@ bool Queue::enqueue(const Item& item)
 	{
 		//rear->next = add; // otherwise it is placed at the end
 		rear.get()->next.reset(add);
-		//rear.reset();
 
 	}
 	//rear = add; 	// end pointer points to new node
@@ -83,7 +82,7 @@ bool Queue::dequeue(Item& item)
 	Node* temp = front.get();
 	
 	//front = front->next; // shift the start pointer to the next element
-	front.reset();
+	front.reset(front.get()->next.get());
 
 	delete temp; // remove the previous first element
 	if (items == 0)
