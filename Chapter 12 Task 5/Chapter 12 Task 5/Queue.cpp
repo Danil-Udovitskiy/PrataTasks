@@ -7,21 +7,10 @@
 
 // Queue class methods
 Queue::Queue(int qs) : qsize(qs)
-{
-	front = rear = NULL; // or nullptr 
+{	
 	items = 0;
 }
 
-Queue::~Queue()
-{
-	Node* temp;
-	while (front != NULL) // while the queue is not empty
-	{
-		temp = front;			// store the address of the initial element
-		front = front->next;	// reset the pointer to the next element
-		delete temp;			// remove the previous initial element
-	}
-}
 
 bool Queue::isempty() const
 {
@@ -44,17 +33,25 @@ bool Queue::enqueue(const Item& item)
 {
 	if (isfull())
 		return false;
-	Node* add = new Node; // create node
+
+	std::shared_ptr<Node> add;
+	add.reset(new Node);
 
 	// On failure, the new operation throws a std::bad_alloc exception
 	add->item = item; // inserting pointers to nodes
-	add->next = NULL; // or nullptr; 
 	items++;
+
 	if (front == NULL) // if the queue is empty
+	{
 		front = add;   // element is placed at the beginning
+	}
+
 	else
+	{
 		rear->next = add; // otherwise it is placed at the end
+	}
 	rear = add; 	// end pointer points to new node
+
 	return true;
 }
 
@@ -65,11 +62,11 @@ bool Queue::dequeue(Item& item)
 		return false;
 	item = front->item; // item is loaded with the first element from the queue
 	items--;
-	Node* temp = front; // store the location of the first element
+	
 	front = front->next; // shift the start pointer to the next element
-	delete temp; // remove the previous first element
+
 	if (items == 0)
-		rear = NULL;
+		rear= NULL;
 	return true;
 }
 

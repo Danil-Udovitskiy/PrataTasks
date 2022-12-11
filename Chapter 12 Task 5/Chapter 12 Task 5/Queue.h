@@ -2,7 +2,7 @@
 
 //Listing 12.10.queue.h
 // queue.h — queue interface
-
+#include <memory>
 
 class Customer
 {
@@ -22,12 +22,15 @@ class Queue
 private:
 	// Class scope definitions
 	// Node - nested structure, local to this class
-	struct Node { Item item; struct Node* next; };
+	struct Node { Item item; std::shared_ptr<Node> next; }; //smart pointer
+	
 	enum { Q_SIZE = 10 };
 
 	// Private class members
-	Node* front; // pointer to the beginning of the Queue
-	Node* rear; // pointer to end of Queue
+
+	std::shared_ptr<Node> front; //smart pointer
+	std::shared_ptr<Node> rear; //smart pointer
+
 	int items; // current number of elements in the Queue
 	const int qsize; // maximum number of elements in the Queue
 	// Forward declarations to prevent open copy
@@ -36,7 +39,7 @@ private:
 
 public:
 	Queue(int qs = Q_SIZE); // create queue with size limit qs
-	~Queue();
+	~Queue() {};
 	bool isempty() const;
 	bool isfull() const;
 	int queuecount() const;
