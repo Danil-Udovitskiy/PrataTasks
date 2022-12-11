@@ -8,7 +8,8 @@ class Stock
 
 private:
 
-	char *company; // pointer to char
+	std::shared_ptr<char[]> company; //smart pointer shared_ptr correctly implements move semantics
+
 	int shares;
 	double share_val;
 	double total_val;
