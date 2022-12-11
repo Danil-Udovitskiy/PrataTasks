@@ -106,7 +106,7 @@ int main()
 	cout << endl;
 	for (int i = 0; i < objects; i++)
 	{
-		p_clients.get()->View();
+		p_clients->View(); //call the method of the stored object through the overloaded operator ->
 		cout << endl;
 	}
 
