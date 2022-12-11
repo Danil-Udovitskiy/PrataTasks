@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 //class declaration for a stack ATD
 typedef unsigned long Item;
@@ -8,7 +9,8 @@ class Stack
 private:
 
 	enum { MAX = 10 }; // class-specific constant
-	Item* pitems; // stores the elements of the stack 
+	std::unique_ptr<Item[]> pitems; //smart pointer
+
 	int size; // number of elements on the stack
 	int top; // index for the top element of the stack
 
