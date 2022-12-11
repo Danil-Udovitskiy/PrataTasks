@@ -70,4 +70,21 @@ Cd& Cd::operator= (const Cd& d) // operator overload = with dynamic memory alloc
 
 
 
+Cd::Cd(const  Cd& d) // copy constructor
+{
+	int len1 = strlen(d.performers.get()) + 1;
+	performers.reset(new char[len1]);
+	strcpy_s(performers.get(), len1, d.performers.get());
+
+	int len2 = strlen(d.label.get()) + 1;
+	label.reset(new char[len2]);
+	strcpy_s(label.get(), len2, d.label.get());
+
+	selections = d.selections;
+	playtime = d.playtime;
+}
+
+
+
+
 

@@ -44,3 +44,11 @@ Classic& Classic::operator= (const Classic& d) // operator overload = with dynam
 
 	return *this;
 }
+
+
+Classic::Classic(const  Classic& d) // copy constructor
+{
+	int lenAdd = strlen(d.main_track.get()) + 1;
+	main_track.reset(new char[lenAdd]);
+	strcpy_s(main_track.get(), lenAdd, d.main_track.get());
+}
