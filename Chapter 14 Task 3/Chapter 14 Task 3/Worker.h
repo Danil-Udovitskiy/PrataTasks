@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <string>
 
 //Listing 12.10.queue.h
 
@@ -34,23 +36,25 @@ public:
 
 
 
+//+++
+class Worker // абстрактный базовый класс
+{
+private:
 
+	std::string fullname;
+	long id;
 
+protected:
 
+	virtual void Data() const;
+	virtual void Get();
 
+public:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	Worker() : fullname("no one"), id(0L) {}
+	Worker(const std::string& s, long n)
+		: fullname(s), id(n) {}
+	virtual ~Worker() = 0; // чистая виртуальная функция
+	virtual void Set() = 0;
+	virtual void Show() const = 0;
+};
