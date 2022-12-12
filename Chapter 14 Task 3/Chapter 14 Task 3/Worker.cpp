@@ -116,3 +116,39 @@ void Worker::Get()
 	while (std::cin.get() != '\n')
 		continue;
 }
+
+
+
+//+++
+// Методы Waiter 
+void Waiter ::Set()
+{
+	std::cout << "Enter waiter's name: "; // ввод имени и фамилии работчика 
+	Worker::Get();
+	Get();
+}
+
+void Waiter::Show() const
+{
+	std::cout << "Category: waiter\n"; // категория: официант 
+	Worker::Data();
+	Data();
+}
+
+
+// Защищенные методы 
+void Waiter::Data() const
+{
+	std::cout << "Panache rating: " << panache << "\n"; // индекс элегантности 
+}
+
+
+void Waiter::Get()
+{
+	std::cout << "Enter waiter's panache rating: ";
+	// Ввод индекса элегантности официанта 
+	std::cin >> panache;
+	while (std::cin.get() != '\n')
+		continue;
+}
+
