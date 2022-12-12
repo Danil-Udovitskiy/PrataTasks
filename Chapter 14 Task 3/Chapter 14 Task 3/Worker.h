@@ -54,6 +54,7 @@ Queue<Tp>::~Queue()
 		front->next;  // reset the pointer to the next element
 		delete temp;  // remove the previous initial element - (front)
 	}
+	std::cout << "dectructor\n";
 }
 
 
