@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 // Base class
 class Cd
@@ -7,8 +8,9 @@ class Cd
 
 private:
 
-	char *performers; // pointer name singer
-	char *label; // pointer name label
+	std::unique_ptr<char[]> performers; //smart pointer
+	std::unique_ptr<char[]>label; //smart pointer
+
 	int selections; // number of collections
 	double playtime; // playback time in minutes
 
@@ -24,6 +26,7 @@ public:
 	virtual void Report() const; // displays all information about the CD
 
 	Cd& operator= (const Cd& d); // prototype of assignment operator overload
+	Cd (const Cd& d); // copy constructor
 };
 
 
@@ -32,7 +35,7 @@ class Classic :public Cd // inheritance from a class Cd
 {
 private:
 
-	char *main_track; //pointer to char
+	std::unique_ptr<char[]> main_track; //smart pointer
 
 public:
 
@@ -44,4 +47,5 @@ public:
 
 	//+
 	Classic& operator= (const Classic& d); 
+	Classic(const Classic& d); // copy constructor
 };

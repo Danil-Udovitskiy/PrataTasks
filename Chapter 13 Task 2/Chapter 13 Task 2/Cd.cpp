@@ -4,14 +4,13 @@
 
 Cd::Cd(const char* s1, const char* s2, int n, double x)
 {
-	//dynamic memory allocation
-	int len1 = strlen(s1);
-	performers = new char[len1 + 1];
-	strcpy_s(performers, len1 + 1, s1);
+	int len1 = strlen(s1) + 1;
+	performers.reset(new char[len1]);
+	strcpy_s(performers.get(), len1 , s1);
 
-	int len2 = strlen(s2);
-	label = new char[len2 + 1];
-	strcpy_s(label, len2 + 1, s2);
+	int len2 = strlen(s2) + 1;
+	label.reset(new char[len2]);
+	strcpy_s(label.get(), len2, s2);
 
 	selections = n;
 	playtime = x;
@@ -20,14 +19,13 @@ Cd::Cd(const char* s1, const char* s2, int n, double x)
 
 Cd::Cd()
 {
-	int len1 = strlen("no name");
-	performers = new char[len1 + 1];
-	strcpy_s(performers, len1 + 1, "no name");
+	int len1 = strlen("no name") + 1;
+	performers.reset(new char[len1]);
+	strcpy_s(performers.get(), len1, "no name");
 
-
-	int len2 = strlen("no label");
-	label = new char[len2 + 1];
-	strcpy_s(label, len2 + 1, "no label");
+	int len2 = strlen("no name") + 1;
+	label.reset(new char[len2]);
+	strcpy_s(label.get(), len2, "no name");
 
 	selections = 0;
 	playtime = 0.0;
@@ -46,8 +44,6 @@ void Cd::Report() const
 Cd::~Cd()
 {
 	std::cout << "cd dect\n";
-	delete[] performers;
-	delete[] label;
 }
 
 
@@ -57,23 +53,37 @@ Cd& Cd::operator= (const Cd& d) // operator overload = with dynamic memory alloc
 	if (this == &d)
 		return *this;
 
-	delete[]performers;
-	delete[]label;
 
+	int len1 = strlen(d.performers.get()) + 1;
+	performers.reset(new char[len1]);
+	strcpy_s(performers.get(), len1, d.performers.get());
 
-	int len1 = strlen(d.performers);
-	performers = new char[len1 + 1];
-	strcpy_s(performers, len1 + 1, d.performers);
-
-	int len2 = strlen(d.label);
-	label = new char[len2 + 1];
-	strcpy_s(label, len2 + 1, d.label);
+	int len2 = strlen(d.label.get()) + 1;
+	label.reset(new char[len2]);
+	strcpy_s(label.get(), len2, d.label.get());
 
 	selections = d.selections;
 	playtime = d.playtime;
 
 	return *this;
 }
+
+
+
+Cd::Cd(const  Cd& d) // copy constructor
+{
+	int len1 = strlen(d.performers.get()) + 1;
+	performers.reset(new char[len1]);
+	strcpy_s(performers.get(), len1, d.performers.get());
+
+	int len2 = strlen(d.label.get()) + 1;
+	label.reset(new char[len2]);
+	strcpy_s(label.get(), len2, d.label.get());
+
+	selections = d.selections;
+	playtime = d.playtime;
+}
+
 
 
 
