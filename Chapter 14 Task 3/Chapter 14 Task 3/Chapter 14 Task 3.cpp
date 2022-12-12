@@ -23,11 +23,11 @@ int main()
 	{
 		char choice;
 		cout << "Enter the employee category:\n" // ввод категории работника; 
-			<< "w: waiter (q - exit) "; // w - официант
+			<< "w: waiter  s: singer (q - exit) "; // w - официант, s - певец, 
 		cin >> choice;
 		while (strchr("wstq", choice) == NULL)
 		{
-			cout << "Please enter w : ";
+			cout << "Please enter w / s : ";
 			cin >> choice;
 		}
 		if (choice == 'q')
@@ -35,6 +35,9 @@ int main()
 		switch (choice)
 		{
 		case 'w': lolas[ct] = new Waiter;
+			break;
+
+		case 's': lolas[ct] = new Singer;
 			break;
 		}
 		cin.get();

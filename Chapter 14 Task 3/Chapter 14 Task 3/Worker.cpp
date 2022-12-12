@@ -152,3 +152,48 @@ void Waiter::Get()
 		continue;
 }
 
+
+
+//+++
+// Методы Singer 
+const char* Singer::pv[Singer::Vtypes] = { "other", "alto", "contralto",
+"soprano", "bass", "baritone", "tenor" };
+
+void Singer::Set()
+{
+	std::cout << "Enter singer's name: "; // Ввод имени и фамилии певца 
+	Worker::Get();
+	Get();
+}
+void Singer::Show() const
+{
+	std::cout << "Category: singer\n"; // Категория: певец 
+	Worker::Data();
+	Data();
+}
+// Защищенные методы 
+void Singer::Data() const
+{
+	std::cout << "Vocal range: " << pv[voice] << "\n"; // Вокальный диапазон 
+}
+
+
+void Singer::Get()
+{
+	std::cout << "Enter number for singer's vocal range:\n";
+	// Ввод номера вокального диапазона певца 
+	int i;
+	for (i = 0; i < Vtypes; i++)
+	{
+		std::cout << i << " : " << pv[i] << " ";
+		if (i % 4 == 3)
+			std::cout << "\n";
+	}
+	if (i % 4 != 0)
+		std::cout << '\n';
+	std::cin >> voice;
+	while (std::cin.get() != '\n')
+		continue;
+}
+
+
