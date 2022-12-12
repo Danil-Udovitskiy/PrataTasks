@@ -6,14 +6,15 @@
 
 
 const int objects = 4;
+
 int main()
 {
 	using std::cin;
 	using std::cout;
 	using std::endl;
 
+	std::shared_ptr<BaseABC> p_clients; //smart pointer 
 
-	BaseABC* p_clients[objects];
 	std::string tempName; // brand name
 	int tempWCode; // wincode
 
@@ -51,7 +52,7 @@ int main()
 			 cout << "Enter price: $ "; // entering the cost of the car
 			 cin >> tempPrice;
 
-			 p_clients[i] = new DMA_lacks(tempName, tempWCode, tempPrice);
+			 p_clients.reset(new DMA_lacks(tempName, tempWCode, tempPrice));
 
 			 break;
 			}
@@ -62,7 +63,7 @@ int main()
 			 cout << "Enter weight: kg "; // entering the weight of the car
 			 cin >> tempWeight;
 
-			 p_clients[i] = new DMA_has(tempName, tempWCode, tempWeight);
+			 p_clients.reset(new DMA_has(tempName, tempWCode, tempWeight));
 
 			 break;
 			}
@@ -77,7 +78,7 @@ int main()
 			 cout << "Enter name2 : "; // entering the name model of the car
 			 cin >> tempName2;
 
-			 p_clients[i] = new DMA(tempName, tempWCode, tempMaxSpeed, tempName2);
+			 p_clients.reset(new DMA(tempName, tempWCode, tempMaxSpeed, tempName2));
 
 			 break;
 			}
@@ -102,19 +103,14 @@ int main()
 	}
 
 
-
 	cout << endl;
 	for (int i = 0; i < objects; i++)
 	{
-		p_clients[i]->View();
+		p_clients->View(); //call the method of the stored object through the overloaded operator ->
 		cout << endl;
 	}
 
 
-	for (int i = 0; i < objects; i++)
-	{
-		delete p_clients[i]; // deallocate memory
-	}
 	cout << "Done.\n";
 	return 0;
 }
