@@ -1,7 +1,7 @@
 ﻿// Chapter 14 Task 3.cpp
 
-//Листинг 14.12
-// workmi.срр — множественное наследование
+//Listing 14.12
+//multiple inheritance
 
 #include <iostream>
 #include <cstring>
@@ -14,20 +14,21 @@ int main()
 	using std::cout;
 	using std::endl;
 	using std::strchr;
-	Worker* lolas[SIZE]; //создал очередь указателей на Worker
+	Worker* lolas[SIZE]; //created a queue of pointers to the Worker
 
 
-	//тестирую создание объекта Waiter от АБС Worker
+	//testing the creation of the Waiter object from the ABS Worker
 	int ct;
 	for (ct = 0; ct < SIZE; ct++)
 	{
 		char choice;
-		cout << "Enter the employee category:\n" // ввод категории работника; 
-			<< "w: waiter  s: singer (q - exit) "; // w - официант, s - певец, 
+		cout << "Enter the employee category:\n" // enter the employee category;
+			<< "w: waiter  s: singer "
+			<< " t: singing waiter (q - exit) ";
 		cin >> choice;
 		while (strchr("wstq", choice) == NULL)
 		{
-			cout << "Please enter w / s : ";
+			cout << "Please enter w / s / t / (q - exit) : ";
 			cin >> choice;
 		}
 		if (choice == 'q')
@@ -39,11 +40,14 @@ int main()
 
 		case 's': lolas[ct] = new Singer;
 			break;
+
+		case 't': lolas[ct] = new SingingWaiter;
+			break;
 		}
 		cin.get();
 		lolas[ct]->Set();
 	}
-	cout << "\nHere is your staff:\n"; // вывод списка работников 
+	cout << "\nHere is your staff:\n"; // output the list of employees
 	int i;
 	for (i = 0; i < ct; i++)
 	{

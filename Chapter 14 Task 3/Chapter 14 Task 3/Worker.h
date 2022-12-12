@@ -36,8 +36,7 @@ public:
 
 
 
-//+++
-class Worker // абстрактный базовый класс
+class Worker // abstract base class
 {
 private:
 
@@ -54,13 +53,13 @@ public:
 	Worker() : fullname("no one"), id(0L) {}
 	Worker(const std::string& s, long n): fullname(s), id(n) {}
 
-	virtual ~Worker() = 0; // чистая виртуальная функция
+	virtual ~Worker() = 0; // pure virtual function
 	virtual void Set() = 0;
 	virtual void Show() const = 0;
 };
 
 
-//++
+
 class Waiter : virtual public Worker
 {
 private:
@@ -83,7 +82,7 @@ public:
 };
 
 
-//+++
+
 class Singer : virtual public Worker
 {
 protected:
@@ -95,7 +94,7 @@ protected:
 
 private:
 
-	static const char* pv[Vtypes]; // строковые эквиваленты видов голосов 
+	static const char* pv[Vtypes]; // string equivalents of voice types
 	int voice;
 
 public:
@@ -103,6 +102,35 @@ public:
 	Singer() : Worker(), voice(other) {}
 	Singer(const std:: string & s, long n, int v = other): Worker(s, n), voice(v) {}
 	Singer(const Worker& wk, int v = other): Worker(wk), voice(v) { }
+
+	void Set();
+	void Show() const;
+};
+
+
+
+// Multiple Inheritance
+class SingingWaiter : public Singer, public Waiter
+{
+protected:
+
+	void Data() const;
+	void Get();
+
+public:
+	SingingWaiter() {}
+
+	SingingWaiter(const std::string& s, long n, int p = 0, int v = other)
+		: Worker(s, n), Waiter(s, n, p), Singer(s, n, v) {}
+	
+	SingingWaiter(const Worker& wk, int p = 0, int v = other)
+		: Worker(wk), Waiter(wk, p), Singer(wk, v) {}
+	
+	SingingWaiter(const Waiter& wt, int v = other)
+		: Worker(wt), Waiter(wt), Singer(wt, v) {}
+	
+	SingingWaiter(const Singer& wt, int p = 0)
+		: Worker(wt), Waiter(wt, p), Singer(wt) {}
 
 	void Set();
 	void Show() const;
