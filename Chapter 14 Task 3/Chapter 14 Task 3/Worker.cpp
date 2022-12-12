@@ -93,3 +93,26 @@ bool Queue<Tp>::dequeue(Tp& item)
 		rear = NULL;
 	return true;
 }
+
+
+
+//+++
+// Методы Worker
+Worker::~Worker()
+{
+}
+
+// Защищенные методы
+void Worker::Data() const
+{
+	std::cout << "Name: " << fullname << "\n"; // имя и фамилия
+	std::cout << "Employee ID: " << id << "\n";  // идентификатор
+}
+void Worker::Get()
+{
+	std::getline(std::cin, fullname);
+	std::cout << "Enter worker's ID: "; // ввод идентификатора работчика
+	std::cin >> id;
+	while (std::cin.get() != '\n')
+		continue;
+}
