@@ -12,4 +12,13 @@ int main()
 
 	Person Jack("Jack", "Pet");
 	Jack.Show();
+
+
+	//Testing Gunslinger class
+	std::cout << "\nGunslinger\n";
+	Gunslinger sniper1;
+	sniper1.Show();
+
+	Gunslinger sniper2("Roko", "One", 5, 1.08);
+	sniper2.Show();
 }

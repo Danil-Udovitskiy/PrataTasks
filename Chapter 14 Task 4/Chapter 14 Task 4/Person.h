@@ -18,3 +18,22 @@ public:
 
 };
 
+
+
+
+class Gunslinger : virtual public Person
+{
+private:
+	int number_of_notches_on_rifle; // количество насечек на винтовке
+	double combat_readiness_time; // время боевой готовности снайпера
+
+public:
+	Gunslinger();
+	Gunslinger(const std::string n, const std::string s_n, int notches_on_rifle, double readiness_time);
+	~Gunslinger();
+	double Draw();
+	virtual void Show();
+
+};
+
+
