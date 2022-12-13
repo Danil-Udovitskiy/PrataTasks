@@ -21,4 +21,14 @@ int main()
 
 	Gunslinger sniper2("Roko", "One", 5, 1.08);
 	sniper2.Show();
+
+
+	//Testing PokerPlayer class
+	std::cout << "\nPokerPlayer\n";
+	PokerPlayer player1;
+	player1.Show();
+
+	PokerPlayer player2("Flesh", "Poker");
+	player2.Show();
+
 }

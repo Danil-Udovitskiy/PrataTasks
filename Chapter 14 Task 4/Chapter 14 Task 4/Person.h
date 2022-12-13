@@ -37,3 +37,21 @@ public:
 };
 
 
+
+
+class PokerPlayer : virtual public Person
+{
+public:
+	PokerPlayer();
+	PokerPlayer(const std::string n, const std::string s_n) : Person(n, s_n) {};
+	
+	~PokerPlayer();
+	unsigned int Draw();  // возвращает случайное число 1-52 (значение карты)
+	void Show();
+
+};
+
+
+
+
+

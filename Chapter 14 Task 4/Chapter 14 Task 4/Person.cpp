@@ -1,4 +1,7 @@
 #include "Person.h"
+#include <stdlib.h> // rand
+#include <time.h> // time
+
 
 Person::Person()
 {
@@ -58,4 +61,33 @@ void Gunslinger::Show()
 
 	std::cout << "Number of notches on a rifle " << number_of_notches_on_rifle << "\n";
 	std::cout << "Combat readiness time " << combat_readiness_time << "\n";
+}
+
+
+
+
+//+++
+//PokerPlayer
+PokerPlayer::PokerPlayer() : Person()
+{
+}
+
+PokerPlayer::~PokerPlayer()
+{
+}
+
+
+unsigned int PokerPlayer::Draw()
+{
+	// To get different initial values in the srand() function, use the time() function
+	// Set the starting point for generating the sequence
+	// use the function time(nullptr)
+	srand(time(nullptr)); 
+	return (0 + rand() % 52); // return unsigned int 1-52
+}
+
+void PokerPlayer::Show()
+{
+	Person::Show();
+	std::cout << "Random card number: " << Draw() << "\n";
 }
