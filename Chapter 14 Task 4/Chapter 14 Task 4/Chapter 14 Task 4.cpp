@@ -31,4 +31,13 @@ int main()
 	PokerPlayer player2("Flesh", "Poker");
 	player2.Show();
 
+
+	//Testing BadDude class
+	std::cout << "\nBadDude\n";
+	BadDude dude1;
+	dude1.Show();
+
+	BadDude dude2("Kiko", "Po", 6, 3.10, 1.2);
+	dude2.Show();
+
 }

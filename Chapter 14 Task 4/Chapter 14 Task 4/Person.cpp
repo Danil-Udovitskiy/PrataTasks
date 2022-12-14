@@ -20,7 +20,7 @@ Person::~Person()
 }
 
 
-void Person::Show()
+void Person::Show()const
 {
 	std::cout << "Name - " << name << "\n";
 	std::cout << "Second name - " << second_name << "\n";
@@ -49,13 +49,13 @@ Gunslinger::~Gunslinger()
 }
 
 
-double Gunslinger::Draw()
+double Gunslinger::Draw()const
 {
 	return combat_readiness_time;
 }
 
 
-void Gunslinger::Show()
+void Gunslinger::Show()const
 {
 	Person::Show();
 
@@ -77,7 +77,7 @@ PokerPlayer::~PokerPlayer()
 }
 
 
-unsigned int PokerPlayer::Draw()
+unsigned int PokerPlayer::Draw()const
 {
 	// To get different initial values in the srand() function, use the time() function
 	// Set the starting point for generating the sequence
@@ -86,8 +86,56 @@ unsigned int PokerPlayer::Draw()
 	return (0 + rand() % 52); // return unsigned int 1-52
 }
 
-void PokerPlayer::Show()
+void PokerPlayer::Show()const
 {
 	Person::Show();
 	std::cout << "Random card number: " << Draw() << "\n";
 }
+
+
+
+
+
+//+++
+//BadDude
+BadDude::BadDude() : Person(), Gunslinger(), PokerPlayer()
+{
+	weapon_draw_time = 0.0;
+}
+
+
+
+BadDude::~BadDude()
+{
+}
+
+double BadDude::Gdraw()const
+{
+	return weapon_draw_time;
+}
+
+
+unsigned int BadDude::Cdraw()const
+{
+	// To get different initial values in the srand() function, use the time() function
+	// Set the starting point for generating the sequence
+	// use the function time(nullptr)
+	srand(time(nullptr));
+	return (0 + rand() % 52); // return unsigned int 1-52
+}
+
+
+
+void BadDude::Show()const
+{
+	//Person::Show();
+	Gunslinger::Show();
+	//PokerPlayer::Show();
+	std::cout << "Random card number: " << Cdraw() << "\n";
+	std::cout << "Weapon drawtime " << weapon_draw_time << "\n";
+}
+
+
+
+
+

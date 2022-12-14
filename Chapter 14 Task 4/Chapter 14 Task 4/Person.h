@@ -14,7 +14,7 @@ public:
 	Person();
 	Person(const std::string n, const std::string s_n);
 	virtual ~Person();
-	virtual void Show();
+	virtual void Show()const;
 
 };
 
@@ -31,8 +31,8 @@ public:
 	Gunslinger();
 	Gunslinger(const std::string n, const std::string s_n, int notches_on_rifle, double readiness_time);
 	~Gunslinger();
-	double Draw();
-	virtual void Show();
+	double Draw()const;
+	virtual void Show()const;
 
 };
 
@@ -46,10 +46,37 @@ public:
 	PokerPlayer(const std::string n, const std::string s_n) : Person(n, s_n) {};
 	
 	~PokerPlayer();
-	unsigned int Draw();  // возвращает случайное число 1-52 (значение карты)
-	void Show();
+	unsigned int Draw()const;  // возвращает случайное число 1-52 (значение карты)
+	void Show()const;
 
 };
+
+
+
+
+class BadDude : virtual public Person, virtual public Gunslinger , virtual public PokerPlayer
+{
+private:
+
+	double weapon_draw_time;
+
+public:
+	BadDude();
+	BadDude(const std::string n, const std::string s_n, int notches_on_rifle, double readiness_time, double weapon_draw) : Person(n, s_n), Gunslinger(n, s_n, notches_on_rifle, readiness_time), PokerPlayer(n, s_n) { weapon_draw_time = readiness_time; };
+
+
+	~BadDude();
+
+	double Gdraw()const; // возвращает время вынимания оружия
+	unsigned int Cdraw()const; // возвращающий следующую вытянутую карту.
+
+	void Show()const;
+};
+
+
+
+
+
 
 
 
