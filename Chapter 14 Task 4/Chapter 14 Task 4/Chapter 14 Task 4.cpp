@@ -16,18 +16,18 @@ int main()
 	Person* lolas[SIZE]; //array of pointers to Person
 
 
-	//testing the creation of the Person, Gunslinger objects
+	//testing the creation of the Person, Gunslinger, PokerPlayer, BadDude objects
 	int ct;
 	for (ct = 0; ct < SIZE; ct++)
 	{
 		char choice;
 
 		std::cout << "Enter the category:\n"
-			<< "p: person g: gunslinger (q - exit) ";
+			<< "p: person  g: gunslinger  o: poker  b: bad dude  (q - exit) ";
 		std::cin >> choice;
-		while (strchr("pgq", choice) == NULL)
+		while (strchr("pgobq", choice) == NULL)
 		{
-			std::cout << "Please enter p / g / (q - exit) : ";
+			std::cout << "Please enter p / g / o / b  (q - exit) : ";
 			std::cin >> choice;
 		}
 		if (choice == 'q')
@@ -41,6 +41,11 @@ int main()
 		case 'g': lolas[ct] = new Gunslinger;
 			break;
 
+		case 'o': lolas[ct] = new PokerPlayer;
+			break;
+
+		case 'b': lolas[ct] = new BadDude;
+			break;
 		}
 
 
@@ -57,5 +62,7 @@ int main()
 	}
 	for (i = 0; i < ct; i++)
 		delete lolas[i];
-	"Bye.\n";
+	
+	std::cout << "Bye.\n";
+	return 0;
 }

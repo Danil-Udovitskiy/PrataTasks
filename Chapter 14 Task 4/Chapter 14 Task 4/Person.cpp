@@ -122,6 +122,10 @@ void PokerPlayer::Show()const
 }
 
 
+void PokerPlayer::Set()
+{
+	Person::Get();
+}
 
 
 
@@ -133,10 +137,10 @@ BadDude::BadDude() : Person(), Gunslinger(), PokerPlayer()
 }
 
 
-
 BadDude::~BadDude()
 {
 }
+
 
 double BadDude::Gdraw()const
 {
@@ -154,16 +158,26 @@ unsigned int BadDude::Cdraw()const
 }
 
 
-
 void BadDude::Show()const
 {
-	//Person::Show();
 	Gunslinger::Show();
-	//PokerPlayer::Show();
-	std::cout << "Random card number: " << Cdraw() << "\n";
+	std::cout << "Next random card number: " << Cdraw() + 1 << "\n";
 	std::cout << "Weapon drawtime " << weapon_draw_time << "\n";
 }
 
+
+void BadDude::Get()
+{
+	Gunslinger::Get();
+	std::cout << "Enter weapon drawtime : ";
+	std::cin >> weapon_draw_time;
+}
+
+
+void BadDude::Set()
+{
+	Get();
+}
 
 
 

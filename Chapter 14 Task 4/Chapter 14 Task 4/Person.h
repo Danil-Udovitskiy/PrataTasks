@@ -56,6 +56,9 @@ public:
 	unsigned int Draw()const;  // возвращает случайное число 1-52 (значение карты)
 	void Show()const;
 
+	//+++
+	void Set();
+
 };
 
 
@@ -78,6 +81,10 @@ public:
 	unsigned int Cdraw()const; // возвращающий следующую вытянутую карту.
 
 	void Show()const;
+
+	//+++
+	void Get();
+	void Set();
 };
 
 
