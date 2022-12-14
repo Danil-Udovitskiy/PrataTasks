@@ -17,7 +17,7 @@ public:
 	virtual void Show()const;
 
 	//+++
-	void Get();
+	virtual void Get();
 	void Set();
 
 };
@@ -38,6 +38,9 @@ public:
 	double Draw()const;
 	virtual void Show()const;
 
+	//+++
+	virtual void Get();
+	void Set();
 };
 
 

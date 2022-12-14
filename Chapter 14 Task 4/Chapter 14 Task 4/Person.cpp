@@ -78,6 +78,21 @@ void Gunslinger::Show()const
 }
 
 
+void Gunslinger::Get()
+{
+	Person::Get();
+	std::cout << "Enter number of notches on rifle : ";
+	std::cin >> number_of_notches_on_rifle;
+	std::cout << "Enter combat readiness time ";
+	std::cin >> combat_readiness_time;
+}
+
+
+void Gunslinger::Set()
+{
+	Get();
+}
+
 
 
 //+++
