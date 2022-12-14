@@ -5,5 +5,7 @@
 
 int main()
 {
-	
+	employee em("Trip", "Harris", "Thumper");
+	std::cout << em << "\n";
+	em.ShowAll();
 }

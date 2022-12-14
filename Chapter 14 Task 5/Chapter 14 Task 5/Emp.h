@@ -25,4 +25,11 @@ public:
 };
 
 
-
+class employee : public Abstr_emp
+{
+public:
+	employee();
+	employee(const std::string& fn, const std::string& ln, const std::string& j);
+	virtual void ShowAll() const;
+	virtual void SetAll();
+};
