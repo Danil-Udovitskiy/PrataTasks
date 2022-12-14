@@ -14,6 +14,20 @@ Person::Person(const std::string n, const std::string s_n)
 }
 
 
+void Person::Get()
+{
+	std::cout << "Enter name : ";
+	std::getline(std::cin, name);
+	std::cout << "Enter second name : ";
+	std::getline(std::cin, second_name);
+}
+
+
+void Person::Set()
+{
+	Get();
+}
+
 
 Person::~Person()
 {

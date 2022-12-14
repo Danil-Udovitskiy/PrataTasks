@@ -16,6 +16,10 @@ public:
 	virtual ~Person();
 	virtual void Show()const;
 
+	//+++
+	void Get();
+	void Set();
+
 };
 
 
