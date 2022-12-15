@@ -26,9 +26,18 @@ int main()
 	std::cout << "\n\nHighfink\n\n";
 	highfink hf(ma, "Curly Kew");
 	hf.ShowAll();
-	hf.SetAll();
-	hf.ShowAll();
 
+
+	std::cout << "\n\nPress a key for next phase:\n";
+
+	std::cin.get();
+	highfink hf2;
+	hf2.SetAll();
+	std::cout << "Using an abstr_emp * pointer:\n";
+	// Using a pointer abstr_emp * 
+	Abstr_emp* tri[4] = { &em, &fi, &hf, &hf2 };
+	for (int i = 0; i < 4; i++)
+		tri[i]->ShowAll();
 	return 0;
 
 }
