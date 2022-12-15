@@ -22,13 +22,12 @@ void Abstr_emp::SetAll()
 {
 	std::cout << "Enter name :";
 	std::cin >> fname;
-	//std::getline(std::cin, fname);
+
 	std::cout << "Enter last name :";
 	std::cin >> lname;
-	//std::getline(std::cin, lname);
+
 	std::cout << "Enter job :";
 	std::cin >> job;
-	//std::getline(std::cin, job);
 }
 
 std::ostream& operator<<(std::ostream& os, const Abstr_emp& e)
@@ -64,4 +63,43 @@ void employee::ShowAll() const
 void employee::SetAll()
 {
 	Abstr_emp::SetAll();
+}
+
+
+//++
+//manager
+manager::manager() : Abstr_emp()
+{
+	inchargeof = 0;
+}
+
+manager::manager(const std::string& fn, const std::string& ln, const std::string& j, int ico) : Abstr_emp(fn, ln, j)
+{
+	inchargeof = ico;
+}
+
+manager::manager(const Abstr_emp& e, int ico): Abstr_emp(e)
+{
+	inchargeof = ico;
+}
+
+manager::manager(const manager& m) :Abstr_emp(m)
+{
+	inchargeof = m.inchargeof;
+}
+
+void manager::ShowAll() const
+{
+	Abstr_emp::ShowAll();
+	//std::cout << "Number of managed abstr_emp : " << inchargeof << "\n";
+	std::cout << "Number of managed abstr_emp : " << InChargeOf() << "\n";
+}
+
+
+void manager::SetAll()
+{
+	Abstr_emp::SetAll();
+	std::cout << "Number of managed abstr_emp :";
+	//std::cin >> inchargeof;
+	std::cin >> InChargeOf();
 }

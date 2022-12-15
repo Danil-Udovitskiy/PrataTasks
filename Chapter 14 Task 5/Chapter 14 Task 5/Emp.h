@@ -33,3 +33,21 @@ public:
 	virtual void ShowAll() const;
 	virtual void SetAll();
 };
+
+
+
+class manager : virtual public Abstr_emp
+{
+private:
+	int inchargeof; // количество управляемых abstr_emp 
+protected:
+	int InChargeOf() const { return inchargeof; } // вывод 
+	int& InChargeOf() { return inchargeof; } // ввод 
+public:
+	manager();
+	manager(const std::string& fn, const std::string& ln, const std::string& j, int ico = 0);
+	manager(const Abstr_emp& e, int ico);
+	manager(const manager& m);
+	virtual void ShowAll() const;
+	virtual void SetAll();
+};
