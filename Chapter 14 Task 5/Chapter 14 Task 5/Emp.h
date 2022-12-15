@@ -40,14 +40,37 @@ class manager : virtual public Abstr_emp
 {
 private:
 	int inchargeof; // количество управляемых abstr_emp 
+
 protected:
 	int InChargeOf() const { return inchargeof; } // вывод 
 	int& InChargeOf() { return inchargeof; } // ввод 
+
 public:
 	manager();
 	manager(const std::string& fn, const std::string& ln, const std::string& j, int ico = 0);
 	manager(const Abstr_emp& e, int ico);
 	manager(const manager& m);
+	virtual void ShowAll() const;
+	virtual void SetAll();
+};
+
+
+
+class fink : virtual public Abstr_emp
+{
+private:
+	std::string reportsto; // кому выводить отчеты 
+
+protected:
+	const std::string ReportsTo() const { return reportsto; }
+	std::string& ReportsTo() { return reportsto; }
+
+public:
+	fink();
+	fink(const std::string& fn, const std::string& ln, const std::string& j, const std::string& rpo);
+	fink(const Abstr_emp& e, const std::string& rpo);
+	fink(const fink& e);
+	
 	virtual void ShowAll() const;
 	virtual void SetAll();
 };

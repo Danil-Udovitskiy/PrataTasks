@@ -99,7 +99,48 @@ void manager::ShowAll() const
 void manager::SetAll()
 {
 	Abstr_emp::SetAll();
-	std::cout << "Number of managed abstr_emp :";
+	std::cout << "Number of managed abstr_emp : ";
 	//std::cin >> inchargeof;
 	std::cin >> InChargeOf();
 }
+
+
+//++
+//fink
+fink::fink() : Abstr_emp()
+{
+}
+
+
+fink::fink(const std::string& fn, const std::string& ln, const std::string& j, const std::string& rpo) : Abstr_emp(fn, ln, j)
+{
+	reportsto = rpo;
+}
+
+fink::fink(const Abstr_emp& e, const std::string& rpo) : Abstr_emp(e)
+{
+	reportsto = rpo;
+}
+
+fink::fink(const fink& e) : Abstr_emp(e)
+{
+	reportsto = e.reportsto;
+}
+
+
+void fink::ShowAll() const
+{
+	Abstr_emp::ShowAll();
+	//std::cout << "Report to : " << reportsto << "\n";
+	std::cout << "Report to : " << ReportsTo() << "\n";
+}
+
+
+void fink::SetAll()
+{
+	Abstr_emp::SetAll();
+	std::cout << "Report to : ";
+	//std::cin >> reportsto;
+	std::cin >> ReportsTo();
+}
+

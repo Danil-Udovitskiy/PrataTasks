@@ -16,4 +16,10 @@ int main()
 	ma.ShowAll();
 	ma.SetAll();
 	ma.ShowAll();
+
+	fink fi("Matt", "Oggs", "Oiler", "JunoBarr");
+	std::cout << fi << "\n";
+	fi.ShowAll();
+	fi.SetAll();
+	fi.ShowAll();
 }
