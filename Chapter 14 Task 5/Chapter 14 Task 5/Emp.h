@@ -39,11 +39,11 @@ public:
 class manager : virtual public Abstr_emp
 {
 private:
-	int inchargeof; // количество управляемых abstr_emp 
+	int inchargeof; // number of managed abstr_emp
 
 protected:
-	int InChargeOf() const { return inchargeof; } // вывод 
-	int& InChargeOf() { return inchargeof; } // ввод 
+	int InChargeOf() const { return inchargeof; } // cout
+	int& InChargeOf() { return inchargeof; } // cin
 
 public:
 	manager();
@@ -59,7 +59,7 @@ public:
 class fink : virtual public Abstr_emp
 {
 private:
-	std::string reportsto; // кому выводить отчеты 
+	std::string reportsto; // report to
 
 protected:
 	const std::string ReportsTo() const { return reportsto; }
@@ -70,6 +70,22 @@ public:
 	fink(const std::string& fn, const std::string& ln, const std::string& j, const std::string& rpo);
 	fink(const Abstr_emp& e, const std::string& rpo);
 	fink(const fink& e);
+	
+	virtual void ShowAll() const;
+	virtual void SetAll();
+};
+
+
+
+class highfink : public manager, public fink // supervision of managers
+{
+public:
+	highfink();
+	highfink(const std::string& fn, const std::string& ln, const std::string& j, const std::string& rpo, int ico);
+	highfink(const Abstr_emp& e, const std::string& rpo, int ico);
+	highfink(const fink& f, int ico);
+	highfink(const manager& m, const std::string& rpo);
+	highfink(const highfink& h);
 	
 	virtual void ShowAll() const;
 	virtual void SetAll();
