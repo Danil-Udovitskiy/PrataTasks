@@ -39,8 +39,12 @@ private:
 class Remote
 {
 private:
-
+	
 	int mode; // управление TV или DVD 
+	
+	//b. Add a member variable to the Remote class that describes the mode of the remote
+	//remote control - normal or interactive.
+	int remote_mode; //normal or interactive
 
 public:
 
@@ -48,7 +52,11 @@ public:
 	friend Tv; // Tv has access to the closed part of Remote
 	//use "friend Tv" instead of "friend class Tv" since Tv is already declared
 
-	Remote(int m = Tv::TV) : mode(m) {}
+
+	// modified constructor with new member variable,
+	// which is initialized to rm or takes the default NORMAL mode
+	Remote(int m = Tv::TV, int rm = NORMAL) : mode(m), remote_mode(rm) {};
+
 	bool volup(Tv& t) { return t.volup(); }
 	bool voldown(Tv& t) { return t.voldown(); }
 	void onoff(Tv& t) { t.onoff(); }
@@ -57,6 +65,9 @@ public:
 	void set_chan(Tv& t, int c) { t.channel = c; }
 	void set_mode(Tv& t) { t.set_mode(); }
 	void set_input(Tv& t) { t.set_input(); }
+
+
+	enum { NORMAL, INTERACTIVE };
 };
 
 
