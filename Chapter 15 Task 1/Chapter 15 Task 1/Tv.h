@@ -68,6 +68,9 @@ public:
 
 
 	enum { NORMAL, INTERACTIVE };
+
+	//c. Added a Remote method that displays the mode.
+	void show_remote_mode() const;
 };
 
 

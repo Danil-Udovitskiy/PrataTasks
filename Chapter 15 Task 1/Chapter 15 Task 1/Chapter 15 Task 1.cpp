@@ -20,6 +20,9 @@ int main()
 	grey.volup(s42);
 	grey.volup(s42);
 
+	std::cout << "\n\nRemote mode\n\n";
+	grey.show_remote_mode(); //testing remote mode
+
 	std::cout << "\n42\" settings after using remote:\n"; // настройки телевизора 42 после использования пульта 
 	s42.settings();
 	Tv s58(Tv::On);

@@ -52,3 +52,16 @@ void Tv::settings() const
 }
 
 
+
+//++
+void Remote::show_remote_mode() const
+{
+	if (remote_mode == NORMAL)
+	{
+		std::cout << "Remote control mode: normal\n";
+	}
+	else
+	{
+		std::cout << "Remote control mode: interactive\n";
+	}
+}
