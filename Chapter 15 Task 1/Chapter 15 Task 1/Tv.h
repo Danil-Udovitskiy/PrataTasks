@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream> 
 //Listing 15.1
-//классы Тѵ и Remote 
+// Тѵ and Remote classes 
 
 
 class Tv
@@ -23,16 +23,20 @@ public:
 	void chandown();
 	void set_mode() { mode = (mode == Antenna) ? Cable : Antenna; }
 	void set_input() { input = (input == TV) ? DVD : TV; }
-	void settings() const; // отображение всех настроек 
+	void settings() const; // display all settings
+
+	//d. Add a method to the Tv class to switch the new Remote member.
+	// This method should only work if the TV is on.
+	void set_remote_mode(Remote& t);
 
 private:
 
-	int state; // On или Off 
-	int volume; // дискретные уровни громкости 
-	int maxchannel; // максимальное количество каналов 
-	int channel; // текущий канал 
-	int mode; // эфирное или кабельное телевидение 
-	int input; // TV или DVD 
+	int state; // On / Off 
+	int volume; // volume levels
+	int maxchannel; // maximum number of channels
+	int channel; // current channel
+	int mode; // terrestrial or cable television
+	int input; // TV / DVD
 };
 
 
@@ -40,7 +44,7 @@ class Remote
 {
 private:
 	
-	int mode; // управление TV или DVD 
+	int mode; // TV or DVD control
 	
 	//b. Add a member variable to the Remote class that describes the mode of the remote
 	//remote control - normal or interactive.
@@ -67,10 +71,16 @@ public:
 	void set_input(Tv& t) { t.set_input(); }
 
 
+	//++
 	enum { NORMAL, INTERACTIVE };
 
 	//c. Added a Remote method that displays the mode.
 	void show_remote_mode() const;
+
+	//d. Function to switch remote mode
+	void set_remote_mode();
+	 
 };
+
 
 
