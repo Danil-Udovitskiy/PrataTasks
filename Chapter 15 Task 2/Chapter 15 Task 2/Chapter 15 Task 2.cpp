@@ -40,11 +40,11 @@ int main()
 
 		catch (bad_gmean& hg)
 		{
-			cout << hg.mesg();
-			cout << "Values used: " << hg.vl << ", "
+			cout << hg.what();
+			cout << "\nValues used: " << hg.v1 << ", "
 				<< hg.v2 << endl; // used values
 			cout << "Sorry, you don't get to play any more.\n"; // end of session 
-
+			break;
 		}							// end of block - catch 
 	}
 
@@ -56,7 +56,6 @@ double hmean(double a, double b)
 {
 	if (a == -b)
 	{
-		//++
 		throw bad_hmean(a, b, "bad arguments to hmean()");
 		//you can also pass 2 arguments, so logic_error::what initialized to nullptr - throw bad_hmean(a, b), but in this case exeption will not be thrown
 	}
@@ -68,7 +67,8 @@ double gmean(double a, double b)
 {
 	if (a < 0 || b < 0)
 	{
-		throw bad_gmean(a, b);
+		throw bad_gmean(a, b, "bad arguments to gmean()\n");
+		//you can also pass 2 arguments, so logic_error::what initialized to nullptr - throw bad_gmean(a, b), but in this case exeption will not be thrown
 	}
 
 	return std::sqrt(a * b);
