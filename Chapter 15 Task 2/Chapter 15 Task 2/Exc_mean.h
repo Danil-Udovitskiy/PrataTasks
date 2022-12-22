@@ -10,19 +10,19 @@ class bad_hmean :public std::logic_error //derivative class from logicerror
 private:
 	double v1;
 	double v2;
+
 public:
 
-	// change construstor with using new member - const char* what
-	bad_hmean(double a = 0, double b = 0, const char* what = nullptr) : v1(a), v2(b), logic_error(what) { }
-	
-	//add what method what (to show third argument)
-	const char* what();
+	// construstor
+	bad_hmean(double a = 0, double b = 0) : v1(a), v2(b), logic_error(nullptr) { }
+
+	//add method what
+	void what();
 };
 
-inline const char* bad_hmean::what()
+inline void bad_hmean::what()
 {
 	std::cout << "hmean(" << v1 << ", " << v2 << "): " << "invalid arguments: a = -b\n";
-	return logic_error::what();
 }
 
 
@@ -36,15 +36,14 @@ public:
 	double v1;
 	double v2;
 
-	//change constructor 
-	bad_gmean(double a = 0, double b = 0, const char* what = nullptr) : v1(a), v2(b), logic_error(what) { }
+	//constructor 
+	bad_gmean(double a = 0, double b = 0) : v1(a), v2(b), logic_error(nullptr) { }
 
 	//add what method
-	const char* what();
+	void what();
 };
 
-inline const char* bad_gmean::what()
+inline void bad_gmean::what()
 {
 	std::cout << "gmean() arguments should be >= 0\n"; // arguments should be >= 0
-	return logic_error::what();
 }
