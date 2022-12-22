@@ -55,25 +55,11 @@ void Tv::settings() const
 
 
 
-void Remote::show_remote_mode() const
-{
-	if (remote_mode == NORMAL)
-	{
-		std::cout << "Remote control mode: normal\n";
-	}
-	else
-	{
-		std::cout << "Remote control mode: interactive\n";
-	}
-}
-
-
-
-void Tv::set_remote_mode(Remote& t)
+void Tv::switchRemoteMode(Remote& t)
 {
 	if (state == On)
 	{
-		t.set_remote_mode();
+		t.switchRemoteMode();
 	}
 	else
 	{
@@ -83,14 +69,4 @@ void Tv::set_remote_mode(Remote& t)
 };
 
 
-void Remote::set_remote_mode()
-{
-	if (remote_mode == NORMAL)
-	{
-		remote_mode = INTERACTIVE;
-	}
-	else
-	{
-		remote_mode = NORMAL;
-	}
-}
+

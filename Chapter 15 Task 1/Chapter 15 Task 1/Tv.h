@@ -27,7 +27,7 @@ public:
 
 	//d. Add a method to the Tv class to switch the new Remote member.
 	// This method should only work if the TV is on.
-	void set_remote_mode(Remote& t);
+	void  switchRemoteMode(Remote& t);
 
 private:
 
@@ -53,8 +53,7 @@ private:
 public:
 
 	//a. Make them mutual friends.
-	friend Tv; // Tv has access to the closed part of Remote
-	//use "friend Tv" instead of "friend class Tv" since Tv is already declared
+	friend class Tv; // Tv has access to the closed part of Remote
 
 
 	// modified constructor with new member variable,
@@ -78,7 +77,7 @@ public:
 	void show_remote_mode() const;
 
 	//d. Function to switch remote mode
-	void set_remote_mode();
+	void switchRemoteMode();
 	 
 };
 

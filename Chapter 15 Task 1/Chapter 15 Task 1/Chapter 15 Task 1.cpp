@@ -23,7 +23,7 @@ int main()
 
 	std::cout << "\n\nRemote mode before change\n\n";
 	grey.show_remote_mode(); // show remote mode before change
-	s42.set_remote_mode(grey); // testing set remote mode to INTERACTIVE
+	s42.switchRemoteMode(grey); // testing set remote mode to INTERACTIVE
 
 
 	std::cout << "\n\nRemote mode after change\n\n";
@@ -35,7 +35,7 @@ int main()
 	Tv s45;
 	Remote grey1;
 	std::cout << "\nRemote mode while TV 45 off\n\n";
-	s45.set_remote_mode(grey1);
+	s45.switchRemoteMode(grey1);
 	grey1.show_remote_mode();
 
 

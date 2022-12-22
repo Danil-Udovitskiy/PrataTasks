@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Chapter 15 Task 1.cpp" />
+    <ClCompile Include="Remote.cpp" />
     <ClCompile Include="Tv.cpp" />
   </ItemGroup>
   <ItemGroup>
