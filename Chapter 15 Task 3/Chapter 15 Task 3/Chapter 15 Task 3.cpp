@@ -6,6 +6,7 @@
 
 
 double hmean(double a, double b);
+double gmean(double a, double b);
 
 int main()
 {
@@ -21,14 +22,15 @@ int main()
 			z = hmean(x, y);
 			cout << "Harmonic mean of " << x << " and " << y
 				<< " is " << z << endl; // harmonic mean
-
+			cout << "Geometric mean of " << x << " and " << y
+				<< " is " << gmean(x, y) << endl; // geometric mean 
 			cout << "Enter next set of numbers <q to quit>: "; // enter next 2 numbers
 
 		}							// end of block - try 
 
 		
 		// +++ 
-		// use base class type to catch hmean exception
+		// use base class type to catch hmean and gmean exception (2 exception)
 		catch (Base& base_obj)		// begin of block - catch 
 		{
 			cout << base_obj.what();
@@ -52,5 +54,16 @@ double hmean(double a, double b)
 	}
 
 	return 2.0 * a * b / (a + b);
+}
+
+double gmean(double a, double b)
+{
+	if (a < 0 || b < 0)
+	{
+		throw bad_gmean(a, b, "bad arguments to gmean()\n");
+		//you can also pass 2 arguments, so logic_error::what initialized to nullptr - throw bad_gmean(a, b), but in this case exeption will not be thrown
+	}
+
+	return std::sqrt(a * b);
 }
 

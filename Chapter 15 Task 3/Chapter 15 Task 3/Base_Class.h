@@ -25,7 +25,7 @@ public:
 
 inline const char* Base::what()
 {
-	std::cout << "Base Class(" << v1 << ", " << v2 << "): " << "invalid arguments: a = -b\n";
+	std::cout << "Base Class(" << v1 << ", " << v2 << ")\n";
 	return logic_error::what();
 }
 
@@ -47,5 +47,25 @@ public:
 inline const char* bad_hmean::what()
 {
 	std::cout << "hmean() invalid arguments: a = -b\n";
+	return Base::what(); //output data from the what() method of the base class
+}
+
+
+
+
+class bad_gmean :public Base //class of exception derived from base
+{
+public:
+
+	//initialize bad_gmean class values with base class values
+	bad_gmean(double a = 0, double b = 0, const char* what = nullptr) : Base(a, b, what) { };
+
+	// display method (overridden)
+	const char* what();
+};
+
+inline const char* bad_gmean::what()
+{
+	std::cout << "gmean() arguments should be >= 0\n"; // arguments should be >= 0
 	return Base::what(); //output data from the what() method of the base class
 }
