@@ -4,7 +4,9 @@
 
 //Listing 15.3
 
-#include "tv.h" 
+#include "tv.h"
+#include "Remote.h"
+
 int main()
 {
 	Tv s42; 

@@ -1,4 +1,5 @@
 ﻿#include "Tv.h"
+#include "Remote.h"
 
 //Listing 15.2
 // methods for class Tv (remote methods are built-in) 

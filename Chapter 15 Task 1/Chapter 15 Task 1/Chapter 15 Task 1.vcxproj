@@ -144,6 +144,7 @@
     <ClCompile Include="Tv.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Remote.h" />
     <ClInclude Include="Tv.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
