@@ -16,17 +16,16 @@ private:
 
 public:
 	//base class constructor
-	Base(double a = 0.0, double b = 0.0, const char* what = nullptr) :v1(a), v2(b), logic_error(what) {};
+	Base(double a = 0.0, double b = 0.0) :v1(a), v2(b), logic_error(nullptr) { };
 
 	// the method is virtual, since it will be overridden in the descendant classes
-	virtual const char* what();
+	virtual void what();
 
 };
 
-inline const char* Base::what()
+inline void Base::what()
 {
-	std::cout << "Base Class(" << v1 << ", " << v2 << ")\n";
-	return logic_error::what();
+	std::cout << "Arguments(" << v1 << ", " << v2 << ")\n";
 }
 
 
@@ -38,16 +37,16 @@ class bad_hmean :public Base //class of exception derived from base
 public:
 
 	//initialize bad_hmean class values with base class values
-	bad_hmean(double a = 0, double b = 0, const char* what = nullptr) : Base(a, b, what) { };
+	bad_hmean(double a = 0, double b = 0) : Base(a, b) { };
 
 	// display method (overridden)
-	const char* what();
+	void what();
 };
 
-inline const char* bad_hmean::what()
+inline void bad_hmean::what()
 {
+	Base::what(); //output data from the what() method of the base class
 	std::cout << "hmean() invalid arguments: a = -b\n";
-	return Base::what(); //output data from the what() method of the base class
 }
 
 
@@ -58,14 +57,14 @@ class bad_gmean :public Base //class of exception derived from base
 public:
 
 	//initialize bad_gmean class values with base class values
-	bad_gmean(double a = 0, double b = 0, const char* what = nullptr) : Base(a, b, what) { };
+	bad_gmean(double a = 0, double b = 0) : Base(a, b) { };
 
 	// display method (overridden)
-	const char* what();
+	void what();
 };
 
-inline const char* bad_gmean::what()
+inline void bad_gmean::what()
 {
+	Base::what(); //output data from the what() method of the base class
 	std::cout << "gmean() arguments should be >= 0\n"; // arguments should be >= 0
-	return Base::what(); //output data from the what() method of the base class
 }

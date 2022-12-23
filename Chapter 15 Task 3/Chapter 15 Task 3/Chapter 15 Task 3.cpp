@@ -33,7 +33,7 @@ int main()
 		// use base class type to catch hmean and gmean exception (2 exception)
 		catch (Base& base_obj)		// begin of block - catch 
 		{
-			cout << base_obj.what();
+			base_obj.what();
 			cout << "\nEnd.\n";
 			break;
 		}
@@ -49,8 +49,7 @@ double hmean(double a, double b)
 {
 	if (a == -b)
 	{
-		throw bad_hmean(a, b, "bad arguments to hmean()");
-		//you can also pass 2 arguments, so logic_error::what initialized to nullptr - throw bad_hmean(a, b), but in this case exeption will not be thrown
+		throw bad_hmean(a, b);
 	}
 
 	return 2.0 * a * b / (a + b);
@@ -60,8 +59,7 @@ double gmean(double a, double b)
 {
 	if (a < 0 || b < 0)
 	{
-		throw bad_gmean(a, b, "bad arguments to gmean()\n");
-		//you can also pass 2 arguments, so logic_error::what initialized to nullptr - throw bad_gmean(a, b), but in this case exeption will not be thrown
+		throw bad_gmean(a, b);
 	}
 
 	return std::sqrt(a * b);
