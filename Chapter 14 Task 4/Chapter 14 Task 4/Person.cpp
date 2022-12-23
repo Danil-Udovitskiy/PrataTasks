@@ -74,7 +74,8 @@ void Gunslinger::Show()const
 	Person::Show();
 
 	std::cout << "Number of notches on a rifle " << number_of_notches_on_rifle << "\n";
-	std::cout << "Combat readiness time " << combat_readiness_time << "\n";
+	//edited
+	std::cout << "Combat readiness time " << Draw() << "\n";
 }
 
 
@@ -117,10 +118,8 @@ unsigned int PokerPlayer::Draw()const
 
 void PokerPlayer::Show()const
 {
+	//edited
 	Person::Show();
-
-	//if there is no Draw() function call, there is no output of a random playing card
-	std::cout << "Random card number: " << Draw() << "\n";
 }
 
 
@@ -159,16 +158,22 @@ unsigned int BadDude::Cdraw()const
 void BadDude::Show()const
 {
 	Gunslinger::Show();
-	std::cout << "Weapon drawtime " << weapon_draw_time << "\n";
-	std::cout << "Random card number: " << Cdraw() << "\n";
+
+	//edited
+	std::cout << "Weapon drawtime : " << Gdraw() << "\n";
+	std::cout << "Randon card number : " << Cdraw() << "\n";
 }
 
 
 void BadDude::Get()
 {
 	Gunslinger::Get();
-	std::cout << "Enter weapon drawtime : ";
-	std::cin >> weapon_draw_time;
+
+	//edited
+	//we get weapon drawtime from  Gunslinger (combat_readiness_time)
+	//dont need this part 
+	//std::cout << "Enter weapon drawtime : ";
+	//std::cin >> weapon_draw_time;
 }
 
 
