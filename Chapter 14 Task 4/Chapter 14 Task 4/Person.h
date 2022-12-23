@@ -63,8 +63,7 @@ public:
 
 
 
-
-class BadDude : virtual public Person, virtual public Gunslinger , virtual public PokerPlayer
+class BadDude : public Gunslinger, public PokerPlayer
 {
 private:
 
@@ -72,8 +71,7 @@ private:
 
 public:
 	BadDude();
-	BadDude(const std::string n, const std::string s_n, int notches_on_rifle, double readiness_time, double weapon_draw) : Person(n, s_n), Gunslinger(n, s_n, notches_on_rifle, readiness_time), PokerPlayer(n, s_n) { weapon_draw_time = readiness_time; };
-
+	BadDude(const std::string n, const std::string s_n, int notches_on_rifle, double readiness_time, double weapon_draw) : Gunslinger(n, s_n, notches_on_rifle, readiness_time), PokerPlayer(n, s_n) { weapon_draw_time = readiness_time; };
 
 	~BadDude();
 

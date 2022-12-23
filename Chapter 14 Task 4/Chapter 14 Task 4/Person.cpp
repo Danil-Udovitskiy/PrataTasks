@@ -118,6 +118,8 @@ unsigned int PokerPlayer::Draw()const
 void PokerPlayer::Show()const
 {
 	Person::Show();
+
+	//if there is no Draw() function call, there is no output of a random playing card
 	std::cout << "Random card number: " << Draw() << "\n";
 }
 
@@ -131,7 +133,7 @@ void PokerPlayer::Set()
 
 //+++
 //BadDude
-BadDude::BadDude() : Person(), Gunslinger(), PokerPlayer()
+BadDude::BadDude() : Gunslinger(), PokerPlayer()
 {
 	weapon_draw_time = 0.0;
 }
@@ -144,25 +146,21 @@ BadDude::~BadDude()
 
 double BadDude::Gdraw()const
 {
-	return weapon_draw_time;
+	return Gunslinger::Draw();
 }
 
 
 unsigned int BadDude::Cdraw()const
 {
-	// To get different initial values in the srand() function, use the time() function
-	// Set the starting point for generating the sequence
-	// use the function time(nullptr)
-	srand(time(nullptr));
-	return (0 + rand() % 52); // return unsigned int 1-52
+	return PokerPlayer::Draw();
 }
 
 
 void BadDude::Show()const
 {
 	Gunslinger::Show();
-	std::cout << "Next random card number: " << Cdraw() + 1 << "\n";
 	std::cout << "Weapon drawtime " << weapon_draw_time << "\n";
+	std::cout << "Random card number: " << Cdraw() << "\n";
 }
 
 
