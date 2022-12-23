@@ -1,7 +1,7 @@
 ﻿// Chapter 15 Task 4.cpp 
 
-//Листинг 15.16.use_sales.срр
-// use_sales.cpp -- вложенные исключения 
+//Listing 15.16
+//nested exceptions
 #include <iostream> 
 #include "Sales.h"
 
@@ -11,7 +11,7 @@ int main()
 	using std::cin;
 	using std::endl;
 	
-	double valsl[12] =
+	double vals1[12] =
 	{
 	1220, 1100, 1122, 2212, 1232, 2334,
 	2884, 2393, 3302, 2922, 3002, 3544
@@ -22,49 +22,57 @@ int main()
 	28, 29, 33, 29, 32, 35
 	};
 	
-	Sales salesl(2011, valsl, 12);
+	Sales sales1(2011, vals1, 12);
 	LabeledSales sales2("Blogstar", 2012, vals2, 12);
 	
 	
-	cout << "First try block: \n"; // первый блок try 
+	cout << "First try block: \n"; // first try block
 	try
 	{
 		int i;
-		cout << "Year = " << salesl.Year() << endl; // год 
+		cout << "Year = " << sales1.Year() << endl; // year
 		for (i = 0; i < 12; ++i)
 		{
-			cout << salesl[i] << ' ';
+			cout << sales1[i] << ' ';
 			if (i % 6 == 5)
 				cout << endl;
 		}
-		cout << "Year = " << sales2.Year() << endl; // год 
-		cout << "Label = " << sales2.Label() << endl; // метка 
+		cout << "Year = " << sales2.Year() << endl; // year
+		cout << "Label = " << sales2.Label() << endl; // label
 		for (i = 0; i <= 12; ++i)
 		{
 			cout << sales2[i] << ' ';
 			if (i % 6 == 5)
 				cout << endl;
 		}
-		cout << "End of try block 1.\n"; // конец первого блока try 
+		cout << "End of try block 1.\n"; // end of first try block
 	}
 
 
-	catch (LabeledSales::nbad_index& bad)
+
+	catch (Sales::bad_index& bad)
 	{
-		cout << bad.what();
-		cout << "Company: " << bad.label_val() << endl; // компания 
-		cout << "bad index: " << bad.bi_val() << endl; // недопустимый индекс 
+		try {
+			// using dynamic_cast, check if the type nbad_index is a successor of bad_index
+			LabeledSales::nbad_index& nbad = dynamic_cast<LabeledSales::nbad_index&> (bad); // use nbad
+			cout << "Company: " << nbad.label_val() << endl; // company
+		}
+
+		// handler for inner try block
+		catch (std::bad_cast&) //failed to cast to a child type (perform dynamic_cast), i.e. bad is not LabeledSales::nbad_index
+		{
+			cout << bad.what(); //which object has an invalid index 
+			cout << "bad index: " << bad.bi_val() << endl; // invalid index (use bad as Sales::bad_index)
+		}
 	}
-	catch (Sales:: bad_index & bad)
-	{
-		cout << bad.what();
-		cout << "bad index: " << bad.bi_val() << endl; // недопустимый индекс 
-	}
+
+
+
 
 	
 	
 	
-	cout << "\nNext try block: \n"; // второй блок try 
+	/*cout << "\nNext try block: \n"; // второй блок try 
 	try
 	{
 		sales2[2] = 37.5;
@@ -83,7 +91,7 @@ int main()
 	{
 		cout << bad.what();
 		cout << "bad index: " << bad.bi_val() << endl; // недопустимый индекс 
-	}
+	}*/
 
 
 	cout << "done\n";
