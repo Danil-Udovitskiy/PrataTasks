@@ -1,7 +1,7 @@
 #pragma once
 
-//Ћистинг 15.14.sales.h
-// sales.h Ч исключени€ и наследование 
+//Listing 15.14.sales.h
+//exceptions and inheritance
 #include <stdexcept> 
 #include <string>
 
@@ -9,16 +9,16 @@ class Sales
 {
 public:
 
-	enum { MONTHS = 12 }; // может быть статической константой 
+	enum { MONTHS = 12 }; // can be a static constant (const static int MONTHS = 12;)
 
 	class bad_index : public std::logic_error
 	{
 	private:
-		int bi; // недопустимое значение индекса 
+		int bi; // invalid index value
 	public:
 		explicit bad_index(int ix,
 			const std::string& s = "Index error in Sales object\n");
-		// ќшибка индекса в объекте Sales 
+		// Index error on the Sales object
 		int bi_val() const { return bi; }
 		virtual  ~bad_index() throw () {};
 	};

@@ -1,8 +1,7 @@
 #include "Sales.h"
 
 //Ћистинг 15.15.sales.ерр
-// sales.ерр Ч реализаци€ Sales 
-#include "sales.h" 
+//implementation of Sales 
 
 using std::string;
 Sales::bad_index::bad_index(int ix, const string& s): std::logic_error(s), bi(ix)
@@ -25,7 +24,7 @@ Sales::Sales(int yy, const double* gr, int n)
 	int i;
 	for (i = 0; i < lim; ++i)
 		gross[i] = gr[i];
-	// ƒл€ i > n и ≥ < MONTHS 
+	// For i > n and i < MONTHS
 	for (; i < MONTHS; ++i)
 		gross[i] = 0;
 }

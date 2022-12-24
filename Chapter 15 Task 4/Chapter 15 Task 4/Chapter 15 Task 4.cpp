@@ -72,26 +72,31 @@ int main()
 	
 	
 	
-	/*cout << "\nNext try block: \n"; // второй блок try 
-	try
-	{
+	cout << "\nNext try block: \n"; // second try block
+	try {
 		sales2[2] = 37.5;
-		salesl[20] = 23345;
-		cout << "End of try block 2.\n"; // конец второго блока try 
+		sales1[20] = 23345;
+		cout << "End of try block 2.\n"; // end of second try block
 	}
 
 
-	catch (LabeledSales::nbad_index& bad)
-	{
-		cout << bad.what();
-		cout << "Company: " << bad.label_val() << endl; // компания 
-		cout << "bad index: " << bad.bi_val() << endl; // недопустимый индекс 
-	}
 	catch (Sales::bad_index& bad)
 	{
-		cout << bad.what();
-		cout << "bad index: " << bad.bi_val() << endl; // недопустимый индекс 
-	}*/
+
+		try 
+		{
+			LabeledSales::nbad_index& nbad = dynamic_cast<LabeledSales::nbad_index&> (bad);
+			cout << "Company: " << nbad.label_val() << endl;
+		}
+
+		//if it was not possible to cast to a child type(execute dynamic_cast) in try block, we go into the catch find out which object has the wrong index
+		//and under what number it is stored
+		catch (std::bad_cast&)  
+		{
+			cout << bad.what();
+			cout << "bad index: " << bad.bi_val() << endl;
+		}
+	}
 
 
 	cout << "done\n";
