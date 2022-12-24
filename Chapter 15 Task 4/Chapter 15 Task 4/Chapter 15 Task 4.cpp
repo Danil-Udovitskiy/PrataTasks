@@ -56,6 +56,7 @@ int main()
 			// using dynamic_cast, check if the type nbad_index is a successor of bad_index
 			LabeledSales::nbad_index& nbad = dynamic_cast<LabeledSales::nbad_index&> (bad); // use nbad
 			cout << "Company: " << nbad.label_val() << endl; // company
+			cout << bad.what();
 		}
 
 		// handler for inner try block
@@ -87,6 +88,7 @@ int main()
 		{
 			LabeledSales::nbad_index& nbad = dynamic_cast<LabeledSales::nbad_index&> (bad);
 			cout << "Company: " << nbad.label_val() << endl;
+			cout << bad.what();
 		}
 
 		//if it was not possible to cast to a child type(execute dynamic_cast) in try block, we go into the catch find out which object has the wrong index
