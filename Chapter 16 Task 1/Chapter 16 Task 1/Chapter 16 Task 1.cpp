@@ -6,8 +6,10 @@
 
 bool palindrom(std::string & w)
 {
+    std::string temp = w;
     std::reverse(w.begin(), w.end());
-    if (w == w)
+
+    if (temp == w)
     {
         std::cout << "palindrome\n";
         return true;
