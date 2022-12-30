@@ -11,12 +11,10 @@ bool palindrom(std::string & w)
 
     if (temp == w)
     {
-        std::cout << "palindrome\n";
         return true;
     }
     else
     {
-        std::cout << "no palindrome\n";
         return false;
     }
 }
@@ -28,6 +26,14 @@ int main()
     std::cout << "Enter word : ";
     std::cin >> word;
 
-    std::cout << palindrom(word);
+
+    if (palindrom(word))
+    {
+        std::cout << "palindrome\n";
+    }
+    else
+    {
+        std::cout << "no palindrome\n";
+    }
 
 }
