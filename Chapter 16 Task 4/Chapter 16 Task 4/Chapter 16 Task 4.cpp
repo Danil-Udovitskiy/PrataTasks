@@ -29,9 +29,9 @@ int main()
 
     //After reduce (sort +  get size + unique) and using for_each
     std::cout << "\n\nreduce\n";
-    std::cout << "size = " << reduce(arr, size) << "\n";
 
     int size_new = reduce(arr, size);
+    std::cout << "size = " << size_new << "\n";
 
     std::for_each(std::begin(arr), &arr[0] + size_new, show);
 
