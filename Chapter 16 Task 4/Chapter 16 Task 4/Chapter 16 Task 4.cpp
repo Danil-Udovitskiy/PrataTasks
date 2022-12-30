@@ -15,9 +15,6 @@ int reduce(long ar[], int n)
 
     n = result - &ar[0]; //subtract 1 element from the end of the resulting range
     
-    std::for_each(&ar[0], result, show); //display the result after sorting and removing duplicate elements
-
-    std::cout << "\nsize = ";
     return n; // return array size
 }
 
@@ -26,16 +23,18 @@ int main()
     const int size = 6;
     long arr[size]{ 10,10,30,30,50,40 };
 
-    for (int i = 0; i < size; ++i)
-    {
-        show(arr[i]);
-    }
-
+    std::for_each(std::begin(arr), std::end(arr), show);
+   
 
 
     //After reduce (sort +  get size + unique) and using for_each
     std::cout << "\n\nreduce\n";
-    std::cout << reduce(arr, size) << "\n";
+    std::cout << "size = " << reduce(arr, size) << "\n";
+
+    int size_new = reduce(arr, size);
+
+    std::for_each(std::begin(arr), &arr[0] + size_new, show);
 
 }
+
 
