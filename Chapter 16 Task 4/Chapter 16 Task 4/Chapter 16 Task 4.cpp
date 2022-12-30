@@ -32,9 +32,18 @@ int main()
 
 
     //After reduce (sort +  get size) and using for_each
+    std::cout << "\n\nreduce";
     std::cout << reduce(arr, size) << "\n";
 
     std::for_each(std::begin(arr), std::end(arr), show);
+
+
+    //++++++++++++++++++
+    std::cout << "\n\nunique\n";
+
+    auto result = std::unique(std::begin(arr), std::end(arr)); //result - is iterator pointing to the end of unique elements
+
+    std::for_each(std::begin(arr), result, show);
 
 
 }
