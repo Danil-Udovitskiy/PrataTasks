@@ -20,9 +20,6 @@ int reduce(T ar[], int n)
 
     n = result - &ar[0];
 
-    //std::for_each(&ar[0], result, show<T>); //perform explicit type inference of the show<T> template parameter
-    
-    //std::cout << "\nsize = ";
     return n; // return array size
 }
 
@@ -39,16 +36,15 @@ int main()
 
     //After reduce (sort +  get size + unique) and using for_each
     std::cout << "\n\nreduce\n";
-    std::cout << reduce(arr, size) << "\n";
-
-    std::cout << "size = " << reduce(arr, size) << "\n";
 
     int size_new = reduce(arr, size);
+    std::cout << "size = " << size_new << "\n";
     
-    //std::for_each(std::begin(arr), &arr[0] + size_new, show);
+    std::for_each(std::begin(arr), &arr[0] + size_new, show<long>);
 
 
-    std::cout << "\nString array\n";
+
+    std::cout << "\n\nString array\n";
     const int size2 = 6;
     std::string arrS[size2]{ "aa","bb","bb","gg","cc","dd" };
 
@@ -57,7 +53,11 @@ int main()
 
     //After reduce (sort +  get size + unique) and using for_each
     std::cout << "\n\nreduce\n";
-    std::cout << reduce(arrS, size2) << "\n";
+
+    int size_new2 = reduce(arrS, size2);
+    std::cout << "size = " << size_new2 << "\n";
+
+    std::for_each(std::begin(arrS), &arrS[0] + size_new2, show<std::string>);
 }
 
 
