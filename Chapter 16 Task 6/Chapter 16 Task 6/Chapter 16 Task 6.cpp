@@ -6,6 +6,11 @@
 #include <ctime> // time() 
 
 
+//include library <queue>
+#include <queue>
+#include "Customer.h" //include header file
+
+
 const int MIN_PER_HR = 60;
 
 bool newcustomer(double x); // is there a new client?
@@ -26,7 +31,11 @@ int main()
 
 	int qs;
 	cin >> qs;
-	Queue line(qs); // queue can contain up to qs people
+
+	//declaring a queue with the Item data type (Customer template)
+	std::queue <Item>line;
+	//add queue counter
+	int queuecount = 0;
 
 	cout << "Enter the number of simulation hours: "; // enter the number of emulated hours
 	int hours; // emulation clock
@@ -56,20 +65,25 @@ int main()
 	{
 		if (newcustomer(min_per_cust)) // there is an incoming client
 		{
-			if (line.isfull())
+			if (queuecount == qs) // check if the queue is full (compare the size of the queue counter with the size limit)
 				turnaways++;
 			else
 			{
 				customers++;
 				temp.set(cycle); // cycle = arrival time
-				line.enqueue(temp);// adding a newcomer to the queue
+
+				line.push(temp); //add to the queue using //void push(const m&x) Inserts x at the end of the queue
+				queuecount = line.size(); //instead of line.enqueue (we get the size of the queue after adding the element and assign it to the counter)
+
 			}
 		}
 
 
-		if (wait_time <= 0 && !line.isempty())
+		if (wait_time <= 0 && !line.empty()) // use bool empty () const Returns true if the queue is empty, false otherwise
 		{
-			line.dequeue(temp); // serving the next client
+			line.pop(); //void pop() Removes an element from the front of the queue 
+			queuecount = line.size(); //instead of line.dequeue (we get the size of the queue after removing the element and assign it to the counter)
+
 			wait_time = temp.ptime(); // during wait_time minutes
 			line_wait += cycle - temp.when();
 			served++;
@@ -77,7 +91,8 @@ int main()
 
 		if (wait_time > 0)
 			wait_time--;
-		sum_line += line.queuecount();
+
+		sum_line += line.size(); //add and assign the size to the total length of the queue
 	}
 
 
