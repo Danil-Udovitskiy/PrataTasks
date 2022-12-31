@@ -6,43 +6,36 @@
 
 bool palindrom(std::string& w)
 {
-    int size = w.size();
+    std::string temp1 = w;
+
+    int size = temp1.size();
     for (int i = 0; i < size; i++)
 
     {
-        if (isupper(w[i]))
+        if (isupper(temp1[i]))
         {
-            w[i] = tolower(w[i]);
+            temp1[i] = tolower(temp1[i]);
         }
 
-        else if (ispunct(w[i])) 
+        else if (ispunct(temp1[i]) || isspace(temp1[i]))
         {
-            w.erase(w.begin() + i); // remove the element
+            temp1.erase(temp1.begin() + i); // remove the element from temp string
             size--; // reduce the string size (because 1 element was removed)
             i--; // return the counter 1 position back
         }
 
-        else if (isspace(w[i]))
-        {
-            w.erase(w.begin() + i);
-            size--;
-            i--;
-        }
-
     }
 
+    std::string temp = temp1;
 
-    std::string temp = w;
-    std::reverse(w.begin(), w.end());
+    std::reverse(temp.begin(), temp.end());
 
-    if (temp == w)
+    if (temp == temp1)
     {
-        std::cout << "palindrome\n";
         return true;
     }
     else
     {
-        std::cout << "no palindrome\n";
         return false;
     }
 }
@@ -54,6 +47,14 @@ int main()
     std::cout << "Enter word : ";
     std::cin >> word;
 
-    std::cout << palindrom(word) << "\n";
+
+    if (palindrom(word))
+    {
+        std::cout << "palindrome\n";
+    }
+    else
+    {
+        std::cout << "no palindrome\n";
+    }
 
 }
