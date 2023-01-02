@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <iterator>
+
 
 int main()
 {
@@ -58,5 +60,23 @@ int main()
     for (int i = 0; i < Pat.size(); i++)
     {
         std::cout << Pat.at(i) << "\n";
+    }
+
+
+
+    //Create a third container that combines these two lists, excludes
+    //duplicatesand displays the contents of this container.
+    //std::set_union doing it
+
+    std::vector<std::string> Names;
+
+    Names.resize(Mat.size() + Pat.size());
+    std::set_union(Mat.begin(), Mat.end(), Pat.begin(), Pat.end(), Names.begin());
+
+    //Output
+    std::cout << "\n\nNames\n";
+    for (int i = 0; i < Names.size(); i++)
+    {
+        std::cout << Names.at(i) << "\n";
     }
 }
