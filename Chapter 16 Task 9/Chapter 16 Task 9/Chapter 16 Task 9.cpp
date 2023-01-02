@@ -4,9 +4,10 @@
 #include <vector>
 
 #include <cstdlib> // rand()
-#include <ctime> // time()
+#include <ctime> // time(), clock()
 
 #include <list>
+#include <algorithm> //sort()
 
 int main()
 {
@@ -56,5 +57,42 @@ int main()
 	{
 		std::cout << *i << "\n";
 	}
+
+
+
+	//c. Measure the time it takes a program to sort vi using the sort() algorithm from the STL
+	// then the time needed to sort the li using the list sort() method.
+
+	//vector
+	clock_t start = clock();
+
+	std::sort(vi.begin(), vi.end());
+
+	std::cout << "\nvi + sort\n";
+	for (int i = 0; i < vi.size(); i++)
+	{
+
+		std::cout << vi.at(i) << "\n";
+	}
+
+	clock_t end = clock();
+
+	std::cout << "time STL sort() vector - " << (double)(end - start) / CLOCKS_PER_SEC << "\n";
+
+	//list
+	start = clock();
+	li.sort();
+	
+	std::cout << "\nli + sort\n";
+	for (auto i = li.begin(); i != li.end(); i++)
+	{
+		std::cout << *i << "\n";
+	}
+
+	end = clock();
+	std::cout << "time list sort() method - " << (double)(end - start) / CLOCKS_PER_SEC << "\n";
+
+
+
 
 }
