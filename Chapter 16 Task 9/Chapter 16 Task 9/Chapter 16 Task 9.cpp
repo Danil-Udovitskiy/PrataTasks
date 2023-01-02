@@ -94,5 +94,61 @@ int main()
 
 
 
+	//d. Reinstall li with the unsorted contents of vi0
+	// Measure the running time of a mixed operation of copying li to vi,
+	//sorting vi, and copying the result back to li.
+
+
+	//we can use copy instead of assign 
+	//but first clear - li.clear();
+	//and than - copy(vi0.begin(), vi0.end(), std::back_inserter(li));
+
+	//Reinstalling li with the unsorted content of vi0
+	li.assign(vi0.begin(), vi0.end());
+
+	std::cout << "\nli\n";
+	for (auto i = li.begin(); i != li.end(); i++)
+	{
+		std::cout << *i << "\n";
+	}
+
+	//Measure the running time of a mixed operation of copying li to vi, sorting vi, and copying the result back to li.
+	start = clock();
+
+	//Copy li to vi
+	vi.assign(li.begin(), li.end());
+	std::cout << "\nCopy li to vi\n";
+
+	for (int i = 0; i < vi.size(); i++)
+	{
+
+		std::cout << vi.at(i) << "\n";
+	}
+
+	//Sort vi
+	std::sort(vi.begin(), vi.end());
+	std::cout << "\nSort vi 2\n";
+	for (int i = 0; i < vi.size(); i++)
+	{
+
+		std::cout << vi.at(i) << "\n";
+	}
+
+	//Copy the result back to li
+	li.assign(vi.begin(), vi.end());
+
+
+	std::cout << "\nCopy the result back to li\n";
+	for (auto i = li.begin(); i != li.end(); i++)
+	{
+		std::cout << *i << "\n";
+	}
+
+
+
+	end = clock();
+	std::cout << "time list copy+sort+copy back " << (double)(end - start) / CLOCKS_PER_SEC << "\n";
+
+
 
 }
