@@ -16,28 +16,14 @@ struct Review {
 	double price;
 };
 
-bool operator<(const Review& rl, const Review& r2);
-bool worseThan(const Review& rl, const Review& r2);
+
+bool operator<(const std::shared_ptr<Review>& rl, const std::shared_ptr<Review>& r2);
+bool worseThan(const std::shared_ptr<Review>& rl, const std::shared_ptr<Review>& r2);
 bool FillReview(Review* rr);
-void ShowReview(const Review& rr);
+void ShowReview(std::shared_ptr<Review> rr);
 
-//++++++++++
 // add a function to compare prices
-bool worseThan_price(const Review& r1, const Review& r2)
-{
-	if (r1.price < r2.price)
-		return true;
-	else
-		return false;
-}
-
-bool betterThan_price(const Review& r1, const Review& r2)
-{
-	if (r1.price > r2.price) 
-		return true;
-	else
-		return false;
-}
+bool worseThan_price(const std::shared_ptr<Review>& r1, const std::shared_ptr<Review>& r2);
 
 
 int main()
@@ -47,18 +33,17 @@ int main()
 	// Use a vector of objects to store input
 	// shared_ptr<Review> instead of a vector of Review objects. //vector<Review> books;
 
-	vector <shared_ptr<Review>> books;		//shared_ptr<Review>(new Review);
+	vector <shared_ptr<Review>> books;
+
 	Review temp;
+
 
 	while (FillReview(&temp))
 	{
 		shared_ptr<Review> temp1(new Review(temp));//(temp)
+
 		books.push_back(temp1);
 	}
-
-
-
-
 
 
 
@@ -95,7 +80,7 @@ int main()
 				for_each(books.begin(), books.end(), ShowReview);
 				break;
 			}
-			/*case 2:
+			case 2:
 			{
 				sort(books.begin(), books.end());
 				cout << "Sorted by title:\nRating\tBook\tPrice\n";
@@ -123,10 +108,10 @@ int main()
 			{
 				cout << "Sorted by price hi-low:\nRating\tBook\tPrice\n";
 				// List of books sorted by price hi-low
-				sort(books.begin(), books.end(), betterThan_price);
-				for_each(books.begin(), books.end(), ShowReview);
+				sort(books.begin(), books.end(), worseThan_price);
+				for_each(books.rbegin(), books.rend(), ShowReview); //using rbegin/rend to reverse show
 				break;
-			}*/
+			}
 			default:
 			{
 				indicator = false;
@@ -147,26 +132,29 @@ int main()
 
 
 
-bool operator<(const Review& rl, const Review& r2)
+
+
+bool operator<(const std::shared_ptr<Review>& rl, const std::shared_ptr<Review>& r2)
 {
-	if (rl.title < r2.title)
+	if (rl->title < r2->title)
 		return true;
-	else if (rl.title == r2.title && rl.rating < r2.rating)
-		return true;
-	else
-		return false;
-}
-bool worseThan(const Review& rl, const Review& r2)
-{
-	if (rl.rating < r2.rating)
+	else if (rl->title == r2->title && rl->rating < r2->rating)
 		return true;
 	else
 		return false;
 }
 
-//++
+
+bool worseThan(const std::shared_ptr<Review>& rl, const std::shared_ptr<Review>& r2)
+{
+	if (rl->rating < r2->rating)
+		return true;
+	else
+		return false;
+}
+
+
 bool FillReview(Review* rr) //function takes object by pointer
-//bool FillReview(Review& rr)
 {
 	std::cout << "Enter book title (quit to quit): ";
 	std::getline(std::cin, rr->title);
@@ -189,9 +177,17 @@ bool FillReview(Review* rr) //function takes object by pointer
 	return true;
 }
 
-//++
-void ShowReview(const Review& rr)
+
+void ShowReview(std::shared_ptr<Review> rr)
 {
-	//++
-	std::cout << rr.rating << "\t" << rr.title << "\t" << rr.price << std::endl;
+	std::cout << rr->rating << "\t" << rr->title << "\t" << rr->price << std::endl;
+}
+
+
+bool worseThan_price(const std::shared_ptr<Review>& r1, const std::shared_ptr<Review>& r2)
+{
+	if (r1->price < r2->price)
+		return true;
+	else
+		return false;
 }
