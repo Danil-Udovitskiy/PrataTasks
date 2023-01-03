@@ -5,7 +5,8 @@
 #include <iostream> 
 #include <string> 
 #include <vector> 
-#include <algorithm> 
+#include <algorithm>
+#include <memory>
 
 struct Review {
 	std::string title;
@@ -17,7 +18,7 @@ struct Review {
 
 bool operator<(const Review& rl, const Review& r2);
 bool worseThan(const Review& rl, const Review& r2);
-bool FillReview(Review& rr);
+bool FillReview(Review* rr);
 void ShowReview(const Review& rr);
 
 //++++++++++
@@ -42,12 +43,23 @@ bool betterThan_price(const Review& r1, const Review& r2)
 int main()
 {
 	using namespace std;
-	vector<Review> books;
 
+	// Use a vector of objects to store input
+	// shared_ptr<Review> instead of a vector of Review objects. //vector<Review> books;
+
+	vector <shared_ptr<Review>> books;		//shared_ptr<Review>(new Review);
 	Review temp;
 
-	while (FillReview(temp))
-		books.push_back(temp);
+	while (FillReview(&temp))
+	{
+		shared_ptr<Review> temp1(new Review(temp));//(temp)
+		books.push_back(temp1);
+	}
+
+
+
+
+
 
 
 	if (books.size() > 0)
@@ -83,7 +95,7 @@ int main()
 				for_each(books.begin(), books.end(), ShowReview);
 				break;
 			}
-			case 2:
+			/*case 2:
 			{
 				sort(books.begin(), books.end());
 				cout << "Sorted by title:\nRating\tBook\tPrice\n";
@@ -114,7 +126,7 @@ int main()
 				sort(books.begin(), books.end(), betterThan_price);
 				for_each(books.begin(), books.end(), ShowReview);
 				break;
-			}
+			}*/
 			default:
 			{
 				indicator = false;
@@ -153,20 +165,21 @@ bool worseThan(const Review& rl, const Review& r2)
 }
 
 //++
-bool FillReview(Review& rr)
+bool FillReview(Review* rr) //function takes object by pointer
+//bool FillReview(Review& rr)
 {
 	std::cout << "Enter book title (quit to quit): ";
-	std::getline(std::cin, rr.title);
-	if (rr.title == "quit")
+	std::getline(std::cin, rr->title);
+	if (rr->title == "quit")
 		return false;
 	std::cout << "Enter book rating: ";
-	std::cin >> rr.rating;
+	std::cin >> rr->rating;
 	if (!std::cin)
 		return false;
 
 	//++
 	std::cout << "Enter book price: ";
-	std::cin >> rr.price;
+	std::cin >> rr->price;
 	if (!std::cin)
 		return false;
 
