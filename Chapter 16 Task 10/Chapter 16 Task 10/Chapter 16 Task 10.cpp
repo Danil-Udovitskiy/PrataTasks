@@ -45,6 +45,9 @@ int main()
 		books.push_back(temp1);
 	}
 
+	//Create another vector of pointers shared_ptr, initialized with original vector
+	//sorting will be done with the new vector - (new_books)
+	vector <shared_ptr<Review>> new_books(books);
 
 
 	if (books.size() > 0)
@@ -82,34 +85,34 @@ int main()
 			}
 			case 2:
 			{
-				sort(books.begin(), books.end());
+				sort(new_books.begin(), new_books.end());
 				cout << "Sorted by title:\nRating\tBook\tPrice\n";
 				// List of books sorted by title
-				for_each(books.begin(), books.end(), ShowReview);
+				for_each(new_books.begin(), new_books.end(), ShowReview);
 				break;
 			}
 			case 3:
 			{
-				sort(books.begin(), books.end(), worseThan);
+				sort(new_books.begin(), new_books.end(), worseThan);
 				cout << "Sorted by rating:\nRating\tBook\tPrice\n";
 				// List of books sorted by rating
-				for_each(books.begin(), books.end(), ShowReview);
+				for_each(new_books.begin(), new_books.end(), ShowReview);
 				break;
 			}
 			case 4:
 			{
 				cout << "Sorted by price low-hi:\nRating\tBook\tPrice\n";
 				// List of books sorted by price low-hi
-				sort(books.begin(), books.end(), worseThan_price);
-				for_each(books.begin(), books.end(), ShowReview);
+				sort(new_books.begin(), new_books.end(), worseThan_price);
+				for_each(new_books.begin(), new_books.end(), ShowReview);
 				break;
 			}
 			case 5:
 			{
 				cout << "Sorted by price hi-low:\nRating\tBook\tPrice\n";
 				// List of books sorted by price hi-low
-				sort(books.begin(), books.end(), worseThan_price);
-				for_each(books.rbegin(), books.rend(), ShowReview); //using rbegin/rend to reverse show
+				sort(new_books.begin(), new_books.end(), worseThan_price);
+				for_each(new_books.rbegin(), new_books.rend(), ShowReview); //using rbegin/rend to reverse show
 				break;
 			}
 			default:
@@ -139,6 +142,9 @@ bool operator<(const std::shared_ptr<Review>& rl, const std::shared_ptr<Review>&
 	if (rl->title < r2->title)
 		return true;
 	else if (rl->title == r2->title && rl->rating < r2->rating)
+		return true;
+	//Add price comparison
+	else if (rl->title == r2->title && rl->rating == r2->rating && rl->price < r2->price)
 		return true;
 	else
 		return false;
