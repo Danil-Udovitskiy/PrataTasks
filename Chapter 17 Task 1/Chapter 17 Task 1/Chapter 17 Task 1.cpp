@@ -4,18 +4,26 @@
 
 int main()
 {
-
 	char symbol;
 	int counter = 0;
 
+	std::cout << "Enter symbols : ";
 
-	std::cout << "Enter symbol : ";
-	while (std::cin >> symbol && symbol != '$')
+	//using the peek() function, we return the next input character without extracting it from the input stream
+	while (symbol = std::cin.peek() != '$') // "look" ahead
 	{
-		counter++;
-		std::cout << "Enter next symbol : ";
+		std::cin.get(symbol);
+		
+		//do not read one space (only after any symbol)
+		if (symbol != '\n')
+		{
+			counter++;
+		}
+		else
+		{
+			std::cout << "Enter next symbols : ";
+		}
 	}
 
-	std::cout << "Total symbols = " << counter << "\n";
-
+	std::cout << "Total symbols before \"$\" = " << counter << "\n";
 }
