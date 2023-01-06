@@ -14,7 +14,7 @@ int main()
 	{
 		std::cin.get(symbol);
 		
-		//do not read one space (only after any symbol)
+		//do not read one enter (only after any symbol)
 		if (symbol != '\n')
 		{
 			counter++;
