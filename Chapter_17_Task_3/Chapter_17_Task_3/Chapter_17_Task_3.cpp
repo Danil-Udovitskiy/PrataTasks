@@ -19,31 +19,29 @@ int main(int argc, char* argv[])
 	std::ifstream fin; //create an ofstream object
 	fin.open(argv[1]); //create and open a file with the name of the second command line argument
 
+	std::ofstream fout; //create an ofstream object
+	fout.open(argv[2]); //create and open a file with the name of the second command line argument
+
+
 	// check if the file to be copied from is open
-	if (!fin.is_open()) 
+	if (!fin.is_open())
 	{
 		std::cerr << "FILE NOT OPEN   " << argv[1] << "\nSTOP\n";
 		return 1;
 	}
 
-
-	std::ofstream fout; //create an ofstream object
-	fout.open(argv[2]); //create and open a file with the name of the second command line argument
-	
 	// check if the file to be copied to is open
-	if (fout.is_open())
-	{
-		//copying
-		char ch;
-		while (fin.get(ch)) //read via fin.get so that the words are separated by a newline character
-		{
-			fout << ch;
-		}
-	}
-	else
+	else if (!fout.is_open())
 	{
 		std::cerr << "FILE NOT OPEN   " << argv[2] << "\nSTOP\n";
 		return 1;
+	}
+
+	//copying
+	char ch;
+	while (fin.get(ch)) //read via fin.get so that the words are separated by a newline character
+	{
+		fout << ch;
 	}
 
 
