@@ -30,6 +30,15 @@ int main()
 		std::cout << "FILE OPEN   " << first << "\n";
 		std::cout << "FILE OPEN   " << second << "\n";
 		std::cout << "FILE OPEN   " << third << "\n";
+
+		std::string str1, str2;
+
+		while (!fin.eof() && !fin2.eof()) //loop runs until both files are read to the end
+		{
+			std::getline(fin, str1); //read from the first file
+			std::getline(fin2, str2); //read from the second file
+			fout << str1 + ' ' + str2 << std::endl; //write concatenated strings 
+		}
 	}
 
 	// check if the 1 file to be copied from is open
@@ -50,22 +59,6 @@ int main()
 		std::cerr << "FILE NOT OPEN   " << third << "\nSTOP\n";
 		return 1;
 	}
-
-
-
-	std::string str1, str2;
-
-	while (std::getline(fin, str1))
-	{
-		fout << str1 << std::endl;
-	}
-
-	while (std::getline(fin2, str2))
-	{
-		fout << str2 << std::endl;
-	}
-
-
 
 	fin.close();
 	fin2.close();
