@@ -51,6 +51,25 @@ int main()
 		return 1;
 	}
 
+
+
+	std::string str1, str2;
+
+	while (std::getline(fin, str1))
+	{
+		fout << str1 << std::endl;
+	}
+
+	while (std::getline(fin2, str2))
+	{
+		fout << str2 << std::endl;
+	}
+
+
+
+	fin.close();
+	fin2.close();
+	fout.close();
 }
 
 
