@@ -23,19 +23,25 @@ int main(int argc, char* argv[])
 	fout.open(argv[2]); //create and open a file with the name of the second command line argument
 
 
+	//Checking if two files were opened successfully
+	if (fin.is_open() && fout.is_open())
+	{
+		std::cerr << "FILE OPEN   " << argv[1] << "\n";
+		std::cerr << "FILE OPEN   " << argv[2] << "\n";
+	}
 	// check if the file to be copied from is open
-	if (!fin.is_open())
+	else if (!fin.is_open())
 	{
 		std::cerr << "FILE NOT OPEN   " << argv[1] << "\nSTOP\n";
 		return 1;
 	}
-
 	// check if the file to be copied to is open
 	else if (!fout.is_open())
 	{
 		std::cerr << "FILE NOT OPEN   " << argv[2] << "\nSTOP\n";
 		return 1;
 	}
+
 
 	//copying
 	char ch;
