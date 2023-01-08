@@ -26,8 +26,18 @@ int main(int argc, char* argv[])
 	//Checking if two files were opened successfully
 	if (fin.is_open() && fout.is_open())
 	{
-		std::cerr << "FILE OPEN   " << argv[1] << "\n";
-		std::cerr << "FILE OPEN   " << argv[2] << "\n";
+		std::cout << "FILE OPEN   " << argv[1] << "\n";
+		std::cout << "FILE OPEN   " << argv[2] << "\n";
+
+		//copying
+		char ch;
+		while (fin.get(ch)) //read via fin.get so that the words are separated by a newline character
+		{
+			fout << ch;
+		}
+
+		fout.close();
+		fin.close();
 	}
 	// check if the file to be copied from is open
 	else if (!fin.is_open())
@@ -41,18 +51,6 @@ int main(int argc, char* argv[])
 		std::cerr << "FILE NOT OPEN   " << argv[2] << "\nSTOP\n";
 		return 1;
 	}
-
-
-	//copying
-	char ch;
-	while (fin.get(ch)) //read via fin.get so that the words are separated by a newline character
-	{
-		fout << ch;
-	}
-
-
-	fout.close();
-	fin.close();
 
 	return 0;
 }
