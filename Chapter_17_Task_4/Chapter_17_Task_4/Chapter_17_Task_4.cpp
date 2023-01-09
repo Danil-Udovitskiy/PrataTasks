@@ -31,13 +31,28 @@ int main()
 		std::cout << "FILE OPEN   " << second << "\n";
 		std::cout << "FILE OPEN   " << third << "\n";
 
-		std::string str1, str2;
+		std::string temp;
 
-		while (!fin.eof() && !fin2.eof()) //loop runs until both files are read to the end
+		while (!fin.eof() || !fin2.eof()) //loop runs until one of the files is equal to end
 		{
-			std::getline(fin, str1); //read from the first file
-			std::getline(fin2, str2); //read from the second file
-			fout << str1 + ' ' + str2 << std::endl; //write concatenated strings 
+			if (!fin.eof())
+			{
+				std::getline(fin, temp); //read from the first file
+				fout << temp << " "; //write string 
+				
+				//if second file eof - write new line
+				if (fin2.eof())
+				{
+					std::cout << std::endl;
+				}
+			}
+
+			if (!fin2.eof())
+			{
+				std::getline(fin2, temp); //read from the second file
+				fout << temp << std::endl; //write string 
+			}
+
 		}
 	}
 
