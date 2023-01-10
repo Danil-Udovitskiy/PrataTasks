@@ -1,69 +1,104 @@
 ﻿// Chapter_17_Task_5.cpp 
 
-
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
+#include <iterator>
 #include <fstream>
-#include <cstring>
-
 
 int main()
 {
-    //three text files for input 
+    //two text files for input
     std::string first = "mat.dat.txt";
     std::string second = "pat.dat.txt";
+    
+    //text file for output
     std::string third = "matnpat.dat.txt";
 
-    //create 2 of 2D char arrays to fill with data
-    const char mat_names[3][10] = { "Alex", "Lolo", "Dan" };
-    const char pat_names[3][10] = { "Alex", "Gigi", "Dann"};
+ 
+    //open files
+    std::ifstream fin; //create an ifstream object
+    fin.open(first);
 
+    std::ifstream fin2; //create an ifstream object
+    fin2.open(second);
 
-    std::ofstream fout1; //create an ofstream object
-    fout1.open(first, std::ios_base::out);//open with file mode iosbase::out (open file for writing)
+    std::ofstream fout; //create an ifstream object
+    fout.open(third);
 
-    std::ofstream fout2; //create an ofstream object
-    fout2.open(second, std::ios_base::out);
-
-    // check for successful creation and opening of files
-    if (fout1.is_open() && fout2.is_open())
+    if (fin.is_open() && fin2.is_open() && fout.is_open())
     {
         std::cout << "FILE OPEN   " << first << "\n";
         std::cout << "FILE OPEN   " << second << "\n";
+        std::cout << "FILE OPEN   " << third << "\n";
 
 
-        //fill files with array data using the write method
-        for (int i = 0; i < 3; i++)
-            fout1.write((char*)mat_names[i], sizeof (mat_names[i]));
-        for (int i = 0; i < 3; i++)
-            fout2.write((char*)pat_names[i], sizeof (pat_names[i]));
+        //First container 
+        std::vector <std::string> Mat;
+
+        std::string name;
+
+        //Input
+        while (fin >> name && !fin.eof())
+        {
+            Mat.push_back(name);
+        }
+
+        //Sort
+        sort(Mat.begin(), Mat.end());
+
+
+        //Second container 
+        std::vector<std::string> Pat;
+
+        //Input
+        while (fin2 >> name && !fin2.eof())
+        {
+            Pat.push_back(name);
+        }
+
+        //Sort
+        sort(Pat.begin(), Pat.end());
+
+
+        //Create a third container that combines these two lists, excludes
+        //duplicatesand displays the contents of this container.
+        //std::set_union doing it
+
+        std::vector<std::string> Names;
+
+        Names.resize(Mat.size() + Pat.size());
+        std::set_union(Mat.begin(), Mat.end(), Pat.begin(), Pat.end(), Names.begin());
+
+        //Output
+        for (int i = 0; i < Names.size(); i++)
+        {
+            fout << Names.at(i) << "\n";
+        }
     }
 
-	fout1.close();
-	fout2.close();
 
-
-
-    std::ifstream fin1; //create an ifstream object
-    fin1.open(first, std::ios_base::in); //open with file mode iosbase::in (open file for reading)
-
-    std::ifstream fin2; //create an ifstream object
-    fin2.open(second, std::ios_base::in); //open with file mode iosbase::in (open file for reading)
-
-    //check if the two files were opened successfully
-    if (!fin1.is_open())
+    // check if the 1 file to be copied from is open
+    else if (!fin.is_open())
     {
         std::cerr << "FILE NOT OPEN   " << first << "\nSTOP\n";
         return 1;
     }
-
-    if (!fin1.is_open())
+    // check if the 2 file to be copied from is open
+    else if (!fin2.is_open())
     {
         std::cerr << "FILE NOT OPEN   " << second << "\nSTOP\n";
         return 1;
     }
+    // check if the 3 file to be copied to is open
+    else if (!fout.is_open())
+    {
+        std::cerr << "FILE NOT OPEN   " << third << "\nSTOP\n";
+        return 1;
+    }
 
-
-   
-
+    fin.close();
+    fin2.close();
+    fout.close();
 }
