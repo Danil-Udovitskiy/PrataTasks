@@ -28,9 +28,25 @@ void Store::operator()(const std::string& str)
     //write down the size of the string first, and then its content
     int len = str.size(); //size
 
-    fill_data.write((char*)&len, sizeof(std::size_t)); // save length (size)
+    fill_data.write((char*)&len, sizeof(int)); // save length (size)
     fill_data.write(str.data(), len) << "\n"; // save characters (content)
 }
+
+
+//ifstream and vector string
+void GetStrs(std::ifstream& str, std::vector<std::string>& vistr)
+{
+    int len;
+    
+    std::string temp;
+    while (str.read((char*)&len, sizeof(int))) // save length (size)
+    {
+        getline(str, temp); //getline takes the stream to read and the line to read
+        vistr.push_back(temp); // put the read line into a vector
+    }
+}
+
+
 
 int main()
 {
@@ -54,21 +70,21 @@ int main()
     for_each(vostr.begin(), vostr.end(), Store (fout));
     fout.close();
 
-    /*
-    // Восстановить содержимое файла
+    
+    // Restore the contents of the file
     vector<string> vistr;
-    ifstream fin("strings.dat", ios_base::in | ios_base:: binary);
+    ifstream fin("strings.dat.txt", ios_base::in | ios_base:: binary);
     if (!fin.is_open())
     {
         cerr << "Could not open file for input. \n";
-        //не удается открыть файл для ввода
+        //can't open file for input
         exit(EXIT_FAILURE);
     }
 
     GetStrs(fin, vistr);
     cout << "\nHere are the strings read from the file:\n";
-    // строки, прочитанные из файла
-    for_each(vistr.begin(), vistr.end(), ShowStr);*/
+    // lines read from the file
+    for_each(vistr.begin(), vistr.end(), ShowStr);
 
     return 0;
 }
