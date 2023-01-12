@@ -3,9 +3,43 @@
 
 #include <iostream>
 #include "Emp.h"
+#include <fstream>
+#include <string>
 
 int main()
 {
+	//check the first run of the program
+	std::string file = "Data.txt";
+
+	std::ifstream fin;
+	fin.open(file);
+
+	if (fin.is_open())
+	{
+		std::cout << "FILE OPEN  - NOT FIRST START " << file << "\n";
+	}
+	else
+	{
+		std::cerr << "FILE NOT OPEN - FIRST START  " << file << "\n";
+	}
+
+
+	std::ofstream fout;
+	fout.open(file, std::ios_base::out | std::ios_base::app); // create a file with the ability to append data to the end of the file
+
+	if (!fout.is_open())
+	{
+		std::cerr << "FILE FOR OUTPUT NOT OPEN   " << file << "\nSTOP\n";
+		return 1;
+	}
+
+
+
+
+
+
+
+
 	std::cout << "Employee\n\n";
 	employee em("Trip", "Harris", "Thumper");
 	std::cout << em << "\n";
