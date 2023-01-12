@@ -29,7 +29,7 @@ void Store::operator()(const std::string& str)
     int len = str.size(); //size
 
     fill_data.write((char*)&len, sizeof(int)); // save length (size)
-    fill_data.write(str.data(), len) << "\n"; // save characters (content)
+    fill_data.write(str.data(), len); // save characters (content)
 }
 
 
@@ -37,11 +37,18 @@ void Store::operator()(const std::string& str)
 void GetStrs(std::ifstream& str, std::vector<std::string>& vistr)
 {
     int len;
-    
-    std::string temp;
+
     while (str.read((char*)&len, sizeof(int))) // save length (size)
     {
-        getline(str, temp); //getline takes the stream to read and the line to read
+        std::string temp;
+        for (int i = 0; i < len; i++)
+        {
+            char ch_temp;
+            str.read((char*)&ch_temp, sizeof(char)); //read character via read using temporary variable char
+
+            temp.push_back(ch_temp); //write character to string temp
+        }
+        
         vistr.push_back(temp); // put the read line into a vector
     }
 }
