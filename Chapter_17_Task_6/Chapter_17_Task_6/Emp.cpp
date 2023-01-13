@@ -42,6 +42,14 @@ Abstr_emp::~Abstr_emp()
 {
 }
 
+//++
+void Abstr_emp::WriteAll(std::ofstream& fout)
+{
+	fout << fname << "\n";
+	fout << lname << "\n";
+	fout << job << "\n";
+}
+
 
 
 //++
@@ -65,6 +73,11 @@ void employee::SetAll()
 	Abstr_emp::SetAll();
 }
 
+//++
+void employee::WriteAll(std::ofstream& fout)
+{
+	Abstr_emp::WriteAll(fout);
+}
 
 //++
 //manager
@@ -102,6 +115,13 @@ void manager::SetAll()
 	std::cout << "Number of managed abstr_emp : ";
 	//std::cin >> inchargeof;
 	std::cin >> InChargeOf();
+}
+
+//++
+void manager::WriteAll(std::ofstream& fout)
+{
+	Abstr_emp::WriteAll(fout);
+	fout << inchargeof << "\n";
 }
 
 
@@ -144,7 +164,11 @@ void fink::SetAll()
 	std::cin >> ReportsTo();
 }
 
-
+void fink::WriteAll(std::ofstream& fout)
+{
+	Abstr_emp::WriteAll(fout);
+	fout << reportsto << "\n";
+}
 
 //++
 //highfink
@@ -187,4 +211,12 @@ void highfink::SetAll()
 
 	std::cout << "Number of managed abstr_emp : ";
 	std::cin >> InChargeOf();
+}
+
+//++
+void highfink::WriteAll(std::ofstream& fout)
+{
+	Abstr_emp::WriteAll(fout);
+	fout << ReportsTo() << "\n";
+	fout << InChargeOf() << "\n";
 }
