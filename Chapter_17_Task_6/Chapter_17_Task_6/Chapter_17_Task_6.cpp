@@ -6,6 +6,67 @@
 #include <fstream>
 #include <string>
 
+//std::string file = "Data.txt";
+
+void readFromFile(std::ifstream& fin)
+{
+	char ch;
+	if (fin.is_open())
+	{
+		int classtype;
+		while ((fin >> classtype).get(ch)) // newline character separates integer from data
+		
+		{
+			Abstr_emp* pc;
+			switch (classtype)
+			{
+			
+			case 1:
+			{
+				pc = new employee;
+				pc->ShowAll(); //show object
+				std::cout << "\n";
+				delete pc;
+				break;
+			}
+
+			case 2:
+			{
+				pc = new manager;
+				pc->ShowAll(); //show object
+				std::cout << "\n";
+				delete pc;
+				break;
+			}
+
+			case 3:
+			{
+				pc = new fink;
+				pc->ShowAll(); //show object
+				std::cout << "\n";
+				delete pc;
+				break;
+			}
+
+			case 4:
+			{
+				pc = new highfink;
+				pc->ShowAll(); //show object
+				std::cout << "\n";
+				delete pc;
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
+			}
+		}
+		fin.close();
+	}
+}
+
 
 int main()
 {
@@ -16,7 +77,7 @@ int main()
 
 
 	std::ifstream fin;
-	fin.open(file);
+	fin.open(file); 
 	char ch;
 
 	if (fin.is_open())
@@ -25,8 +86,8 @@ int main()
 		
 		// Display initial content
 		std::cout << "Here are the current contents of the " << file << " file: \n";
-		while (fin.get(ch))
-			std::cout << ch;
+
+		readFromFile(fin); //call function to read data
 		fin.close();
 	}
 	else
@@ -56,9 +117,14 @@ int main()
 
 	for (int i = 0; i < MAX; i++)
 	{
-		std::cout << "Employee - 1  Manager - 2  Fink - 3  Highfink - 4: ";
+		std::cout << "\n0 - quit\n Employee - 1  Manager - 2  Fink - 3  Highfink - 4: ";
 		int choice;
 		std::cin >> choice;
+
+		if (choice == 0)
+		{
+			break;
+		}
 
 		switch (choice)
 		{
