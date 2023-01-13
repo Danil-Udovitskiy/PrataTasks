@@ -63,7 +63,7 @@ void readFromFile(std::ifstream& fin)
 			}
 			}
 		}
-		fin.close();
+
 	}
 }
 
@@ -192,7 +192,7 @@ int main()
 			std::cout << ch;
 		fin.close();
 	}
-
+	
 	
 
 	return 0;

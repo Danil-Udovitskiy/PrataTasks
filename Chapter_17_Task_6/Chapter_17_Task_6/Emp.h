@@ -25,6 +25,7 @@ public:
 
 	//++
 	virtual void WriteAll(std::ofstream& fout);
+	virtual void ReadAll(std::ifstream& fin);
 };
 
 
@@ -38,6 +39,7 @@ public:
 
 	//++
 	virtual void WriteAll(std::ofstream& fout);
+	virtual void ReadAll(std::ifstream& fin);
 };
 
 
@@ -61,6 +63,7 @@ public:
 
 	//++
 	virtual void WriteAll(std::ofstream& fout);
+	virtual void ReadAll(std::ifstream& fin);
 };
 
 
@@ -84,6 +87,7 @@ public:
 
 	//++
 	virtual void WriteAll(std::ofstream& fout);
+	virtual void ReadAll(std::ifstream& fin);
 };
 
 
@@ -103,4 +107,5 @@ public:
 
 	//++
 	virtual void WriteAll(std::ofstream& fout);
+	virtual void ReadAll(std::ifstream& fin);
 };

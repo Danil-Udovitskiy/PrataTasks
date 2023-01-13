@@ -50,6 +50,10 @@ void Abstr_emp::WriteAll(std::ofstream& fout)
 	fout << job << "\n";
 }
 
+void Abstr_emp::ReadAll(std::ifstream& fin)
+{
+	fin >> fname >> lname >> job;
+}
 
 
 //++
@@ -77,6 +81,11 @@ void employee::SetAll()
 void employee::WriteAll(std::ofstream& fout)
 {
 	Abstr_emp::WriteAll(fout);
+}
+
+void employee::ReadAll(std::ifstream& fin)
+{
+	Abstr_emp::ReadAll(fin);
 }
 
 //++
@@ -124,6 +133,11 @@ void manager::WriteAll(std::ofstream& fout)
 	fout << inchargeof << "\n";
 }
 
+void manager::ReadAll(std::ifstream& fin)
+{
+	Abstr_emp::ReadAll(fin);
+	fin >> inchargeof;
+}
 
 //++
 //fink
@@ -168,6 +182,12 @@ void fink::WriteAll(std::ofstream& fout)
 {
 	Abstr_emp::WriteAll(fout);
 	fout << reportsto << "\n";
+}
+
+void fink::ReadAll(std::ifstream& fin)
+{
+	Abstr_emp::ReadAll(fin);
+	fin >> reportsto;
 }
 
 //++
@@ -219,4 +239,12 @@ void highfink::WriteAll(std::ofstream& fout)
 	Abstr_emp::WriteAll(fout);
 	fout << ReportsTo() << "\n";
 	fout << InChargeOf() << "\n";
+}
+
+
+void highfink::ReadAll(std::ifstream& fin)
+{
+	Abstr_emp::ReadAll(fin);
+	fin >> ReportsTo();
+	fin >> InChargeOf();
 }
