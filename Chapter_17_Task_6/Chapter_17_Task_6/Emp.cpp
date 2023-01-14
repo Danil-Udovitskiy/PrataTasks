@@ -80,6 +80,7 @@ void employee::SetAll()
 //++
 void employee::WriteAll(std::ofstream& fout)
 {
+	fout << Employee << "\n";
 	Abstr_emp::WriteAll(fout);
 }
 
@@ -129,6 +130,7 @@ void manager::SetAll()
 //++
 void manager::WriteAll(std::ofstream& fout)
 {
+	fout << Manager << "\n";
 	Abstr_emp::WriteAll(fout);
 	fout << inchargeof << "\n";
 }
@@ -180,6 +182,7 @@ void fink::SetAll()
 
 void fink::WriteAll(std::ofstream& fout)
 {
+	fout << Fink << "\n";
 	Abstr_emp::WriteAll(fout);
 	fout << reportsto << "\n";
 }
@@ -236,6 +239,7 @@ void highfink::SetAll()
 //++
 void highfink::WriteAll(std::ofstream& fout)
 {
+	fout << Highfink << "\n";
 	Abstr_emp::WriteAll(fout);
 	fout << ReportsTo() << "\n";
 	fout << InChargeOf() << "\n";

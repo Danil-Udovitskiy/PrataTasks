@@ -6,54 +6,65 @@
 #include <fstream>
 #include <string>
 
-//std::string file = "Data.txt";
 
-void readFromFile(std::ifstream& fin)
+int main()
 {
-	char ch;
+	const int MAX = 10;
+	Abstr_emp* pc[MAX];
+
+	//check the first run of the program
+	std::string file = "Data.txt";
+
+
+	std::ifstream fin;
+	fin.open(file); 
+
+
+	int count = 0;
+
 	if (fin.is_open())
 	{
+		// Display initial content
+		std::cout << "FILE OPEN  - NOT FIRST START\nHere are the current contents of the " << file << " file: \n";
+
+		char ch;
 		int classtype;
 		while ((fin >> classtype).get(ch)) // newline character separates integer from data
-		
+
 		{
-			Abstr_emp* pc;
+			Abstr_emp* pt;
 			switch (classtype)
 			{
-			
-			case 1:
+
+			case Abstr_emp::classkind::Employee: //determine the type of the object by the case
 			{
-				pc = new employee;
-				pc->ShowAll(); //show object
-				std::cout << "\n";
-				delete pc;
+				pt = new employee; //create an object
+				pc[count] = pt; //assign an object to an array element
+				pt->ReadAll(fin); //read function that reads the required fields
 				break;
 			}
 
-			case 2:
+			case Abstr_emp::classkind::Manager:
 			{
-				pc = new manager;
-				pc->ShowAll(); //show object
-				std::cout << "\n";
-				delete pc;
+				pt = new manager;
+				pc[count] = pt;
+				pt->ReadAll(fin); //read object
 				break;
 			}
 
-			case 3:
+			case Abstr_emp::classkind::Fink:
 			{
-				pc = new fink;
-				pc->ShowAll(); //show object
-				std::cout << "\n";
-				delete pc;
+				pt = new fink;
+				pc[count] = pt;
+				pt->ReadAll(fin); //read object
 				break;
 			}
 
-			case 4:
+			case Abstr_emp::classkind::Highfink:
 			{
-				pc = new highfink;
-				pc->ShowAll(); //show object
-				std::cout << "\n";
-				delete pc;
+				pt = new highfink;
+				pc[count] = pt;
+				pt->ReadAll(fin); //read object
 				break;
 			}
 
@@ -62,40 +73,21 @@ void readFromFile(std::ifstream& fin)
 				break;
 			}
 			}
+			count++;
 		}
-
-	}
-}
-
-
-int main()
-{
-	const int MAX = 10;
-
-	//check the first run of the program
-	std::string file = "Data.txt";
-
-
-	std::ifstream fin;
-	fin.open(file); 
-	char ch;
-
-	if (fin.is_open())
-	{
-		std::cout << "FILE OPEN  - NOT FIRST START " << file << "\n";
-		
-		// Display initial content
-		std::cout << "Here are the current contents of the " << file << " file: \n";
-
-		readFromFile(fin); //call function to read data
 		fin.close();
+
 	}
 	else
 	{
 		std::cerr << "FILE NOT OPEN - FIRST START  " << file << "\n";
 	}
 
-
+	//call the show method on all objects
+	for (int j = 0; j < count; j++)
+	{
+		pc[j]->ShowAll();
+	}
 
 
 	// Adding new data
@@ -111,11 +103,13 @@ int main()
 
 	//++
 	//read data(input)
-	std::cout << "Enter data (enter a blank line to quit):\n";
+	if (count != MAX)
+	{
+		std::cout << "\n\nEnter data :\n";
+	}
 
-	Abstr_emp* pc[MAX];
-
-	for (int i = 0; i < MAX; i++)
+	int i;
+	for (i = count; i < MAX; i++)
 	{
 		std::cout << "\n0 - quit\n Employee - 1  Manager - 2  Fink - 3  Highfink - 4: ";
 		int choice;
@@ -162,39 +156,23 @@ int main()
 
 		default:
 		{
-			std::cout << "Incorrect input, repeat 1 - 4\n";
+			std::cout << "Incorrect input, repeat 0 - 4\n";
 			i--;
 			break;
 		}
 		}//switch end
 
-
 	}
 	fout.close();
 
 
-
-	// Display changed file
-	fin.clear();
-	
-	fin.open(file);
-	// check open
-	if (!fin.is_open())
+	//call the show method on all new objects
+	for (int k = count; k < i; k++)
 	{
-		std::cerr << "FILE NOT OPEN   " << file << "\nSTOP\n";
-		return 1;
+		pc[k]->ShowAll(); 
 	}
-	//show
-	if (fin.is_open())
-	{
-		std::cout << "Here are the new contents of the " << file << " file:\n";
-		while (fin.get(ch))
-			std::cout << ch;
-		fin.close();
-	}
-	
-	
 
+	
 	return 0;
 
 }

@@ -13,6 +13,8 @@ private:
 	std::string job;
 
 public:
+	enum classkind { Employee = 1, Manager = 2, Fink = 3, Highfink = 4 };
+
 	Abstr_emp();
 	Abstr_emp(const std::string& fn, const std::string& ln, const std::string& j);
 
@@ -38,8 +40,9 @@ public:
 	virtual void SetAll();
 
 	//++
-	virtual void WriteAll(std::ofstream& fout);
-	virtual void ReadAll(std::ifstream& fin);
+	//using override to get information about the correctness of a function definition in the parent class
+	void WriteAll(std::ofstream& fout) override;
+	void ReadAll(std::ifstream& fin) override;
 };
 
 
@@ -62,8 +65,8 @@ public:
 	virtual void SetAll();
 
 	//++
-	virtual void WriteAll(std::ofstream& fout);
-	virtual void ReadAll(std::ifstream& fin);
+	void WriteAll(std::ofstream& fout) override;
+	void ReadAll(std::ifstream& fin) override;;
 };
 
 
@@ -86,8 +89,8 @@ public:
 	virtual void SetAll();
 
 	//++
-	virtual void WriteAll(std::ofstream& fout);
-	virtual void ReadAll(std::ifstream& fin);
+	void WriteAll(std::ofstream& fout) override;
+	void ReadAll(std::ifstream& fin) override;
 };
 
 
@@ -106,6 +109,6 @@ public:
 	virtual void SetAll();
 
 	//++
-	virtual void WriteAll(std::ofstream& fout);
-	virtual void ReadAll(std::ifstream& fin);
+	void WriteAll(std::ofstream& fout) override;
+	void ReadAll(std::ifstream& fin) override;
 };
