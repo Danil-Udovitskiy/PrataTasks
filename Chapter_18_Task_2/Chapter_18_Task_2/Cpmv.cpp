@@ -16,6 +16,16 @@ Cpmv::Cpmv(std::string q, std::string z) // constructor with arguments
 }
 
 
+Cpmv::Cpmv(const Cpmv& cp) //copy constructor
+{
+	std::cout << "\n-Copy constructor - Cpmv obj2 = obj1\n";
+
+	pi = new Info;
+	pi->qcode = cp.pi->qcode;
+	pi->zcode = cp.pi->zcode;
+}
+
+
 
 
 void Cpmv::Display() const // Show data
@@ -37,4 +47,5 @@ void Cpmv::Display() const // Show data
 Cpmv::~Cpmv()
 {
 	std::cout << "destructor\n";
+	delete pi;
 }

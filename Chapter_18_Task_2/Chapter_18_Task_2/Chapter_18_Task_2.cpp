@@ -14,5 +14,8 @@ int main()
 	Cpmv second(word1, word2);
 	second.Display();
 
+	Cpmv third = second; //copy constructor
+	third.Display();
+
 
 }

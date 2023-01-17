@@ -14,7 +14,7 @@ private:
 public:
 	Cpmv();
 	Cpmv(std::string q, std::string z);
-	//Cpmv(const Cpmv& cp);
+	Cpmv(const Cpmv& cp);
 	//Cpmv(Cpmv&& mv);
 	~Cpmv();
 	//Cpmv& operator=(const Cpmv& cp);
