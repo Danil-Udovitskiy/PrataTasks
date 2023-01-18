@@ -26,6 +26,32 @@ Cpmv::Cpmv(const Cpmv& cp) //copy constructor
 }
 
 
+Cpmv& Cpmv::operator=(const Cpmv& cp) // assignment operation with copy
+{
+	std::cout << "\n-Automatic assignment with copy - obj2 = obj1\n";
+	if (this == &cp)
+		return *this;
+	delete pi;
+
+	pi = new Info;
+	pi->qcode = cp.pi->qcode;
+	pi->zcode = cp.pi->zcode;
+	return *this;
+}
+
+
+Cpmv Cpmv::operator+(const Cpmv& obj) const // operator+() function
+{
+	std::cout << "\n- operator+() - (obj1 + obj2)\n";
+	Cpmv temp = Cpmv(pi->qcode + obj.pi->qcode, pi->zcode + obj.pi->zcode);
+
+	//temp.pi->qcode + pi->qcode;
+	//temp.pi->zcode + pi->zcode;
+
+	return temp;
+}
+
+
 
 
 void Cpmv::Display() const // Show data
