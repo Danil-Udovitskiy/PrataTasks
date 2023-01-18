@@ -52,8 +52,6 @@ Cpmv Cpmv::operator+(const Cpmv& obj) const // operator+() function
 }
 
 
-
-
 void Cpmv::Display() const // Show data
 {
 	std::cout << "\n-Display function- obj.Display()\n";
@@ -74,4 +72,27 @@ Cpmv::~Cpmv()
 {
 	std::cout << "destructor\n";
 	delete pi;
+}
+
+
+//++
+Cpmv::Cpmv(Cpmv&& mv) noexcept  // transfer constructor 
+{
+	std::cout << "\n-Transfer constructor - Cpmv obj2 (obj1)\n";
+	pi = mv.pi; // borrow address 
+	mv.pi = nullptr; // set old object to null pointer
+}
+
+
+Cpmv& Cpmv::operator=(Cpmv&& mv) noexcept  // assignment with transfer
+{
+	std::cout << "\n-Automatic assignment with transfer - obj1 + obj2\n";
+	if (this == &mv)
+		return *this;
+	
+	delete pi;
+	pi = mv.pi; // borrow address 
+	mv.pi = nullptr; // set old object to null pointer
+	return *this;
+
 }
