@@ -3,44 +3,42 @@
 #include <iostream>
 #include <string>
 
-//template<typename... Args> // Args — это пакет параметров шаблона 
-//void show_listl(Args... args) // args — это пакет параметров функции 
+//template<typename... Args> // Args - template parameter pack
+//void show_listl(Args... args) // args - function parameter pack
 
 
 // Definition for 0 parameters - end call
-void show_list()
+long double sum_values()
 {
-    std::cout << "0 arg to show_list function\n";
+    return 0;
 }
 
 // Definition for 1 parameter
 template<typename T>
-void show_list(T value)
+//void show_list(T value)
+long double sum_values(const T& value)
 {
-    std::cout << value << '\n';
+    return value;
 }
 
 
 // Definition for 1 or more parameters
 template<typename T, typename... Args>
-void show_list(T value, Args... args)
-
+long double sum_values(const T& value, const Args&... args)
 {
-    std::cout << value << ", ";
-    show_list(args...);
+    long double sum;
+    sum = value + sum_values(args...);
+    return  sum;
 }
 
 
 int main()
 {
-    int n = 14;
-    double x = 2.71828;
-    std::string mr = "Mr. String objects!";
+    std::cout << sum_values(5, 2.344, -4, 3.1) << "\n"; // 1 + parameters
 
-    show_list();
-    show_list(n, x);
-    show_list(x * x, '!', 7, mr);
-    show_list('S', 80, "sweet", 4.5);
+    std::cout << sum_values(5.43243) << "\n"; // 1 parameter
+
+    std::cout << sum_values() << "\n"; // without parameters
 
     return 0;
 
