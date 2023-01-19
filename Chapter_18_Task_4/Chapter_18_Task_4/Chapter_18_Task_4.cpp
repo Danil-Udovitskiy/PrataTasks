@@ -1,20 +1,9 @@
 ﻿// Chapter_18_Task_4.cpp
 
-//Listing 16.15
 #include <iostream> 
 #include <list> 
 #include <iterator> 
 #include <algorithm> 
-
-template<class T> // functor class defines operator()()
-class TooBig
-{
-private:
-	T cutoff;
-public:
-	TooBig(const T& t) : cutoff(t) {}
-	bool operator () (const T& v) { return v > cutoff; }
-};
 
 
 int main()
@@ -23,28 +12,34 @@ int main()
 	using std::cout;
 	using std::endl;
 
-	TooBig<int> f100(100); // limit value = 100
-	
+
 	list<int> yadayada = {50, 100, 90, 180, 60, 210, 415, 88, 188, 201};
 	list<int> etcetera {50, 100, 90, 180, 60, 210, 415, 88, 188, 201};
 	
+	// named lambda
+	auto show = [](int n) {std::cout << n << " "; };
+
 	cout << "Original lists:\n"; // source lists
-	for_each(yadayada.begin(), yadayada.end(), [](int n) {std::cout << n << " "; });
+	for_each(yadayada.begin(), yadayada.end(), show );
 	cout << endl;
 
-	for_each(etcetera.begin(), etcetera.end(), [](int n) {std::cout << n << " "; });
+	for_each(etcetera.begin(), etcetera.end(), show);
 	cout << endl;
 
 
-	yadayada.remove_if(f100);		// use named function object
+	// anonymous lambdas to replace the functor
+	auto hundred = 100;
+	yadayada.remove_if([&hundred](int n) {return n > hundred; });
 
-	etcetera.remove_if(TooBig<int>(200)); // constructing a functional object 
+	auto two_hundred = 200;
+	etcetera.remove_if([&two_hundred](int n) {return n > two_hundred; });
+
 
 	cout << "Trimmed lists:\n"; // truncated lists
-	for_each(yadayada.begin(), yadayada.end(), [](int n) {std::cout << n << " "; });
+	for_each(yadayada.begin(), yadayada.end(), show);
 	cout << endl;
 
-	for_each(etcetera.begin(), etcetera.end(), [](int n) {std::cout << n << " "; });
+	for_each(etcetera.begin(), etcetera.end(), show);
 	cout << endl;
 
 	return 0;
