@@ -30,8 +30,5 @@ int main()
 {
     std::cout << sum_values(5, 2.344, -4, 3.1) << "\n"; // 1 + parameters
 
-    std::cout << sum_values(5.43243) << "\n"; // 1 parameter
-
     return 0;
-
 }
