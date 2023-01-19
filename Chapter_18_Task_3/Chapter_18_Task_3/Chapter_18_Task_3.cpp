@@ -7,12 +7,6 @@
 //void show_listl(Args... args) // args - function parameter pack
 
 
-// Definition for 0 parameters - end call
-long double sum_values()
-{
-    return 0;
-}
-
 // Definition for 1 parameter
 template<typename T>
 //void show_list(T value)
@@ -37,8 +31,6 @@ int main()
     std::cout << sum_values(5, 2.344, -4, 3.1) << "\n"; // 1 + parameters
 
     std::cout << sum_values(5.43243) << "\n"; // 1 parameter
-
-    std::cout << sum_values() << "\n"; // without parameters
 
     return 0;
 
