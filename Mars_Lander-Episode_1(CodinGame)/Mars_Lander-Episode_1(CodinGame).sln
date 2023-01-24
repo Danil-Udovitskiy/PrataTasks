@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mars_Lander-Episode_1(CodinGame)", "Mars_Lander-Episode_1(CodinGame)\Mars_Lander-Episode_1(CodinGame).vcxproj", "{0C180D75-85F0-4CB6-900E-56B2F7C582B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Debug|x64.ActiveCfg = Debug|x64
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Debug|x64.Build.0 = Debug|x64
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Debug|x86.ActiveCfg = Debug|Win32
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Debug|x86.Build.0 = Debug|Win32
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Release|x64.ActiveCfg = Release|x64
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Release|x64.Build.0 = Release|x64
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Release|x86.ActiveCfg = Release|Win32
+		{0C180D75-85F0-4CB6-900E-56B2F7C582B8}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C399D7EF-599A-4C7D-89F1-D57A73DF8AFE}
+	EndGlobalSection
+EndGlobal
