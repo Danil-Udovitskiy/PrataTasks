@@ -14,7 +14,7 @@ int main()
         int land_y; // Y coordinate of a surface point. By linking all the points together in a sequential fashion, you form the surface of Mars.
         cin >> land_x >> land_y; cin.ignore();
     }
-
+  
     // game loop
     while (1)
     {
@@ -30,7 +30,51 @@ int main()
 
         std::string power_engine;
 
-        if (v_speed > -40 && h_speed < 16)// vertical landing speed is limited to 40 meters per second
+        //настраиваем вертикальную скорость 
+        if (v_speed > -40)// vertical landing speed is limited to 40 meters per second
+        {
+            power_engine = " 3"; //" 0"
+            cout << rotate << power_engine << endl;
+        }
+        else
+        {
+            power_engine = " 4";
+            cout << rotate << power_engine << endl;
+        }
+
+
+        //if the ship should fly to the right - turn right
+           //to the right in two cases 1- when we want to slow down the movement to the left
+           // 2 - when to fly right
+
+           //if left - turn left
+
+           //when the ship is in the landing zone, then to 0 angle
+           //TAKE ACCOUNT WHEN THE SHIP IS IN THE LANDING AREA
+
+           //set horizontal speed (SHIP TURN)
+        if (h_speed > 20) // || h_speed < -20
+        //take into account 2 directions (right to left)
+        {
+            power_engine = " 4"; //" 0"
+            rotate = -50;
+            cout << rotate << power_engine << endl;
+        }
+        else if ( h_speed < -20)
+        {
+            power_engine = " 4";
+            rotate = 50;
+            cout << rotate << power_engine << endl;
+        }
+
+
+
+
+
+        //need to determine (whether we are at the landing site)
+
+
+        /*if (v_speed > -40 && h_speed < 16)// vertical landing speed is limited to 40 meters per second
         //if the horizontal speed is less than 16 meters per second, then we change the angle to move to the allowed plane for landing
         {
             power_engine = " 3";
@@ -60,7 +104,7 @@ int main()
         {
 
             cout << rotate << power_engine << endl; //display the angle and power of the engine
-        }
+        }*/
 
     }
 }
