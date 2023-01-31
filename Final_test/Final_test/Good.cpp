@@ -58,7 +58,6 @@ Good::~Good()
 
 void Store::readDataFromFile(std::ifstream& dataFile)
 {
-	std::vector<Good> products;
 	std::string temp_name;
 	int temp_number;
 	float temp_weight;
@@ -67,9 +66,9 @@ void Store::readDataFromFile(std::ifstream& dataFile)
 	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight && (!dataFile.eof()))
 	{
 		Good temp(temp_name, temp_number, temp_weight);
-		products.push_back(temp);
+		goods.push_back(temp);
 	}
-
+	dataFile.close();
 }
 
 
@@ -80,6 +79,10 @@ Store::Store(std::ifstream& dataFile)//конструктор
 		std::cout << "FILE OPEN\n"; // << dataFile << "\n";
 		readDataFromFile(dataFile);
 	}
+	else
+	{
+		std::cout << "FILE NOT OPEN\n";
+	}
 }
 
 Store::~Store()
@@ -88,7 +91,7 @@ Store::~Store()
 	std::string second = "StoreInfoUpdated.txt";
 
 	std::ofstream fout; //create an ofstream object
-	fout.open(second); //, std::ifstream::binary
+	fout.open(second); //для добавления данных, а не удаление и запись (second, std::ofstream::app)
 
 	if (fout.is_open())
 	{
@@ -98,10 +101,11 @@ Store::~Store()
 		{
 			fout << goods.at(i) << "\n";
 		}
-
-		//fout.write(reinterpret_cast<char*>(&goods), sizeof(goods));
-
 	}
-
+	else
+	{
+		std::cout << "FILE NOT OPEN\n";
+	}
+	fout.close();
 
 }
