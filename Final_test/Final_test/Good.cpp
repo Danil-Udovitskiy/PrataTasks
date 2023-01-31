@@ -1,11 +1,11 @@
 #include "Good.h"
 
-Good::Good()//constructor
+/*Good::Good()//constructor
 {
 	number = 0;
 	weight = 0;
 	//weights.push_back(weight);
-}
+}*/
 
 Good::Good(std::string gName, int gNumber, float gWeight) //constructor with arguments
 {
@@ -56,23 +56,17 @@ Good::~Good()
 
 //+++++++++++++++++++++++++++++++++++++
 
-void Store::readDataFromFile(std::ifstream& dataFile) //функция считывания из файла (без типа возврата std::ifstream )
+void Store::readDataFromFile(std::ifstream& dataFile)
 {
 	std::vector<Good> products;
-	Good temp;
 	std::string temp_name;
 	int temp_number;
 	float temp_weight;
 
-
 	//Input
-	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight && !dataFile.eof())
+	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight && (!dataFile.eof()))
 	{
-		//Good
-		dataFile >> temp_name;
-		dataFile >> temp_number;
-		dataFile >> temp_weight;
-
+		Good temp(temp_name, temp_number, temp_weight);
 		products.push_back(temp);
 	}
 
@@ -94,11 +88,20 @@ Store::~Store()
 	std::string second = "StoreInfoUpdated.txt";
 
 	std::ofstream fout; //create an ofstream object
-	fout.open(second);
+	fout.open(second); //, std::ifstream::binary
 
 	if (fout.is_open())
 	{
 		std::cout << "FILE OPEN\n";
+		
+		for (int i = 0; i < goods.size(); i++)
+		{
+			fout << goods.at(i) << "\n";
+		}
+
+		//fout.write(reinterpret_cast<char*>(&goods), sizeof(goods));
+
 	}
+
 
 }

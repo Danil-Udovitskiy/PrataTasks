@@ -12,8 +12,8 @@ private:
 	float weight;
 
 public:
-	Good();
-	~Good();
+	//удален конструктор по умолчанию, поскольку товар без данных быть не может 
+	virtual ~Good(); //деструктор определен виртуальным чтобы в функции чтения из файла класса Стор правильно освобождалась память
 
 	Good(std::string gName, int gNumber, float gWeight);
 	friend std::ostream& operator<<(std::ostream& os, const Good& t);
@@ -32,7 +32,7 @@ class Store
 {
 private:
 	std::vector<Good> goods;
-	bool isAvailable = true;
+	//bool isAvailable = true;
 
 	//это функция помощник, которая вызывается в конструкторе и считывает данные из файла
 	void readDataFromFile(std::ifstream& dataFile);
@@ -55,5 +55,3 @@ public:
 	~Store(); //тут мы создаем файл и записываем данные из класса в файл
 
 };
-
-
