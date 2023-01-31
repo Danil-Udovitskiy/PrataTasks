@@ -54,12 +54,6 @@ Good::~Good()
 
 
 
-
-
-
-
-
-
 //+++++++++++++++++++++++++++++++++++++
 
 void Store::readDataFromFile(std::ifstream& dataFile) //функция считывания из файла (без типа возврата std::ifstream )
@@ -96,4 +90,15 @@ Store::Store(std::ifstream& dataFile)//конструктор
 
 Store::~Store()
 {
+	//text file for output
+	std::string second = "StoreInfoUpdated.txt";
+
+	std::ofstream fout; //create an ofstream object
+	fout.open(second);
+
+	if (fout.is_open())
+	{
+		std::cout << "FILE OPEN\n";
+	}
+
 }
