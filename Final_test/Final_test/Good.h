@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 
 class Good
 {
@@ -40,15 +41,17 @@ private:
 public:
 	Store(std::ifstream& dataFile); //тут мы считываем данные из файла в класс
 	
-	/*void sortByName();
+	void sortByName();
 	void sortByNumber();
 	void sortBySingleGoodWeight();
 	void sortByAllGoodsWeight();
 	void showByName(std::string name);
-	void showByNumber(int mix, int max);
+	void showByNumber(int min, int max);
 	void showBySingleGoodWeight(float min, float max);
 	void showByAllGoodsWeight(float min, float max);
 	void showAllGoods();
+
+	/*void showAllGoods();
 	void showStoreState();
 	bool tryBuyGood(std::string name, int count);*/
 	

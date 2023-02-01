@@ -109,3 +109,90 @@ Store::~Store()
 	fout.close();
 
 }
+
+
+
+void Store::sortByName()
+{
+	std::sort(goods.begin(), goods.end(), [](Good& good1, Good& good2) {
+		return good1.getName() < good2.getName(); });
+}
+
+
+void Store::sortByNumber()
+{
+	std::sort(goods.begin(), goods.end(), [](Good& good1, Good& good2) {
+		return good1.getNumber() < good2.getNumber(); });
+}
+
+
+void Store::sortBySingleGoodWeight()
+{
+	std::sort(goods.begin(), goods.end(), [](Good& good1, Good& good2) {
+		return good1.getWeight() < good2.getWeight(); });
+}
+
+void Store::sortByAllGoodsWeight()
+{
+	std::sort(goods.begin(), goods.end(), [](Good& good1, Good& good2) {
+		return good1.getWeightOfAllGoods() < good2.getWeightOfAllGoods(); });
+}
+
+
+void Store::showByName(std::string name)
+{
+	for (auto i : goods)
+	{
+		if (i.getName() == name)
+		{
+			std::cout << i;
+		}
+	}
+}
+
+
+void Store::showByNumber(int min, int max)
+{
+	for (auto i : goods)
+	{
+		if (i.getNumber() >= min && i.getNumber() <= max)
+		{
+			std::cout << i;
+		}
+	}
+}
+
+
+void Store::showBySingleGoodWeight(float min, float max)
+{
+	for (auto i : goods)
+	{
+		if (i.getWeight() >= min && i.getWeight() <= max)
+		{
+			std::cout << i;
+		}
+	}
+}
+
+
+void Store::showByAllGoodsWeight(float min, float max)
+{
+	for (auto i : goods)
+	{
+		if (i.getWeightOfAllGoods() >= min && i.getWeightOfAllGoods() <= max)
+		{
+			std::cout << i;
+		}
+	}
+}
+
+
+
+
+void Store::showAllGoods()
+{
+	for (int i = 0; i < goods.size(); i++)
+	{
+		std::cout << goods.at(i);
+	}
+}
