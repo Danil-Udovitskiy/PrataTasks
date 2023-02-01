@@ -1,18 +1,10 @@
-#include "Good.h"
-
-/*Good::Good()//constructor
-{
-	number = 0;
-	weight = 0;
-	//weights.push_back(weight);
-}*/
+﻿#include "Good.h"
 
 Good::Good(std::string gName, int gNumber, float gWeight) //constructor with arguments
 {
 	name = gName;
 	number = gNumber;
 	weight = gWeight;
-	//weights.push_back(weight);
 }
 
 //show data
@@ -58,13 +50,27 @@ Good::~Good()
 
 void Store::readDataFromFile(std::ifstream& dataFile)
 {
+	std::string temp_isAvailable;//добавил переменную и в зависимости от входа инициализируется
+
 	std::string temp_name;
 	int temp_number;
 	float temp_weight;
 
+	dataFile >> temp_isAvailable; //читаем один раз + не нужен еоф
 	//Input
-	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight && (!dataFile.eof()))
+	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight)//!dataFile.eof()
 	{
+		if (temp_isAvailable == "true")
+		{
+			isAvailable = true;
+		}
+		else if (temp_isAvailable == "false")
+		{
+			isAvailable = false;
+			break;
+		}
+
+
 		Good temp(temp_name, temp_number, temp_weight);
 		goods.push_back(temp);
 	}
@@ -72,7 +78,9 @@ void Store::readDataFromFile(std::ifstream& dataFile)
 }
 
 
-Store::Store(std::ifstream& dataFile)//����������� 
+
+
+Store::Store(std::ifstream& dataFile)//конструктор
 {
 	if (dataFile.is_open())
 	{
@@ -85,13 +93,14 @@ Store::Store(std::ifstream& dataFile)//�����������
 	}
 }
 
+
 Store::~Store()
 {
 	//text file for output
 	std::string second = "StoreInfoUpdated.txt";
 
 	std::ofstream fout; //create an ofstream object
-	fout.open(second); //��� ���������� ������, � �� �������� � ������ (second, std::ofstream::app)
+	fout.open(second); //для добавления данных, а не удаление и запись (second, std::ofstream::app)
 
 	if (fout.is_open())
 	{
@@ -109,6 +118,8 @@ Store::~Store()
 	fout.close();
 
 }
+
+
 
 
 
@@ -208,6 +219,19 @@ void Store::showAllGoods()
 
 
 
+void Store::showStoreState()
+{
+	if (isAvailable == true)
+	{
+		std::cout << "Store is opened\n";
+	}
+	else
+	{
+		std::cout << "Store isn't opened\n";
+	}
+}
+
+
 
 
 
@@ -227,4 +251,20 @@ void showMenu()
 	std::cout << "11. Show information about the possibility of buying goods\n";
 	std::cout << "12. Buy goods\n";
 	std::cout << "13. Exit\n";
+}
+
+
+bool Store::tryBuyGood(std::string name, int count)
+{
+	for (auto i : goods)
+	{
+		if (i.getName() == name && i.getNumber() >= count && isAvailable == true)
+		{
+			std::cout << "Can buy this good\n";
+			i.getNumber() - count;
+			return true;
+		}
+	}
+	std::cout << "Can't buy this good\n";
+	return false;
 }

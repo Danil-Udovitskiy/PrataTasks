@@ -51,9 +51,8 @@ public:
 	void showByAllGoodsWeight(float min, float max);
 	void showAllGoods();
 
-
-	/*void showStoreState(); //11.Показать информацию о возможности покупки товаров. 
-	bool tryBuyGood(std::string name, int count);*/
+	void showStoreState();
+	bool tryBuyGood(std::string name, int count);
 	
 	~Store(); //тут мы создаем файл и записываем данные из класса в файл
 
