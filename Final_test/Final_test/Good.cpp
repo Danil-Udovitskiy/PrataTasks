@@ -148,6 +148,8 @@ void Store::showByName(std::string name)
 			std::cout << i;
 		}
 	}
+
+	std::cout << "No good with this name\n";
 }
 
 
@@ -160,6 +162,8 @@ void Store::showByNumber(int min, int max)
 			std::cout << i;
 		}
 	}
+
+	std::cout << "No goods in this range\n";
 }
 
 
@@ -172,6 +176,8 @@ void Store::showBySingleGoodWeight(float min, float max)
 			std::cout << i;
 		}
 	}
+
+	std::cout << "No goods in this range\n";
 }
 
 
@@ -184,6 +190,8 @@ void Store::showByAllGoodsWeight(float min, float max)
 			std::cout << i;
 		}
 	}
+
+	std::cout << "No goods in this range\n";
 }
 
 
@@ -195,4 +203,28 @@ void Store::showAllGoods()
 	{
 		std::cout << goods.at(i);
 	}
+}
+
+
+
+
+
+
+
+void showMenu()
+{
+	//system("cls");
+	std::cout << "1. Show all goods\n";
+	std::cout << "2. Sort by good name\n";
+	std::cout << "3. Sort by number of goods\n";
+	std::cout << "4. Sort by weight of one unit\n";
+	std::cout << "5. Sort by total weight\n";
+	std::cout << "6. Show product information by name\n";
+	std::cout << "7. Show product information in the quantity range\n";
+	std::cout << "8. Show information about goods in the range of weight of one unit of goods\n";
+	std::cout << "9. Show information about goods in the range of the total weight of the goods\n";
+	std::cout << "10. Show information about all goods\n";
+	std::cout << "11. Show information about the possibility of buying goods\n";
+	std::cout << "12. Buy goods\n";
+	std::cout << "13. Exit\n";
 }

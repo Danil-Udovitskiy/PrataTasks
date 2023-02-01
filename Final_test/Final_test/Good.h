@@ -33,7 +33,7 @@ class Store
 {
 private:
 	std::vector<Good> goods;
-	//bool isAvailable = true;
+	bool isAvailable;
 
 	//это функция помощник, которая вызывается в конструкторе и считывает данные из файла
 	void readDataFromFile(std::ifstream& dataFile);
@@ -51,10 +51,13 @@ public:
 	void showByAllGoodsWeight(float min, float max);
 	void showAllGoods();
 
-	/*void showAllGoods();
-	void showStoreState();
+
+	/*void showStoreState(); //11.Показать информацию о возможности покупки товаров. 
 	bool tryBuyGood(std::string name, int count);*/
 	
 	~Store(); //тут мы создаем файл и записываем данные из класса в файл
 
 };
+
+
+void showMenu();

@@ -38,19 +38,20 @@ int main()
 	obbj.showAllGoods();
 
 	std::cout << "\nshow by name\n";
-	obbj.showByName("Banana");
+	obbj.showByName("gggg"); //Banana
 
 	std::cout << "\nshow by number\n";
 	obbj.showByNumber(1, 2);
 
-	std::cout << "\nshow by weight\n";
+	/*std::cout << "\nshow by weight\n";
 	obbj.showBySingleGoodWeight(120, 300);
 
 	std::cout << "\nshow by all weight\n";
-	obbj.showByAllGoodsWeight(117, 200);
+	obbj.showByAllGoodsWeight(117, 200);*/
 
+	
 
-
+	showMenu();
 }
 
 
