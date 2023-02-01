@@ -59,6 +59,7 @@ int main()
 	std::cout << "\ntry buy good\n";
 	obbj.tryBuyGood("Banana", 6);
 	obbj.tryBuyGood("Banana", 5);
+	obbj.showAllGoods();
 
 }
 

@@ -1,5 +1,6 @@
 ﻿#include "Good.h"
 
+
 Good::Good(std::string gName, int gNumber, float gWeight) //constructor with arguments
 {
 	name = gName;
@@ -38,6 +39,11 @@ float Good::getWeightOfAllGoods()
 	float sum = 0.0f;
 	sum = number * weight;
 	return sum;
+}
+
+void Good::reduceQuantityGood(int count)
+{
+	number = number - count;
 }
 
 Good::~Good()
@@ -256,12 +262,12 @@ void showMenu()
 
 bool Store::tryBuyGood(std::string name, int count)
 {
-	for (auto i : goods)
+	for (auto &i : goods)
 	{
 		if (i.getName() == name && i.getNumber() >= count && isAvailable == true)
 		{
 			std::cout << "Can buy this good\n";
-			i.getNumber() - count;
+			i.reduceQuantityGood(count);
 			return true;
 		}
 	}

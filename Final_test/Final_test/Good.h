@@ -24,7 +24,7 @@ public:
 	float getWeight();
 	float getWeightOfAllGoods();
 
-
+	void reduceQuantityGood(int count);
 };
 
 
