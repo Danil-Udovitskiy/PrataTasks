@@ -8,13 +8,20 @@ Good::Good(std::string gName, int gNumber, float gWeight) //constructor with arg
 	weight = gWeight;
 }
 
-//show data
+//show all data
 std::ostream& operator<<(std::ostream& os, const Good& t) //operator<<
 {
 	os << "Name - " << t.name << "\n";
 	os << "Number - " << t.number << "\n";
 	os << "Weight - " << t.weight << "\n";
 
+	return os;
+}
+
+//show by name
+std::ostream& operator<(std::ostream& os, const Good& t)
+{
+	os << "Name - " << t.name << "\n";
 	return os;
 }
 
@@ -31,7 +38,8 @@ int Good::getNumber() //number
 
 float Good::getWeight() //weight
 {
-	return weight;
+	//return weight; //total weight of all units of one product
+	return weight/ number; //weight of one unit of one product
 }
 
 float Good::getWeightOfAllGoods()
@@ -52,19 +60,19 @@ Good::~Good()
 
 
 
-//+++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 void Store::readDataFromFile(std::ifstream& dataFile)
 {
-	std::string temp_isAvailable;//добавил переменную и в зависимости от входа инициализируется
+	std::string temp_isAvailable; // added a variable and depending on the origin
 
 	std::string temp_name;
 	int temp_number;
 	float temp_weight;
 
-	dataFile >> temp_isAvailable; //читаем один раз + не нужен еоф
+	dataFile >> temp_isAvailable;
 	//Input
-	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight)//!dataFile.eof()
+	while (dataFile >> temp_name && dataFile >> temp_number && dataFile >> temp_weight) //!dataFile.eof()
 	{
 		if (temp_isAvailable == "true")
 		{
@@ -86,11 +94,10 @@ void Store::readDataFromFile(std::ifstream& dataFile)
 
 
 
-Store::Store(std::ifstream& dataFile)//конструктор
+Store::Store(std::ifstream& dataFile) //constructor
 {
 	if (dataFile.is_open())
 	{
-		std::cout << "FILE OPEN\n"; // << dataFile << "\n";
 		readDataFromFile(dataFile);
 	}
 	else
@@ -106,11 +113,11 @@ Store::~Store()
 	std::string second = "StoreInfoUpdated.txt";
 
 	std::ofstream fout; //create an ofstream object
-	fout.open(second); //для добавления данных, а не удаление и запись (second, std::ofstream::app)
+	fout.open(second); //for adding data, not deleting and writing (second, std::ofstream::app)
 
 	if (fout.is_open())
 	{
-		std::cout << "FILE OPEN\n";
+		//std::cout << "FILE OPEN\n";
 		
 		for (int i = 0; i < goods.size(); i++)
 		{
@@ -124,8 +131,6 @@ Store::~Store()
 	fout.close();
 
 }
-
-
 
 
 
@@ -158,62 +163,73 @@ void Store::sortByAllGoodsWeight()
 
 void Store::showByName(std::string name)
 {
+	bool ind = false;
 	for (auto i : goods)
 	{
 		if (i.getName() == name)
 		{
 			std::cout << i;
+			ind = true;
+			break;
 		}
 	}
-
+	if(ind != true)
 	std::cout << "No good with this name\n";
 }
 
 
 void Store::showByNumber(int min, int max)
 {
+	bool ind = false;
 	for (auto i : goods)
 	{
 		if (i.getNumber() >= min && i.getNumber() <= max)
 		{
 			std::cout << i;
+			ind = true;
+			break;
 		}
 	}
-
+	if (ind != true)
 	std::cout << "No goods in this range\n";
 }
 
 
 void Store::showBySingleGoodWeight(float min, float max)
 {
+	bool ind = false;
 	for (auto i : goods)
 	{
 		if (i.getWeight() >= min && i.getWeight() <= max)
 		{
 			std::cout << i;
+			ind = true;
+			break;
 		}
 	}
-
+	if (ind != true)
 	std::cout << "No goods in this range\n";
 }
 
 
 void Store::showByAllGoodsWeight(float min, float max)
 {
+	bool ind = false;
 	for (auto i : goods)
 	{
 		if (i.getWeightOfAllGoods() >= min && i.getWeightOfAllGoods() <= max)
 		{
 			std::cout << i;
+			ind = true;
+			break;
 		}
 	}
-
+	if (ind != true)
 	std::cout << "No goods in this range\n";
 }
 
 
-
-
+//show full info about all goods
 void Store::showAllGoods()
 {
 	for (int i = 0; i < goods.size(); i++)
@@ -222,6 +238,14 @@ void Store::showAllGoods()
 	}
 }
 
+//show all goods by names
+void Store::showAllGoodsByName()
+{
+	for (int i = 0; i < goods.size(); i++)
+	{
+		std::cout < goods.at(i);
+	}
+}
 
 
 
@@ -239,11 +263,9 @@ void Store::showStoreState()
 
 
 
-
-
 void showMenu()
 {
-	//system("cls");
+	system("cls");
 	std::cout << "1. Show all goods\n";
 	std::cout << "2. Sort by good name\n";
 	std::cout << "3. Sort by number of goods\n";

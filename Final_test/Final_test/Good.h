@@ -12,12 +12,12 @@ private:
 	int number;
 	float weight;
 
-public:
-	//удален конструктор по умолчанию, поскольку товар без данных быть не может 
-	virtual ~Good(); //деструктор определен виртуальным чтобы в функции чтения из файла класса Стор правильно освобождалась память
-
+public: 
+	
 	Good(std::string gName, int gNumber, float gWeight);
+
 	friend std::ostream& operator<<(std::ostream& os, const Good& t);
+	friend std::ostream& operator<(std::ostream& os, const Good& t);
 
 	std::string getName();
 	int getNumber();
@@ -25,6 +25,8 @@ public:
 	float getWeightOfAllGoods();
 
 	void reduceQuantityGood(int count);
+
+	virtual ~Good(); //the destructor is defined as virtual so that the memory is correctly freed in the function of reading from the file of the class Store
 };
 
 
@@ -35,11 +37,11 @@ private:
 	std::vector<Good> goods;
 	bool isAvailable;
 
-	//это функция помощник, которая вызывается в конструкторе и считывает данные из файла
+	//this is a helper function that is called in the constructor and reads data from the file
 	void readDataFromFile(std::ifstream& dataFile);
 
 public:
-	Store(std::ifstream& dataFile); //тут мы считываем данные из файла в класс
+	Store(std::ifstream& dataFile); //read data from file to class
 	
 	void sortByName();
 	void sortByNumber();
@@ -50,13 +52,12 @@ public:
 	void showBySingleGoodWeight(float min, float max);
 	void showByAllGoodsWeight(float min, float max);
 	void showAllGoods();
+	void showAllGoodsByName();
 
 	void showStoreState();
 	bool tryBuyGood(std::string name, int count);
 	
-	~Store(); //тут мы создаем файл и записываем данные из класса в файл
-
+	~Store(); //create a file and write the data from the class to the file
 };
-
 
 void showMenu();

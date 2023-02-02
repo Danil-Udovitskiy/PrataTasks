@@ -10,56 +10,136 @@ int main()
 	//text file for input (pre-created)
 	std::string first = "StoreInfo.txt";
 
-	//text file for output
-	std::string second = "StoreInfoUpdated.txt";
-
-	//open files
+	//open file
 	std::ifstream fin; //create an ifstream object
 	fin.open(first);
 
+	Store obj(fin);
 
-	Store obbj(fin);
-	obbj.showAllGoods();
+	bool work = true;
 
-	obbj.sortByName();
-	std::cout << "\nsort name\n";
-	obbj.showAllGoods();
+	while (work)
+	{
+		showMenu();
 
-	obbj.sortByNumber();
-	std::cout << "\nsort number\n";
-	obbj.showAllGoods();
+		int choice;
+		std::cout << "\nEnter your operation:\n";
+		std::cin >> choice;
 
-	obbj.sortBySingleGoodWeight();
-	std::cout << "\nsort single weight\n";
-	obbj.showAllGoods();
+		system("cls");
 
-	obbj.sortByAllGoodsWeight();
-	std::cout << "\nsort all weight\n";
-	obbj.showAllGoods();
+		switch (choice)
+		{
+		case 1:
+		{
+			obj.showAllGoodsByName();
+			system("pause");
+			break;
+		}
+		case 2:
+		{
+			obj.sortByName();
+			obj.showAllGoods();
+			system("pause");
+			break;
+		}
+		case 3:
+		{
+			obj.sortByNumber();
+			obj.showAllGoods();
+			system("pause");
+			break;
+		}
+		case 4:
+		{
+			obj.sortBySingleGoodWeight();
+			obj.showAllGoods();
+			system("pause");
+			break;
+		}
+		case 5:
+		{
+			obj.sortByAllGoodsWeight();
+			obj.showAllGoods();
+			system("pause");
+			break;
+		}
+		case 6:
+		{
+			std::string name;
+			std::cout << "Enter name :";
+			std::cin >> name;
+			obj.showByName(name);
+			system("pause");
+			break;
+		}
+		case 7:
+		{
+			int min = 0, max = 0;
+			std::cout << "Enter min and max numbers :";
+			std::cin >> min >> max;
+			obj.showByNumber(min, max);
+			system("pause");
+			break;
+		}
+		case 8:
+		{
+			float min = 0, max = 0;
+			std::cout << "Enter min and max single weight :";
+			std::cin >> min >> max;
+			obj.showBySingleGoodWeight(min, max);
+			system("pause");
+			break;
+		}
+		case 9:
+		{
+			float min = 0, max = 0;
+			std::cout << "Enter min and max total weights :";
+			std::cin >> min >> max;
+			obj.showByAllGoodsWeight(min, max);
+			system("pause");
+			break;
+		}
+		case 10:
+		{
+			obj.showAllGoods();
+			system("pause");
+			break;
+		}
+		case 11:
+		{
+			obj.showStoreState();
+			system("pause");
+			break;
+		}
+		case 12:
+		{
+			std::string name;
+			std::cout << "Enter name of good :";
+			std::cin >> name;
+			int number;
+			std::cout << "Enter number of good :";
+			std::cin >> number;
 
-	std::cout << "\nshow by name\n";
-	obbj.showByName("gggg"); //Banana
+			obj.tryBuyGood(name, number);
+			system("pause");
+			break;
+		}
+		case 13:
+		{
+			work = false;
+			break;
+		}
+		default:
+		{
+			std::cout << "Error choice\nPress enter to continue\n";
+			std::cin.ignore();
+			getchar();
+			break;
+		}
+		}
 
-	std::cout << "\nshow by number\n";
-	obbj.showByNumber(1, 2);
-
-	std::cout << "\nshow by weight\n";
-	obbj.showBySingleGoodWeight(120, 300);
-
-	std::cout << "\nshow by all weight\n";
-	obbj.showByAllGoodsWeight(117, 200);
-
-	
-	std::cout << "\nshow menu\n";
-	showMenu();
-
-	std::cout << "\nshow store state\n";
-	obbj.showStoreState();
-
-	std::cout << "\ntry buy good\n";
-	obbj.tryBuyGood("Banana", 6);
-	obbj.tryBuyGood("Banana", 5);
-	obbj.showAllGoods();
+	}
 
 }
 
