@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sum_in_loop(CodeAbbey)", "Sum_in_loop(CodeAbbey)\Sum_in_loop(CodeAbbey).vcxproj", "{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Debug|x64.ActiveCfg = Debug|x64
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Debug|x64.Build.0 = Debug|x64
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Debug|x86.ActiveCfg = Debug|Win32
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Debug|x86.Build.0 = Debug|Win32
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Release|x64.ActiveCfg = Release|x64
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Release|x64.Build.0 = Release|x64
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Release|x86.ActiveCfg = Release|Win32
+		{B2202BEC-DF8C-46DD-A691-26D8F6E105F2}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D480B64-03BB-4A74-B462-45AA8D42892B}
+	EndGlobalSection
+EndGlobal

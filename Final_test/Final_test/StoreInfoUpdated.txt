@@ -1,7 +1,3 @@
-Name - Cheese
-Number - 1
-Weight - 117
-
 Name - Banana
 Number - 5
 Weight - 120
@@ -9,4 +5,8 @@ Weight - 120
 Name - Orange
 Number - 11
 Weight - 231
+
+Name - Cheese
+Number - 1
+Weight - 117
 
