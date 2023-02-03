@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ca257438-1f86-4ebe-beb5-8726004c17e8}</ProjectGuid>
-    <RootNamespace>Finaltest</RootNamespace>
+    <ProjectGuid>{9b3d82ad-b91a-451e-af75-bf561f85a63e}</ProjectGuid>
+    <RootNamespace>FinalTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Final_test.cpp" />
+    <ClCompile Include="Final_Test.cpp" />
     <ClCompile Include="Good.cpp" />
   </ItemGroup>
   <ItemGroup>

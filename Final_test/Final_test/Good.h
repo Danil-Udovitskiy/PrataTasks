@@ -12,8 +12,8 @@ private:
 	int number;
 	float weight;
 
-public: 
-	
+public:
+
 	Good(std::string gName, int gNumber, float gWeight);
 
 	friend std::ostream& operator<<(std::ostream& os, const Good& t);
@@ -42,7 +42,7 @@ private:
 
 public:
 	Store(std::ifstream& dataFile); //read data from file to class
-	
+
 	void sortByName();
 	void sortByNumber();
 	void sortBySingleGoodWeight();
@@ -56,7 +56,7 @@ public:
 
 	void showStoreState();
 	bool tryBuyGood(std::string name, int count);
-	
+
 	~Store(); //create a file and write the data from the class to the file
 };
 

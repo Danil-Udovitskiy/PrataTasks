@@ -1,4 +1,4 @@
-﻿#include "Good.h"
+#include "Good.h"
 
 
 Good::Good(std::string gName, int gNumber, float gWeight) //constructor with arguments
@@ -39,7 +39,7 @@ int Good::getNumber() //number
 float Good::getWeight() //weight
 {
 	//return weight; //total weight of all units of one product
-	return weight/ number; //weight of one unit of one product
+	return weight / number; //weight of one unit of one product
 }
 
 float Good::getWeightOfAllGoods()
@@ -118,7 +118,7 @@ Store::~Store()
 	if (fout.is_open())
 	{
 		//std::cout << "FILE OPEN\n";
-		
+
 		for (int i = 0; i < goods.size(); i++)
 		{
 			fout << goods.at(i) << "\n";
@@ -173,8 +173,8 @@ void Store::showByName(std::string name)
 			break;
 		}
 	}
-	if(ind != true)
-	std::cout << "No good with this name\n";
+	if (ind != true)
+		std::cout << "No good with this name\n";
 }
 
 
@@ -191,7 +191,7 @@ void Store::showByNumber(int min, int max)
 		}
 	}
 	if (ind != true)
-	std::cout << "No goods in this range\n";
+		std::cout << "No goods in this range\n";
 }
 
 
@@ -208,7 +208,7 @@ void Store::showBySingleGoodWeight(float min, float max)
 		}
 	}
 	if (ind != true)
-	std::cout << "No goods in this range\n";
+		std::cout << "No goods in this range\n";
 }
 
 
@@ -225,7 +225,7 @@ void Store::showByAllGoodsWeight(float min, float max)
 		}
 	}
 	if (ind != true)
-	std::cout << "No goods in this range\n";
+		std::cout << "No goods in this range\n";
 }
 
 
@@ -284,7 +284,7 @@ void showMenu()
 
 bool Store::tryBuyGood(std::string name, int count)
 {
-	for (auto &i : goods)
+	for (auto& i : goods)
 	{
 		if (i.getName() == name && i.getNumber() >= count && isAvailable == true)
 		{
