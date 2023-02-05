@@ -5,34 +5,41 @@
 
 int main()
 {
-	
-	//int size = 0;
-	double size = 0.0;
+	int size = 0;
+	int number = 0;
+	double avarage = 0.0;
+
 	std::cout << "Enter number of values : ";
 	std::cin >> size;
 
-	std::vector<int> vec(size);
-	//vec.resize(size);
+	std::vector<int>results;
 
-
-	int number = 0;
-	std::cout << "Enter numbers : ";
-	for (int i = 0; i < vec.size(); i++)
+	for (int i = 0; i < size; i++)
 	{
-		std::cin >> number;
-		vec[i] = number;
+		std::vector<int> vec;
+		std::cout << "Enter numbers separated by spaces:\n";
+		while (std::cin >> number)
+		{
+			vec.push_back(number);
+			if (std::cin.get() == '\n')
+				break;
+		}
+
+		double sum = 0.0;
+		for (int i = 0; i < vec.size(); i++)
+		{
+			sum = sum + vec[i];
+		}
+
+		avarage = sum / (vec.size()-1);
+
+		results.push_back(round(avarage));
 	}
 
-
-	//int sum = 0;
-	double sum = 0.0;
-	for (int i = 0; i < vec.size(); i++)
+	for (int i = 0; i < results.size(); i++)
 	{
-		sum = sum + vec[i];
+		std::cout << results[i] << " ";
 	}
 
-
-	double avarage = sum / size;
-	std::cout << "avarage = " << round(avarage) << "\n";
+	std::cout << "\n";
 }
-
