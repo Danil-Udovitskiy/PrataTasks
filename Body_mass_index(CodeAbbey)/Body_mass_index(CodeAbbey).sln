@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Body_mass_index(CodeAbbey)", "Body_mass_index(CodeAbbey)\Body_mass_index(CodeAbbey).vcxproj", "{E797DC99-DD40-4291-A582-3FA0DC662546}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Debug|x64.ActiveCfg = Debug|x64
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Debug|x64.Build.0 = Debug|x64
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Debug|x86.ActiveCfg = Debug|Win32
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Debug|x86.Build.0 = Debug|Win32
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Release|x64.ActiveCfg = Release|x64
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Release|x64.Build.0 = Release|x64
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Release|x86.ActiveCfg = Release|Win32
+		{E797DC99-DD40-4291-A582-3FA0DC662546}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95C29AB7-7AD0-4D56-B62F-62BFD43318DA}
+	EndGlobalSection
+EndGlobal
