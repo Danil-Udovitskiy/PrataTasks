@@ -15,13 +15,13 @@ int main()
 	//output 15 108
 
 	int swap = 0;
-	int move = 1;
-
+	int move = 0;
 
 	for (int i = N - 1; i > 0; i--)
 	{
-		bool ind = false;
+		move++;
 
+		bool ind = false;
 		for (int j = 0; j < i; j++)
 		{
 			if (a[j] > a[j + 1])
@@ -35,10 +35,11 @@ int main()
 				swap++;
 			}
 		}
-		if (ind == true)
+		if (ind == false)
 		{
-			move++;
+			break;
 		}
 	}
+
 	std::cout << move << " " << swap << "\n";
 }
