@@ -23,16 +23,13 @@ int main()
 		{
 			if (number % 2 == 0)
 			{
-				int even = number / 2;
-				number = even;
-				counter++;
+				number = number / 2;
 			}
 			else
 			{
-				int odd = 3 * number + 1;
-				number = odd;
-				counter++;
+				number = 3 * number + 1;
 			}
+			counter++;
 		}
 		results.push_back(counter);
 	}
