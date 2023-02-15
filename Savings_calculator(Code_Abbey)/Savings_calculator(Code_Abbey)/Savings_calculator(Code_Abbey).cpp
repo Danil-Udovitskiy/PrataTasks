@@ -27,6 +27,9 @@ int main()
         while (S < R) // increase the initial sum until we get the required (years too)
         {
             S += S * (P / 100);
+            S = static_cast<int>(S * 100); //or S = (int)(S * 100);
+            S = (S / 100);
+
             years++;
         }
         results.push_back(years);
