@@ -2,34 +2,46 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath> 
 
 int main()
 {
-    int range = 1000;
+	double number = 0;
 
+	std::vector<double>Fibonachi(2);
+	Fibonachi[0] = 0;
+	Fibonachi[1] = 1;
 
-    std::vector<double>Fibonachi(2);
-    Fibonachi[0] = 0;
-    Fibonachi[1] = 1;
+	for (int i = 2; i < 1000; i++)
+	{
+		number = (Fibonachi[i - 2] + Fibonachi[i - 1]);
+		Fibonachi.push_back(number);
+	}
 
-    double number = 0;
+	double value = 0.0;
+	int size = 0;
+	std::vector<int>Indexes;
 
-    for (int i = 2; i < 100; i++)
-    {
-        number = (Fibonachi[i - 2] + Fibonachi[i - 1]);
-        Fibonachi.push_back(number);
-    }
+	std::cout << "Enter size : ";
+	std::cin >> size;
 
-    double value = 0.0;
-    std::cout << "Enter value : "; //2111485077978050 test data from 16 symbols max
-    std::cin >> value;
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << "Enter value : ";
+		std::cin >> value;
 
-    for (int i = 0; i < Fibonachi.size(); i++)
-    {
-        if (value == Fibonachi[i])
-        {
-            std::cout << "index of value = " << i << " ";
-            break;
-        }
-    }
+		for (int i = 0; i < Fibonachi.size(); i++)
+		{
+			if (std::abs(value - Fibonachi[i]) <= value * 0.00001)
+			{
+				Indexes.push_back(i);
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < Indexes.size(); i++)
+	{
+		std::cout << Indexes[i] << " ";
+	}
 }
