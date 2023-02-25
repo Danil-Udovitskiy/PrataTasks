@@ -3,6 +3,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <iomanip>
 
 double radians(double X);
 
@@ -37,17 +38,13 @@ int main()
 
         double angleBСD = 180 - (angleCDB + angleB);
 
-
         //length of the hypotenuse
-
         double AC = D1 * (std::sin(radians(angleABC)) / std::sin(radians(angleACB)));
 
-        std::cout << AC << "\n";
-
-
         //leg length (distance D1+D2)
+        double SinA = std::sin(radians(angleA));
 
-        double AB = AC * std::sin(radians(angleA));
+        double AB = round(AC * SinA);
 
         results.push_back(AB);
     }
@@ -60,5 +57,5 @@ int main()
 
 double radians(double X)
 {
-  return(X * 3.14) / 180;
+  return(X * 3.1415926535897932384626433832795) / 180.0;
 }
