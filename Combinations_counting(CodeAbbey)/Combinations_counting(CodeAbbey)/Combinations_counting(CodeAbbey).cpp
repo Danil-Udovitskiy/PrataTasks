@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-unsigned long long Fact(unsigned long long N)
+double Fact(double N)
 {
     if (N == 0)
     {
@@ -18,7 +18,7 @@ unsigned long long Fact(unsigned long long N)
 
 int main()
 {
-    std::vector<int>results;
+    std::vector<double>results;
 
     int size = 0;
     std::cout << "Enter size : ";
@@ -26,17 +26,17 @@ int main()
 
     for (int i = 0; i < size; i++)
     {
-        long long N = 0;
+        double N = 0;
         std::cout << "Enter N :";
         std::cin >> N;
 
-        long long K = 0;
+        double K = 0;
         std::cout << "Enter K :";
         std::cin >> K;
 
         double c = Fact(N) / (Fact(N - K));
 
-        int result = round(c / 2);
+        double result = round(c / 2);
 
         results.push_back(result);
     }
