@@ -13,8 +13,14 @@ int main()
 
 	std::vector<int>total_results;
 
+	int counterA;//счетxик А
+
+	std::vector<int>numbersOfA;
+
 	for (int i = 0; i < size; i++)
 	{
+		counterA = 0;
+
 		std::cout << "enter text : ";
 		std::string str;
 		std::getline(std::cin, str);
@@ -72,20 +78,28 @@ int main()
 				results.push_back(a);
 			}
 
+			sum += a; //плюсую все кроме А символа 
 
 			//1 or 11
-			if (str[i] == 'A' && sum > 10)
+			/*if (str[i] == 'A' && sum > 10)
 			{
 				a = 1;
 				results.push_back(a);
+				counterA++;
 			}
 			else if (str[i] == 'A' && sum < 11)
 			{
 				a = 11;
 				results.push_back(a);
+				counterA++;
+			}*/
+
+			if (str[i] == 'A')
+			{
+				counterA++;
 			}
 
-			sum += a;
+			numbersOfA.push_back(counterA);
 		}
 
 		int sum2 = 0;
@@ -98,15 +112,67 @@ int main()
 		total_results.push_back(sum2);
 	}
 
+	//std::cout << "Total a = " << counterA << "\n";
+
 	for (int i = 0; i < total_results.size(); i++)
 	{
-		if (total_results[i] > 21)
+		/*if (total_results[i] > 20 && counterA == 1)
+		{
+			std::cout << total_results[i]-10 << " ";
+		}
+		else if (total_results[i] > 21)
 		{
 			std::cout << "Bust ";
 		}
 		else
 		{
 			std::cout << total_results[i] << " ";
+		}*/
+
+		//1 блок
+		if (total_results[i] < 21 && (numbersOfA[i] == 0 || numbersOfA[i] == 1))
+		{
+			std::cout << total_results[i] + 1 << " ";
+		}
+		else if (total_results[i] < 11 && numbersOfA[i] == 1)
+		{
+			std::cout << total_results[i] + 11 << " ";
+		}
+
+		//2 блок
+		else if (total_results[i] < 20 && numbersOfA[i] == 2)
+		{
+			std::cout << total_results[i] + 2 << " ";
+		}
+		else if (total_results[i] < 10 && numbersOfA[i] == 2)
+		{
+			std::cout << total_results[i] + 12 << " ";
+		}
+
+		//3 блок
+		else if (total_results[i] < 19 && numbersOfA[i] == 3)
+		{
+			std::cout << total_results[i] + 3 << " ";
+		}
+		else if (total_results[i] < 9 && numbersOfA[i] == 3)
+		{
+			std::cout << total_results[i] + 13 << " ";
+		}
+
+		//3 блок
+		else if (total_results[i] < 18 && numbersOfA[i] == 4)
+		{
+			std::cout << total_results[i] + 4 << " ";
+		}
+		else if (total_results[i] < 8 && numbersOfA[i] == 4)
+		{
+			std::cout << total_results[i] + 14 << " ";
+		}
+
+		//4 блок
+		else if (total_results[i] > 21)
+		{
+			std::cout << "Bust ";
 		}
 	}
 }
