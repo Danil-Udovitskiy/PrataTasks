@@ -2,14 +2,20 @@
 
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include <ios>
+
+
 
 double Fact(double N)
 {
-    if (N == 0)
+    //if(std::abs(N) <= N * 0.00001)
+    if (N == 0.0)
     {
         return  0;
     }
-    if (N == 1)
+    //if (std::abs(N) <= N * 1.00001)
+    if (N == 1.0)
     {
         return  1;
     }
@@ -43,6 +49,7 @@ int main()
 
     for (int i = 0; i < results.size(); i++)
     {
-        std::cout << results[i] << " ";
+        std::cout.setf(std::ios_base::fixed);
+        std::cout << std::setprecision(0) << results[i] << " "; 
     }
 }
