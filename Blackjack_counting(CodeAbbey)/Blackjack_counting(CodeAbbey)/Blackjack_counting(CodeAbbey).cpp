@@ -88,14 +88,7 @@ int main()
 
 		numbersOfA.push_back(counterA);
 
-		int sum2 = 0;
-
-		for (int i = 0; i < results.size(); i++)
-		{
-			sum2 += results[i];
-		}
-
-		total_results.push_back(sum2);
+		total_results.push_back(sum);
 	}
 
 	for (int i = 0; i < total_results.size(); i++)
@@ -105,9 +98,9 @@ int main()
 		{
 			std::cout << total_results[i] + 11 << " ";
 		}
-		else if (total_results[i] < 21 && (numbersOfA[i] == 0 || numbersOfA[i] == 1))
+		else if (total_results[i] < 22 && (numbersOfA[i] == 0 || numbersOfA[i] == 1))
 		{
-			if (numbersOfA[i] == 1)
+			if (total_results[i] < 21 && numbersOfA[i] == 1)
 				std::cout << total_results[i] + 1 << " ";
 			else
 				std::cout << total_results[i] << " ";
