@@ -19,13 +19,42 @@ int main()
         //std::cout << "enter words :";
         std::getline(std::cin, str);
 
-        int value2 = -2;
+        std::string temp;
 
-        std::string temp = str.substr(value2 + str.size(), str.size());
+        for (int i = 0; i < str.size(); i++)
+        {
+            if (str[i] == ' ')
+            {
+                continue;
+            }
+            else
+            {
+                temp.push_back(str[i]);
+            }
+        }
 
+        int first = 0;
+        int second = 0;
         int winner = 0;
 
-        if ((temp[0] == 'R' && temp[1] == 'S') || (temp[0] == 'S' && temp[1] == 'P') || (temp[0] == 'P' && temp[1] == 'R'))
+        for (int i = 0; i < temp.size(); i += 2)
+        {
+            if (temp[i] == temp[i + 1])
+            {
+                continue;
+            }
+
+            if ((temp[i] == 'R' && temp[i + 1] == 'S') || (temp[i] == 'S' && temp[i + 1] == 'P') || (temp[i] == 'P' && temp[i + 1] == 'R'))
+            {
+                first++;
+            }
+            else
+            {
+                second++;
+            }
+        }
+
+        if (first > second)
         {
             winner = 1;
         }
@@ -42,65 +71,3 @@ int main()
         std::cout << results[i] << " ";
     }
 }
-
-
-
-
-
-
-
-//With draws
-
-/*
-#include <iostream>
-#include <vector>
-#include <string>
-
-int main()
-{
-    int size = 0;
-    std::cout << "Enter size : ";
-    std::cin >> size;
-    std::cin.ignore();
-
-    std::vector <int>results;
-
-    for (int i = 0; i < size; i++)
-    {
-        std::string str;
-        //std::cout << "enter words :";
-        std::getline(std::cin, str);
-
-        int value2 = -2;
-
-        std::string temp = str.substr(value2 + str.size(), str.size());
-
-        int winner = 0;
-
-        if ((temp[0] == 'R' && temp[1] == 'S') || (temp[0] == 'S' && temp[1] == 'P') || (temp[0] == 'P' && temp[1] == 'R'))
-        {
-            winner = 1;
-        }
-        else if (((temp[0] == 'R' && temp[1] == 'R') || (temp[0] == 'S' && temp[1] == 'S') || (temp[0] == 'P' && temp[1] == 'P')))
-        {
-            winner = 0;
-        }
-        else
-        {
-            winner = 2;
-        }
-        results.push_back(winner);
-    }
-
-    for (int i = 0; i < results.size(); i++)
-    {
-        if (results[i] == 0)
-        {
-            std::cout << "DRAW ";
-        }
-        else
-        {
-            std::cout << results[i] << " ";
-        }
-    }
-}*/
