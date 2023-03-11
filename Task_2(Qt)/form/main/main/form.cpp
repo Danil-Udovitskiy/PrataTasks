@@ -16,7 +16,6 @@ Form::Form(QWidget* parent) : QDialog(parent)
     lineEdit1->setFixedWidth(300);
     QRegExp regExp1( "[A-Za-z]+" );
     lineEdit1->setValidator(new QRegExpValidator(regExp1, this ));
-    label1->setBuddy(lineEdit1);
 
     //Second name
     label2 = new QLabel(tr("Second name:"));
@@ -24,7 +23,6 @@ Form::Form(QWidget* parent) : QDialog(parent)
     lineEdit2 = new QLineEdit;
     lineEdit2->setFixedWidth(300);
     lineEdit2->setValidator(new QRegExpValidator(regExp1, this ));
-    label2->setBuddy(lineEdit2);
 
     //Age
     label3 = new QLabel(tr("Age:"));
@@ -33,7 +31,6 @@ Form::Form(QWidget* parent) : QDialog(parent)
     lineEdit3->setFixedWidth(300);
     QRegExp regExp2("[0-9]{1,2}");
     lineEdit3->setValidator(new QRegExpValidator(regExp2, this ));
-    label3->setBuddy(lineEdit3);
 
     //Hobbies
     label4 = new QLabel(tr("Hobbies:"));
