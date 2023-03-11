@@ -6,34 +6,42 @@
 #include <QFile>
 #include <QTextStream>
 
+
 Form::Form(QWidget* parent) : QDialog(parent)
 {
     //Name
     label1 = new QLabel(tr("First name:"));
+    label1->setFixedWidth(100);
     lineEdit1 = new QLineEdit;
+    lineEdit1->setFixedWidth(300);
     QRegExp regExp1( "[A-Za-z]+" );
     lineEdit1->setValidator(new QRegExpValidator(regExp1, this ));
     label1->setBuddy(lineEdit1);
 
     //Second name
     label2 = new QLabel(tr("Second name:"));
+    label2->setFixedWidth(100);
     lineEdit2 = new QLineEdit;
+    lineEdit2->setFixedWidth(300);
     lineEdit2->setValidator(new QRegExpValidator(regExp1, this ));
     label2->setBuddy(lineEdit2);
 
     //Age
     label3 = new QLabel(tr("Age:"));
+    label1->setFixedWidth(100);
     lineEdit3 = new QLineEdit;
-    QRegExp regExp2( "[0-9]{2}" );
+    lineEdit3->setFixedWidth(300);
+    QRegExp regExp2("[0-9]{1,2}");
     lineEdit3->setValidator(new QRegExpValidator(regExp2, this ));
     label3->setBuddy(lineEdit3);
 
     //Hobbies
     label4 = new QLabel(tr("Hobbies:"));
-    lineEdit4 = new QLineEdit;
-    QRegExp regExp3( "[A-Za-z, ]+" );
-    lineEdit4->setValidator(new QRegExpValidator(regExp3, this ));
-    label4->setBuddy(lineEdit4);
+    label4->setFixedWidth(100);
+    textEdit = new MyTextEdit;
+    textEdit->setFixedWidth(300);
+    textEdit->setWordWrapMode(QTextOption::WrapAnywhere);
+    textEdit->setAlignment(Qt::AlignLeft);
 
     //button
     saveButton = new QPushButton(tr("Save"));
@@ -54,8 +62,7 @@ Form::Form(QWidget* parent) : QDialog(parent)
 
     QHBoxLayout* Layout4 = new QHBoxLayout;
     Layout4->addWidget(label4);
-    Layout4->addWidget(lineEdit4);
-
+    Layout4->addWidget(textEdit);
 
     QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->addLayout(Layout1);
@@ -80,19 +87,16 @@ void Form::saveClicked()
 
 void Form::Write()
 {
-    QTextStream out(stdout);
-
-    QString filename =QFileDialog::getSaveFileName(this, tr("Save File"), " ", tr("Text Files (*.txt);"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), " ", tr("Text Files (*.txt);"));
     QFile file(filename);
 
     if (file.open(QIODevice::WriteOnly))
     {
         QTextStream out(&file);
-
         out<<label1->text()<<lineEdit1->text()<<"\n";
         out<<label2->text()<<lineEdit2->text()<<"\n";
         out<<label3->text()<<lineEdit3->text()<<"\n";
-        out<<label4->text()<<lineEdit4->text()<<"\n";
+        out<<label4->text()<<textEdit->toPlainText()<<"\n";
     }
     else
     {
@@ -104,5 +108,5 @@ void Form::Write()
     lineEdit1->clear();
     lineEdit2->clear();
     lineEdit3->clear();
-    lineEdit4->clear();
+    textEdit->clear();
 }

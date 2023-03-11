@@ -3,10 +3,34 @@
 
 #include <QDialog>
 #include <QFileDialog>
-
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTextEdit>
+
+#include <QKeyEvent>
+
+class MyTextEdit : public QTextEdit
+{
+public:
+    MyTextEdit(QWidget *parent = 0) : QTextEdit(parent) {};
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override
+    {
+        if (event->key() == Qt::Key_Comma || event->key() == Qt::Key_Space ||(event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z))
+        {
+            QTextEdit::keyPressEvent(event);
+        }
+        else
+        {
+            event->ignore();
+        }
+    }
+};
+
+
+
 
 class Form : public QDialog
 {
@@ -33,7 +57,7 @@ private:
     QLineEdit* lineEdit3;
 
     QLabel* label4;
-    QLineEdit* lineEdit4;
+    MyTextEdit * textEdit;
 
     QPushButton* saveButton;
 };
