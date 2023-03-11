@@ -4,47 +4,47 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFile>
+#include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
+
 
 
 Read::Read(QWidget* parent) : QDialog(parent)
 {
     //Name
     label1 = new QLabel(tr("First name:"));
+    label1->setFixedWidth(100);
     lineEdit1 = new QLineEdit;
-    //QRegExp regExp1( "[A-Za-z]+" );
-    //QRegExp regExp1("");
-    //lineEdit1->setValidator(new QRegExpValidator(regExp1, this ));
+    lineEdit1->setFixedWidth(300);
     lineEdit1->setReadOnly(true);
-    label1->setBuddy(lineEdit1);
+
 
     //Second name
     label2 = new QLabel(tr("Second name:"));
+    label2->setFixedWidth(100);
     lineEdit2 = new QLineEdit;
-    //lineEdit2->setValidator(new QRegExpValidator(regExp1, this ));
+    lineEdit2->setFixedWidth(300);
     lineEdit2->setReadOnly(true);
-    label2->setBuddy(lineEdit2);
 
     //Age
     label3 = new QLabel(tr("Age:"));
+    label3->setFixedWidth(100);
     lineEdit3 = new QLineEdit;
-    //QRegExp regExp2( "[0-9]{2}" );
-    //lineEdit3->setValidator(new QRegExpValidator(regExp2, this ));
+    lineEdit3->setFixedWidth(300);
     lineEdit3->setReadOnly(true);
-    label3->setBuddy(lineEdit3);
 
     //Hobbies
     label4 = new QLabel(tr("Hobbies:"));
-    lineEdit4 = new QLineEdit;
-    //QRegExp regExp3( "[A-Za-z, ]+" );
-    //lineEdit4->setValidator(new QRegExpValidator(regExp3, this ));
-    lineEdit4->setReadOnly(true);
-    label4->setBuddy(lineEdit4);
+    label4->setFixedWidth(100);
+    //textEdit = new MyTextEdit;
+    textEdit = new QTextEdit;
+    textEdit->setFixedWidth(300);
+    textEdit->setReadOnly(true);
 
     //button
-    saveButton = new QPushButton(tr("Read"));
-    connect(saveButton, SIGNAL(clicked()), this, SLOT(saveClicked()));
+    readButton = new QPushButton(tr("Read"));
+    connect(readButton, SIGNAL(clicked()), this, SLOT(readClicked()));
 
     //Layouts
     QHBoxLayout* Layout1 = new QHBoxLayout;
@@ -61,15 +61,14 @@ Read::Read(QWidget* parent) : QDialog(parent)
 
     QHBoxLayout* Layout4 = new QHBoxLayout;
     Layout4->addWidget(label4);
-    Layout4->addWidget(lineEdit4);
-
+    Layout4->addWidget(textEdit);
 
     QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->addLayout(Layout1);
     mainLayout->addLayout(Layout2);
     mainLayout->addLayout(Layout3);
     mainLayout->addLayout(Layout4);
-    mainLayout->addWidget(saveButton);
+    mainLayout->addWidget(readButton);
     setLayout(mainLayout);
 
     //Window name + size
@@ -79,17 +78,15 @@ Read::Read(QWidget* parent) : QDialog(parent)
 }
 
 
-void Read::saveClicked()
+void Read::readClicked()
 {
-    Write();
+    readFromFile();
 }
 
 
-void Read::Write()
-{
-    QTextStream out(stdout);
-
-    QString filename =QFileDialog::getOpenFileName(this, tr("Open File"), " ", tr("Text Files (*.txt);"));
+void Read::readFromFile()
+{    
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), " ", tr("Text Files (*.txt);"));
     QFile file(filename);
 
     if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
@@ -101,10 +98,24 @@ void Read::Write()
 
     while (!in.atEnd())
     {
-       QString line = in.readLine();
        QString word;
+       QString line;
 
-       word = line.section(':', 1);
+       //1 block
+       line = in.readLine();
+
+       if (line.startsWith("First name:"))
+       {
+           word = line.section(':', 1);
+           //label1->setText(word);
+       }
+       else
+       {
+           Clear();
+           QMessageBox::warning(this,"Error","Incorrect file! (label1)");
+           break;
+       }
+
        QRegExp regExp1("[A-Za-z]+");
        if (regExp1.exactMatch(word))
        {
@@ -113,11 +124,27 @@ void Read::Write()
        else
        {
            Clear();
-           QMessageBox::warning(this,"Error","Incorrect file!");
+           QMessageBox::warning(this,"Error","Incorrect file! (lineEdit1)");
            break;
        }
 
+
+
+       //2 block
        line = in.readLine();
+
+       if (line.startsWith("Second name:"))
+       {
+           word = line.section(':', 1);
+           //label2->setText(word);
+       }
+       else
+       {
+           Clear();
+           QMessageBox::warning(this,"Error","Incorrect file! (label2)");
+           break;
+       }
+
        word = line.section(':', 1);
        if (regExp1.exactMatch(word))
        {
@@ -126,13 +153,30 @@ void Read::Write()
        else
        {
            Clear();
-           QMessageBox::warning(this,"Error","Incorrect file!");
+           QMessageBox::warning(this,"Error","Incorrect file! (lineEdit2)");
            break;
        }
 
+
+
+       //3 block
        line = in.readLine();
+
+       if (line.startsWith("Age:"))
+       {
+           word = line.section(':', 1);
+           //label3->setText(word);
+       }
+
+       else
+       {
+           Clear();
+           QMessageBox::warning(this,"Error","Incorrect file! (label3)");
+           break;
+       }
+
        word = line.section(':', 1);
-       QRegExp regExp2( "[0-9]{2}" );
+       QRegExp regExp2( "[0-9]{1,2}" );
        if (regExp2.exactMatch(word))
        {
           lineEdit3->setText(word);
@@ -140,21 +184,38 @@ void Read::Write()
        else
        {
            Clear();
-           QMessageBox::warning(this,"Error","Incorrect file!");
+           QMessageBox::warning(this,"Error","Incorrect file! (lineEdit3)");
            break;
        }
 
+
+
+       //4 block
        line = in.readLine();
+
+       if (line.startsWith("Hobbies:"))
+       {
+           word = line.section(':', 1);
+           //label4->setText(word);
+       }
+
+       else
+       {
+           Clear();
+           QMessageBox::warning(this,"Error","Incorrect file! (label4)");
+           break;
+       }
+
        word = line.section(':', 1);
        QRegExp regExp3( "[A-Za-z, ]+" );
        if (regExp3.exactMatch(word))
        {
-          lineEdit4->setText(word);
+           textEdit->setText(word);
        }
        else
        {
            Clear();
-           QMessageBox::warning(this,"Error","Incorrect file!");
+           QMessageBox::warning(this,"Error","Incorrect file! (textEdit)");
            break;
 
        }
@@ -169,5 +230,5 @@ void Read::Clear()
     lineEdit1->clear();
     lineEdit2->clear();
     lineEdit3->clear();
-    lineEdit4->clear();
+    textEdit->clear();
 }

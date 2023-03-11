@@ -2,10 +2,11 @@
 #define READ_H
 
 #include <QDialog>
-#include <QFileDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTextEdit>
+
 
 class Read : public QDialog
 {
@@ -14,12 +15,12 @@ class Read : public QDialog
 public:
 
     Read(QWidget* parent = 0);
-    void Write();
+    void readFromFile();
     void Clear();
 
 private slots:
 
-    void saveClicked();
+    void readClicked();
 
 private:
 
@@ -33,9 +34,9 @@ private:
     QLineEdit* lineEdit3;
 
     QLabel* label4;
-    QLineEdit* lineEdit4;
+    QTextEdit* textEdit;
 
-    QPushButton* saveButton;
+    QPushButton* readButton;
 };
 
 #endif
