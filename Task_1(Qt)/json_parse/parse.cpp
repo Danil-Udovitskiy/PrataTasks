@@ -8,54 +8,88 @@
 #include <QStringList>
 #include "parse.h"
 
-ResultWindow::ResultWindow(QWidget *parent,QString str): QWidget(parent)
+
+ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
 {
-
     firstName = new QLabel(tr("First users name:"));
-    firstName->setFixedWidth(100);
-
     secondName = new QLabel(tr("Second users name:"));
-    secondName->setFixedWidth(100);
-
     age = new QLabel(tr("Users age:"));
-    age->setFixedWidth(100);
-
     fathersName = new QLabel(tr("Fathers name:"));
-    fathersName->setFixedWidth(100);
-
     fathersAge = new QLabel(tr("Fathers age:"));
-    fathersAge->setFixedWidth(100);
-
     fathersWeight = new QLabel(tr("Fathers weight:"));
-    fathersWeight->setFixedWidth(100);
-
     mothersName = new QLabel(tr("Mothers name:"));
-    mothersName->setFixedWidth(100);
-
     mothersAge = new QLabel(tr("Mothers age:"));
-    mothersAge->setFixedWidth(100);
-
     mothersWeight = new QLabel(tr("Mothers weight:"));
-    mothersWeight->setFixedWidth(100);
+
+    firstNamea = new QLabel;
+    secondNamea = new QLabel;
+    agea = new QLabel;
+    fathersNamea = new QLabel;
+    fathersAgea = new QLabel;
+    fathersWeighta = new QLabel;
+    mothersNamea = new QLabel;
+    mothersAgea = new QLabel;
+    mothersWeighta = new QLabel;
 
 
-    QVBoxLayout* Layout1 = new QVBoxLayout;
+
+    QHBoxLayout* Layout1 = new QHBoxLayout;
     Layout1->addWidget(firstName);
-    Layout1->addWidget(secondName);
-    Layout1->addWidget(age);
-    Layout1->addWidget(fathersName);
-    Layout1->addWidget(fathersAge);
-    Layout1->addWidget(fathersWeight);
-    Layout1->addWidget(mothersName);
-    Layout1->addWidget(mothersAge);
-    Layout1->addWidget(mothersWeight);
+    Layout1->addWidget(firstNamea);
 
+    QHBoxLayout* Layout2 = new QHBoxLayout;
+    Layout2->addWidget(secondName);
+    Layout2->addWidget(secondNamea);
+
+    QHBoxLayout* Layout3 = new QHBoxLayout;
+    Layout3->addWidget(age);
+    Layout3->addWidget(agea);
+
+    QHBoxLayout* Layout4 = new QHBoxLayout;
+    Layout4->addWidget(fathersName);
+    Layout4->addWidget(fathersNamea);
+
+    QHBoxLayout* Layout5 = new QHBoxLayout;
+    Layout5->addWidget(fathersAge);
+    Layout5->addWidget(fathersAgea);
+
+    QHBoxLayout* Layout6 = new QHBoxLayout;
+    Layout6->addWidget(fathersWeight);
+    Layout6->addWidget(fathersWeighta);
+
+    QHBoxLayout* Layout7 = new QHBoxLayout;
+    Layout7->addWidget(mothersName);
+    Layout7->addWidget(mothersNamea);
+
+    QHBoxLayout* Layout8 = new QHBoxLayout;
+    Layout8->addWidget(mothersAge);
+    Layout8->addWidget(mothersAgea);
+
+    QHBoxLayout* Layout9 = new QHBoxLayout;
+    Layout9->addWidget(mothersWeight);
+    Layout9->addWidget(mothersWeighta);
+
+
+
+
+    QVBoxLayout* LayoutVert = new QVBoxLayout;
+    LayoutVert->addLayout(Layout1);
+    LayoutVert->addLayout(Layout2);
+    LayoutVert->addLayout(Layout3);
+    LayoutVert->addLayout(Layout4);
+    LayoutVert->addLayout(Layout5);
+    LayoutVert->addLayout(Layout6);
+    LayoutVert->addLayout(Layout7);
+    LayoutVert->addLayout(Layout8);
+    LayoutVert->addLayout(Layout9);
+    LayoutVert->setAlignment(Qt::AlignLeft);
 
 
     Parse(str);
 
     QVBoxLayout* mainLayout = new QVBoxLayout;
-    mainLayout->addLayout(Layout1);
+    mainLayout->addLayout(LayoutVert);
+
     setLayout(mainLayout);
     setWindowTitle("Parsed data");
     resize(600, 400);
@@ -65,7 +99,6 @@ ResultWindow::ResultWindow(QWidget *parent,QString str): QWidget(parent)
 void ResultWindow::Parse(QString str)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
-
 
         // Check if there was an error while parsing
         if (jsonDoc.isNull())
@@ -123,7 +156,6 @@ void ResultWindow::Parse(QString str)
         QString mothersAge = QString::number(mother["Age"].toInt());
         QString mothersWeight = QString::number(mother["Weight"].toDouble());
 
-
         firstNamea->setText(firstName);
         secondNamea->setText(secondName);
         agea->setText(age);
@@ -166,8 +198,7 @@ MainWindow::MainWindow(QWidget* parent):QWidget(parent)
 
 void MainWindow::parseJson()
 {
-    ResultWindow* resultWindow = new ResultWindow;
-    //ResultWindow* resultWindow = new ResultWindow(this, jsonEdit->toPlainText());
+    ResultWindow* resultWindow = new ResultWindow(this, jsonEdit->toPlainText());
 
     // Getting the geometry of the main window
     QRect mainRect = this->geometry();
@@ -179,5 +210,5 @@ void MainWindow::parseJson()
     // Set new coordinates for resultWindow window
     resultWindow->move(resultX, resultY);
 
-    //resultWindow->show();
+    resultWindow->show();
 }

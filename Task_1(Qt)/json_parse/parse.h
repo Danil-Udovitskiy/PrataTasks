@@ -7,13 +7,14 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QString>
+#include <QDialog>
 
-class ResultWindow : public QWidget
+class ResultWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    ResultWindow(QWidget *parent = nullptr,QString str="");
+    ResultWindow(QWidget *parent,QString str);
     void Parse(QString str);
 
 private:
@@ -57,7 +58,3 @@ private:
 };
 
 #endif
-
-
-
-
