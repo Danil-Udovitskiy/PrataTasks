@@ -9,7 +9,7 @@
 #include <QSpacerItem>
 #include "parse.h"
 
-bool correctParse = false;
+static bool correctParse = false;
 
 ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
 {

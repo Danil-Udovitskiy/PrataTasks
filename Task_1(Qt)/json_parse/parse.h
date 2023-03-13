@@ -9,7 +9,6 @@
 #include <QString>
 #include <QDialog>
 
-extern bool correctParse;
 
 class ResultWindow : public QDialog
 {
