@@ -9,7 +9,7 @@
 #include <QSpacerItem>
 #include "parse.h"
 
-
+bool correctParse = false;
 
 ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
 {
@@ -193,6 +193,8 @@ void ResultWindow::Parse(QString str)
         resultList << mothersName << mothersNamea->text();
         resultList << mothersAge << mothersAgea->text();
         resultList << mothersWeight << mothersWeighta->text();
+
+        correctParse = true;
 }
 
 
@@ -227,5 +229,8 @@ void MainWindow::parseJson()
     // Set new coordinates for resultWindow window
     resultWindow->move(resultX, resultY);
 
-    resultWindow->show();
+    if(correctParse)
+    {
+        resultWindow->show();
+    }
 }

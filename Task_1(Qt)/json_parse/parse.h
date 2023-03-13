@@ -9,6 +9,8 @@
 #include <QString>
 #include <QDialog>
 
+extern bool correctParse;
+
 class ResultWindow : public QDialog
 {
     Q_OBJECT
@@ -37,6 +39,8 @@ private:
     QLabel* mothersNamea;
     QLabel* mothersAgea;
     QLabel* mothersWeighta;
+
+    //bool correctParse = false;
 };
 
 
