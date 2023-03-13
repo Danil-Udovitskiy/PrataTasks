@@ -6,7 +6,9 @@
 #include <QJsonArray>
 #include <QMessageBox>
 #include <QStringList>
+#include <QSpacerItem>
 #include "parse.h"
+
 
 
 ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
@@ -36,6 +38,8 @@ ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
     QHBoxLayout* Layout1 = new QHBoxLayout;
     Layout1->addWidget(firstName);
     Layout1->addWidget(firstNamea);
+
+
 
     QHBoxLayout* Layout2 = new QHBoxLayout;
     Layout2->addWidget(secondName);
@@ -74,14 +78,27 @@ ResultWindow::ResultWindow(QWidget *parent,QString str): QDialog(parent)
 
     QVBoxLayout* LayoutVert = new QVBoxLayout;
     LayoutVert->addLayout(Layout1);
+
+    QSpacerItem *vertSpaser =new QSpacerItem(0, 10);
+    LayoutVert->addSpacerItem(vertSpaser);
+
     LayoutVert->addLayout(Layout2);
+    LayoutVert->addSpacerItem(vertSpaser);
+
     LayoutVert->addLayout(Layout3);
+    LayoutVert->addSpacerItem(vertSpaser);
+
     LayoutVert->addLayout(Layout4);
     LayoutVert->addLayout(Layout5);
     LayoutVert->addLayout(Layout6);
+    LayoutVert->addSpacerItem(vertSpaser);
+
     LayoutVert->addLayout(Layout7);
     LayoutVert->addLayout(Layout8);
     LayoutVert->addLayout(Layout9);
+
+    QSpacerItem *verticalSpacer = new QSpacerItem(0, 180);
+    LayoutVert->addSpacerItem(verticalSpacer);
     LayoutVert->setAlignment(Qt::AlignLeft);
 
 
@@ -204,8 +221,8 @@ void MainWindow::parseJson()
     QRect mainRect = this->geometry();
 
     // Calculate the coordinates for the window resultWindow
-    int resultX = mainRect.x() + 10;
-    int resultY = mainRect.y()-50;
+    int resultX = mainRect.x() + 20;
+    int resultY = mainRect.y()-80;
 
     // Set new coordinates for resultWindow window
     resultWindow->move(resultX, resultY);
