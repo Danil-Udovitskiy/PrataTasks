@@ -1,0 +1,21 @@
+{
+    "First name" : "Abdula",
+    "Second name" : "Ararat",
+    "Age" : "15",
+    "Abilities" : ["Work" , "Walk", "Learn"],
+    "Family" : 
+    {
+        "Father":
+        {
+            "Name" : "Abad",
+            "Age" : 59,
+            "Weight" : 90.5
+        },
+        "Mother":
+        {
+            "Name" : "Abaya",
+            "Age" : 51,
+            "Weight" : 57.3
+        }
+    }
+}
