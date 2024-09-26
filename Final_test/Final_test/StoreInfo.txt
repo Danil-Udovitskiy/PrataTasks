@@ -1,0 +1,4 @@
+true
+Banana 5 120
+Orange 11 231
+Cheese 1 117
